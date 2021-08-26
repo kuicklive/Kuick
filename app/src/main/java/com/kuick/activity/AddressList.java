@@ -283,6 +283,7 @@ public class AddressList extends BaseActivity {
                 onBackPressed();
                 break;
             case R.id.btnAddAddress:
+                binding.btnAddAddress.setEnabled(false);
                 Intent intent = new Intent(this,AddressInformation.class);
                 if (isShopify){
                     intent.putExtra(INTENT_KEY_IS_ADDRESS_TYPE,isShopify);
@@ -319,7 +320,7 @@ public class AddressList extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        binding.btnAddAddress.setEnabled(true);
         TextView btnCartCount = binding.getRoot().findViewById(R.id.cartCount);
         showCartCount(btnCartCount);
 
