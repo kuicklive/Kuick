@@ -1662,6 +1662,8 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
         if (cardItemAdapter != null) {
             previousPrice = 0;
         }
+        discountStr = "";
+
         removePaymentMethod();
         removePromocode();
         removeShipping();
