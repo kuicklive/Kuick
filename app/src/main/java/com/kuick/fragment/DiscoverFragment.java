@@ -52,8 +52,9 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     private ActivityNewStreamersFullScreenBinding binding;
     private TextView txtTitle;
     public static List<MostPopularLivesResponse> mostPopularLives;
-    private MostPopulerLiveAdapter adapterMostPopularLives;
+    public MostPopulerLiveAdapter adapterMostPopularLives;
     private long tStart;
+    public static DiscoverFragment discoverFragment;
 
     public static DiscoverFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -75,6 +76,7 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = ActivityNewStreamersFullScreenBinding.inflate(inflater, container, false);
         mostPopularListener = this;
+        discoverFragment = this;
         setToolBar();
         setLanguageLable();
         tStart = System.currentTimeMillis();
@@ -171,7 +173,7 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     }
 
 
-    private void callMostPopularLives() {
+    public void callMostPopularLives() {
 
         try {
 
@@ -511,6 +513,14 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
             e.printStackTrace();
             Log.e(TAG, "connectUser() jsonObject = addLiveShort() Exception" + e.toString());
         }
+    }
+
+
+    @Nullable
+    @Override
+    public Object getExitTransition() {
+        discoverFragment = null;
+        return super.getExitTransition();
     }
 
 }

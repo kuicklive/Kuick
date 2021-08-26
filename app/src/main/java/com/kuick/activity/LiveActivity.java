@@ -75,6 +75,7 @@ public class LiveActivity extends RtcBaseActivity implements LiveEventListener, 
     public static String eventId = "";
     public static String eventIdForConfetti = "";
     public static boolean isLiveIsRunning = false;
+    public static String liveStreamerId = "";
     PictureInPictureParams.Builder pictureInPictureParamsBuilder = null;
     private ActivityLiveBinding binding;
     private CommentsAdapter mLiveAdapter;
@@ -462,6 +463,7 @@ public class LiveActivity extends RtcBaseActivity implements LiveEventListener, 
         binding.btnHeart.setOnClickListener(this);
         binding.btnPiP.setOnClickListener(this);
         binding.productImg.setOnClickListener(this);
+        binding.productView.setOnClickListener(this);
         binding.btnShare.setOnClickListener(this);
     }
 
@@ -551,6 +553,7 @@ public class LiveActivity extends RtcBaseActivity implements LiveEventListener, 
                 }
 
                 break;
+            case R.id.productView:
             case R.id.productImg:
             case R.id.btnCart:
                 showBottomDialog(productData);

@@ -21,6 +21,7 @@ import com.kuick.common.Common;
 import com.kuick.common.SocketSingleObject;
 import com.kuick.databinding.ActivityHomeBinding;
 import com.kuick.fragment.DiscoverFragment;
+import com.kuick.fragment.VideoClipsFragment;
 import com.kuick.interfaces.ImageRefreshListener;
 import com.kuick.interfaces.OpenHome;
 import com.kuick.model.BannerDetails;
@@ -1975,7 +1976,19 @@ public class HomeActivity extends BaseActivity implements ImageRefreshListener, 
     public void onNetworkConnected() {
         super.onNetworkConnected();
 
-        recreate();
+        //recreate();
+        if (Common.socket!=null && !Common.socket.connected()) {
+            connectSocket();
+            if (VideoClipsFragment.currentFragment!=null){
+                if (VideoClipsFragment.currentFragment.mVideoClipAdapter!=null){
+                    VideoClipsFragment.currentFragment.mVideoClipAdapter.notifyDataSetChanged();
+                }
+            }
+        }
+
+        if (DiscoverFragment.discoverFragment!=null){ // refresh LIVEs screen listing
+            DiscoverFragment.discoverFragment.callMostPopularLives();
+        }
 
         if (Constants.isFromConnectionLost) {
 

@@ -64,7 +64,7 @@ public class VideoClipsFragment extends BaseFragment implements View.OnClickList
     String isCart = "0", isDislike = "0";
     private FragmentVideoClipsBinding binding;
     private TextView btnTryAgain;
-    private VideoRecyclerAdapter mVideoClipAdapter;
+    public VideoRecyclerAdapter mVideoClipAdapter;
     private ItemTouchHelper itemTouchHelper;
     private boolean isPause = false;
     private List<ClipsData> clipData;
@@ -211,7 +211,6 @@ public class VideoClipsFragment extends BaseFragment implements View.OnClickList
                         if (response.body() != null) {
                             clipData = response.body().getClipsData();
                             userPreferences.setBackClicks(response.body().getClicks());
-                            userPreferences.setTotalCartSize(response.body().getCart_count());
                             setRecyclerView(clipData);
                         }
 
@@ -221,6 +220,13 @@ public class VideoClipsFragment extends BaseFragment implements View.OnClickList
                         }
                         showView(binding.dataNotFound);
                     }
+
+                    if (response.body()!=null && response.body().getCart_count()!=null){
+                        userPreferences.setTotalCartSize(response.body().getCart_count());
+                        TextView btnCartCount = binding.getRoot().findViewById(R.id.cartCount);
+                        showCartCount(btnCartCount);
+                    }
+
                     runnable = () -> hideLoader();
                     handler.postDelayed(runnable, 50);
 

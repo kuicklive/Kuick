@@ -38,6 +38,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.kuick.activity.HomeActivity.homeActivity;
+import static com.kuick.activity.LiveActivity.liveActivity;
 import static com.kuick.util.comman.Utility.PrintLog;
 
 public class MostPopulerLiveAdapter extends RecyclerView.Adapter<MostPopulerLiveAdapter.ViewHolder> {
@@ -98,8 +99,29 @@ public class MostPopulerLiveAdapter extends RecyclerView.Adapter<MostPopulerLive
 
             MostPopularLivesResponse data = mostPopularLives.get(position);
 
-            if (data.getIs_live() != null && data.getIs_live().equals("1") && data.getLive_streaming_slug() != null) {
-                callLiveStreamingAPI(data);
+            if (LiveActivity.liveActivity!=null && BaseActivity.isInPictureInPictureMode){
+
+                if (LiveActivity.liveStreamerId.equals(data.getId())) {
+
+                    if (data.getIs_live() != null && data.getIs_live().equals("1") && data.getLive_streaming_slug() != null) {
+                        callLiveStreamingAPI(data);
+                    }
+
+                }else {
+
+                    LiveActivity.liveActivity.finishWhenLiveRunningAndClickOnLiveNotification();
+                    if (data.getIs_live() != null && data.getIs_live().equals("1") && data.getLive_streaming_slug() != null) {
+                        LiveActivity.liveStreamerId = data.getId();
+                        callLiveStreamingAPI(data);
+                    }
+                }
+
+            }else {
+
+                if (data.getIs_live() != null && data.getIs_live().equals("1") && data.getLive_streaming_slug() != null) {
+                    LiveActivity.liveStreamerId = data.getId();
+                    callLiveStreamingAPI(data);
+                }
             }
 
         });

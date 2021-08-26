@@ -371,7 +371,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-
+                    android:maxLength="10"
                     android:fontFamily="@font/quicksand_regular"
                     android:inputType="numberDecimal"
                     android:singleLine="true"
