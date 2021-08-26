@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:background="@color/common_bg"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/layoutComman"
+            layout="@layout/comman_bg" />
+
+        <include
+            android:layout_marginStart="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_50dp"
+            layout="@layout/common_toolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/dataNotFound"
+            android:visibility="gone"
+            android:background="@color/common_bg"
+            android:layout_below="@+id/layoutComman"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                layout="@layout/data_not_found"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent" />
+
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:visibility="visible"
+            android:background="@color/common_bg"
+            android:id="@+id/dataView"
+            android:layout_below="@+id/layoutComman"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <FrameLayout
+                    android:id="@+id/live_streamer"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp">
+
+                    <RelativeLayout
+                        android:id="@+id/mLiveBanner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_marginRight="@dimen/_15dp"
+                            android:layout_marginLeft="@dimen/_15dp"
+                            app:cardCornerRadius="@dimen/_10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_200dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/bannerImage"
+                                    android:scaleType="fitXY"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"/>
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_gravity="bottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50dp">
+
+                        <com.jackandphantom.circularimageview.CircleImage
+                            android:id="@+id/userImg"
+                            android:layout_centerHorizontal="true"
+                            android:scaleType="fitXY"
+                            android:adjustViewBounds="true"
+                            android:layout_width="@dimen/_50dp"
+                            android:layout_height="@dimen/_50dp"/>
+
+
+                        <TextView
+                            android:id="@+id/countryName"
+                            android:maxLength="20"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="@dimen/_15dp"
+                            android:textSize="@dimen/_15sp"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/quicksand_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <TextView
+                            android:id="@+id/userName"
+                            android:singleLine="true"
+                            android:layout_toEndOf="@+id/userImg"
+                            android:gravity="end"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginEnd="@dimen/_15dp"
+                            android:textSize="@dimen/_15sp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/quicksand_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                </FrameLayout>
+
+                <RelativeLayout
+                    android:visibility="visible"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:layout_marginRight="@dimen/_15dp"
+                    android:layout_marginLeft="@dimen/_15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/website"
+                        android:textColor="@color/black"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="@dimen/_25dp"
+                        android:textSize="@dimen/_15sp"
+                        android:fontFamily="@font/quicksand_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/_10dp"
+                        android:layout_below="@+id/website"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                  <LinearLayout
+                      android:layout_marginTop="@dimen/_10dp"
+                      android:orientation="horizontal"
+                      android:id="@+id/iconSocialMedia"
+                      android:layout_below="@+id/description"
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/_30dp">
+
+                      <ImageView
+                          android:id="@+id/btnWp"
+                          android:padding="@dimen/_3dp"
+                          android:layout_weight="1"
+                          android:src="@drawable/social_wapp"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"/>
+                      <ImageView
+                          android:id="@+id/btnFB"
+                          android:padding="@dimen/_3dp"
+                          android:layout_weight="1"
+                          android:src="@drawable/social_fb"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"/>
+                      <ImageView
+                          android:id="@+id/btnMessanger"
+                          android:padding="@dimen/_3dp"
+                          android:layout_weight="1"
+                          android:src="@drawable/social_messanger"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"/>
+                      <ImageView
+                          android:id="@+id/btnInsta"
+                          android:padding="@dimen/_3dp"
+                          android:layout_weight="1"
+                          android:src="@drawable/social_insta"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"/>
+                      <ImageView
+                          android:id="@+id/btnLinkedin"
+                          android:padding="@dimen/_3dp"
+                          android:layout_weight="1"
+                          android:src="@drawable/social_in"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"/>
+                      <ImageView
+                          android:id="@+id/btnTwit"
+                          android:padding="@dimen/_3dp"
+                          android:layout_weight="1"
+                          android:src="@drawable/social_tw"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"/>
+                      <ImageView
+                          android:id="@+id/btnyoutube"
+                          android:padding="@dimen/_3dp"
+                          android:layout_weight="1"
+                          android:src="@drawable/social_you_tube"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"/>
+                      <ImageView
+                          android:id="@+id/btnTiktok"
+                          android:padding="@dimen/_3dp"
+                          android:layout_weight="1"
+                          android:src="@drawable/social_tiktok"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"/>
+                      <ImageView
+                          android:id="@+id/btnTwich"
+                          android:padding="@dimen/_3dp"
+                          android:layout_weight="1"
+                          android:src="@drawable/social_twich"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"/>
+                      <ImageView
+                          android:id="@+id/btnPen"
+                          android:padding="@dimen/_3dp"
+                          android:layout_weight="1"
+                          android:src="@drawable/social_pen"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"/>
+
+                  </LinearLayout>
+                    <TextView
+                        android:id="@+id/upcomingLive"
+                        android:layout_marginTop="@dimen/_8dp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:textSize="@dimen/_18sp"
+                        android:fontFamily="@font/quicksand_bold"
+                        android:layout_below="@+id/iconSocialMedia"
+                        android:text="Upcoming Live Streams"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/mUpcommingLive"
+                        android:layout_below="@+id/upcomingLive"
+                        android:layout_width="match_parent"
+                        android:overScrollMode="never"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </RelativeLayout>
+
+
+</layout>

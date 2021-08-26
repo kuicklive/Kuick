@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:background="@drawable/profile_tab_shape"
+        android:layout_marginLeft="@dimen/_12dp"
+        android:layout_marginTop="@dimen/_10dp"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/_10dp"
+        android:layout_marginRight="@dimen/_12dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:adjustViewBounds="true"
+            android:id="@+id/iconTab"
+            android:padding="@dimen/_12dp"
+            android:src="@drawable/user_icon"
+            android:layout_width="@dimen/_50dp"
+            android:layout_height="@dimen/_50dp"/>
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_8dp"
+            android:paddingBottom="@dimen/_5dp"
+            android:textSize="@dimen/_20sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="@string/my_profile"
+            android:layout_toEndOf="@+id/iconTab"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50dp"
+            tools:ignore="RtlSymmetry" />
+
+        <ImageView
+            android:layout_alignParentEnd="true"
+            android:id="@+id/btnGo"
+            android:padding="@dimen/_15dp"
+            android:src="@drawable/go_right"
+            android:layout_width="@dimen/_50dp"
+            android:layout_height="@dimen/_50dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

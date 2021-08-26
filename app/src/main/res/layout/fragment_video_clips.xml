@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:background="@color/common_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/dataNotFound"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <include
+                android:id="@+id/layoutComman"
+                layout="@layout/comman_bg" />
+
+            <include
+                android:layout_marginTop="@dimen/_50dp"
+                layout="@layout/common_toolbar"
+                android:layout_height="@dimen/_50dp"
+                android:layout_width="match_parent" />
+
+            <include
+                layout="@layout/data_not_found"
+                android:layout_below="@+id/layoutComman"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent" />
+
+        </RelativeLayout>
+
+
+        <!-- data view -->
+        <RelativeLayout
+            android:id="@+id/dataView"
+            android:visibility="gone"
+            tools:visibility="gone"
+            android:background="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcVideo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:visibility="visible"
+                tools:listitem="@layout/videoclip_viewpager" />
+
+            <RelativeLayout
+                android:id="@+id/layHeader"
+                android:layout_marginTop="@dimen/_30dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50dp">
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/_12dp"
+                    android:background="@drawable/black_circle_shape"
+                    android:layout_marginStart="@dimen/_20dp"
+                    android:src="@drawable/btn_back"
+                    android:layout_width="@dimen/_40dp"
+                    android:layout_height="@dimen/_40dp"
+                    app:tint="@color/white" />
+
+                <LinearLayout
+                    android:id="@+id/layValume"
+                    android:visibility="visible"
+                    android:layout_width="@dimen/_40dp"
+                    android:layout_height="@dimen/_40dp"
+                    android:layout_marginEnd="@dimen/_20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/black_circle_shape"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/btnVolume"
+                        android:layout_width="@dimen/_20dp"
+                        android:layout_height="@dimen/_20dp"
+                        android:background="@drawable/selector_volume_white" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/btnCart"
+                android:visibility="visible"
+                android:layout_width="45dp"
+                android:layout_marginEnd="@dimen/_20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_height="45dp"
+                android:background="@drawable/blue_circle_transprent"
+                android:padding="@dimen/_12dp"
+                android:src="@drawable/cart_bucket_icon"
+                app:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/btnDislike"
+                android:visibility="visible"
+                android:layout_width="45dp"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_centerVertical="true"
+                android:layout_height="45dp"
+                android:background="@drawable/readshape"
+                android:padding="@dimen/_10dp"
+                android:src="@drawable/icon_dislike" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:background="@color/common_bg"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:background="@drawable/rectangle_shape"
+                android:id="@+id/productImgContainer"
+                android:layout_width="@dimen/_90dp"
+                android:layout_height="@dimen/_90dp">
+
+                <com.jackandphantom.circularimageview.RoundedImage
+                    android:id="@+id/productImg"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:paddingBottom="@dimen/_10dp"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/productName"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:textSize="@dimen/_18sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/orderQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_below="@+id/productName"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:textColor="@color/black" />
+
+
+                <TextView
+                    android:id="@+id/priceTag"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_below="@+id/orderQuantity"
+                    android:textSize="@dimen/_12sp"
+                    android:drawablePadding="@dimen/_5dp"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:textColor="@color/black"
+                    app:drawableLeftCompat="@drawable/price_tag" />
+
+                <TextView
+                    android:id="@+id/txtProccessStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:visibility="visible"
+                    android:textSize="@dimen/_14sp"
+                    android:layout_below="@+id/priceTag"
+                    android:textColor="#263151" />
+
+
+
+
+                <TextView
+                    android:background="@drawable/yellow_shape"
+                    android:id="@+id/progressBtn"
+                    android:text="@string/in_progress"
+                    android:paddingBottom="@dimen/_2dp"
+                    android:layout_marginTop="@dimen/_2dp"
+                    android:paddingRight="@dimen/_3dp"
+                    android:paddingLeft="@dimen/_3dp"
+                    android:layout_below="@+id/orderID"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:layout_width="@dimen/_90dp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:background="@drawable/pink_shape"
+                    android:id="@+id/btnCancelled"
+                    android:text="@string/cancelled"
+                    android:paddingBottom="@dimen/_2dp"
+                    android:layout_marginTop="@dimen/_2dp"
+                    android:paddingRight="@dimen/_3dp"
+                    android:paddingLeft="@dimen/_3dp"
+                    android:layout_below="@+id/orderID"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:layout_width="@dimen/_90dp"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:background="@drawable/green_shape"
+                    android:id="@+id/btnCompleted"
+                    android:text="@string/completed"
+                    android:paddingBottom="@dimen/_2dp"
+                    android:layout_marginTop="@dimen/_2dp"
+                    android:paddingRight="@dimen/_3dp"
+                    android:paddingLeft="@dimen/_3dp"
+                    android:layout_below="@+id/orderID"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:layout_width="@dimen/_90dp"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

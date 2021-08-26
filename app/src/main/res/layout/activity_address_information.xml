@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:id="@+id/scrollAddress"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_15dp">
+
+        <RelativeLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/common_bg"
+            tools:context=".activity.AddressInformation">
+
+            <include
+                android:id="@+id/layoutComman"
+                layout="@layout/comman_bg" />
+
+            <include
+                layout="@layout/common_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10dp"
+                android:layout_marginTop="@dimen/_60dp" />
+
+
+            <!--   <androidx.core.widget.NestedScrollView
+                   android:layout_margin="@dimen/_15dp"
+                   android:layout_width="match_parent"
+                   android:layout_below="@+id/layoutComman"
+                   android:layout_height="match_parent">-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/layoutComman"
+
+                android:layout_margin="@dimen/_15dp"
+                android:orientation="vertical">
+
+                <!--mobile number-->
+                <RelativeLayout
+                    android:id="@+id/inputMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_70dp"
+                    android:layout_marginTop="@dimen/_15dp"
+                    android:background="@android:color/transparent"
+                    android:orientation="horizontal"
+                    app:boxBackgroundColor="@android:color/transparent">
+
+                    <TextView
+                        android:id="@+id/txtMobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_bold"
+                        android:text="Mobile Number for Shipping Updates"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp" />
+
+
+                    <Spinner
+                        android:id="@+id/countryCodeSpinner"
+                        android:layout_width="105dp"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/txtMobile"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="-8dp"
+                        android:visibility="visible" />
+
+                    <View
+                        android:id="@+id/view1"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/txtMobile"
+                        android:layout_marginTop="@dimen/_5dp"
+                        android:layout_marginBottom="@dimen/_5dp"
+                        android:layout_toEndOf="@+id/countryCodeSpinner"
+                        android:background="@color/profile_tab_color" />
+
+                    <EditText
+                        android:id="@+id/edtMobileNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/txtMobile"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10dp"
+                        android:layout_marginTop="@dimen/_5dp"
+                        android:layout_toEndOf="@+id/view1"
+                        android:background="@null"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:inputType="number"
+                        android:maxLength="12"
+                        android:paddingEnd="@dimen/_10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp"
+                        tools:ignore="RtlSymmetry" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:background="@color/profile_tab_color" />
+
+
+                <!--address type-->
+                <RelativeLayout
+                    android:id="@+id/inputAddressType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15dp"
+                    android:background="@android:color/transparent"
+                    android:orientation="horizontal"
+                    app:boxBackgroundColor="@android:color/transparent">
+
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_bold"
+                        android:text="@string/address_type"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp" />
+
+                    <TextView
+                        android:id="@+id/addressType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/address"
+                        android:background="@null"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:text="@string/usa"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp"
+                        android:visibility="gone" />
+
+                    <Spinner
+                        android:id="@+id/addressSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/address"
+                        android:layout_marginStart="-8dp"
+                        android:background="@null"
+                        android:visibility="visible" />
+
+
+                    <ImageView
+                        android:layout_width="@dimen/_20dp"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/address"
+                        android:layout_alignParentEnd="true"
+                        android:padding="@dimen/_3dp"
+                        android:rotation="180"
+                        android:src="@drawable/down_arrow" />
+
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:background="@color/profile_tab_color" />
+
+                <!--address-->
+
+                <TextView
+                    android:id="@+id/addressLable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15dp"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:text="@string/address"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sp" />
+
+                <EditText
+                    android:id="@+id/fullAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="@font/quicksand_regular"
+                    android:inputType="textPostalAddress"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:background="@color/profile_tab_color" />
+
+                <!--apartment ,suit,etc-->
+
+                <TextView
+                    android:id="@+id/txtApartment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15dp"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:text="@string/apartment"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sp" />
+
+                <EditText
+                    android:id="@+id/apartment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="@font/quicksand_regular"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:background="@color/profile_tab_color" />
+
+                <!--city-->
+
+                <TextView
+                    android:id="@+id/txtCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15dp"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:text="@string/city"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sp" />
+
+                <EditText
+                    android:id="@+id/cityName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="@font/quicksand_regular"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:background="@color/profile_tab_color" />
+
+                <!--state-->
+                <LinearLayout
+                    android:id="@+id/txtStateOptional"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/txtState"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15dp"
+                        android:fontFamily="@font/quicksand_bold"
+                        android:text="@string/state"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp" />
+
+                    <EditText
+                        android:id="@+id/state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/_5dp"
+                        android:background="@color/profile_tab_color" />
+
+                </LinearLayout>
+
+                <!-- State / Region / Province drop down -->
+                <RelativeLayout
+                    android:id="@+id/inputStateRegionProvince"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15dp"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/hint_country"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:boxBackgroundColor="@android:color/transparent">
+
+                    <TextView
+                        android:id="@+id/stateRegionProvince"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_bold"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp" />
+
+                    <TextView
+                        android:id="@+id/stateRegionProvinceName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/stateRegionProvince"
+                        android:background="@null"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp"
+                        android:visibility="visible" />
+
+                    <Spinner
+                        android:id="@+id/stateRegionProvinceSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/stateRegionProvince"
+                        android:layout_marginStart="-10dp"
+                        android:background="@null"
+                        android:visibility="visible" />
+
+
+                    <ImageView
+                        android:layout_width="@dimen/_20dp"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/stateRegionProvince"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/_3dp"
+                        android:rotation="180"
+                        android:src="@drawable/down_arrow" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="@dimen/_5dp"
+                        android:background="@color/profile_tab_color" />
+
+                </RelativeLayout>
+
+
+                <!--postal code-->
+
+                <TextView
+                    android:id="@+id/txtPostalCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15dp"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:text="@string/postal"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sp" />
+
+                <EditText
+                    android:id="@+id/postalCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+
+                    android:fontFamily="@font/quicksand_regular"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:background="@color/profile_tab_color" />
+
+                <!--country-->
+                <RelativeLayout
+                    android:id="@+id/inputCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15dp"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/hint_country"
+                    android:orientation="horizontal"
+                    app:boxBackgroundColor="@android:color/transparent">
+
+                    <TextView
+                        android:id="@+id/country"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_bold"
+                        android:text="@string/your_contry"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp" />
+
+                    <TextView
+                        android:id="@+id/countyName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/country"
+                        android:background="@null"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp"
+                        android:visibility="visible" />
+
+                    <Spinner
+                        android:id="@+id/countrySpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/country"
+                        android:layout_marginStart="-10dp"
+                        android:background="@null"
+                        android:visibility="visible" />
+
+
+                    <ImageView
+                        android:layout_width="@dimen/_20dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/_3dp"
+                        android:rotation="180"
+                        android:src="@drawable/down_arrow" />
+
+                </RelativeLayout>
+
+
+                <!-- show this if country_regions api find selected country-->
+                <RelativeLayout
+                    android:id="@+id/layRegions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/txtRegion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15dp"
+                        android:fontFamily="@font/quicksand_bold"
+                        android:text="Region"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp" />
+
+                    <TextView
+                        android:id="@+id/region"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtRegion"
+                        android:layout_marginEnd="@dimen/_15dp"
+                        android:background="@null"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:inputType="textPostalAddress"
+                        android:maxLength="40"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp" />
+
+                    <ImageView
+                        android:id="@+id/btnRagion"
+                        android:layout_width="@dimen/_20dp"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/txtRegion"
+                        android:layout_alignParentEnd="true"
+                        android:padding="@dimen/_3dp"
+                        android:rotation="180"
+                        android:src="@drawable/down_arrow" />
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/_5dp"
+                        android:background="@color/profile_tab_color" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:background="@color/profile_tab_color" />
+
+
+                <TextView
+                    android:id="@+id/btnSaveAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_30dp"
+                    android:layout_marginBottom="@dimen/_10dp"
+                    android:background="@drawable/save_change_button"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/_10dp"
+                    android:paddingTop="@dimen/_8dp"
+                    android:paddingEnd="@dimen/_10dp"
+                    android:paddingBottom="@dimen/_8dp"
+                    android:text="@string/save_address"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_18sp" />
+
+            </LinearLayout>
+
+            <!-- </androidx.core.widget.NestedScrollView>-->
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+</layout>

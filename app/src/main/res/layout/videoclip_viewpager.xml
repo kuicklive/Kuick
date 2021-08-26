@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/mainView"
+        app:cardBackgroundColor="@color/white"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+     <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+
+         <com.google.android.exoplayer2.ui.PlayerView
+             android:id="@+id/playerView"
+             android:layout_alignParentTop="true"
+             android:layout_alignParentBottom="true"
+             android:layout_centerInParent="true"
+             android:layout_alignParentStart="true"
+             android:layout_alignParentEnd="true"
+             android:layout_width="fill_parent"
+             app:resize_mode="fill"
+             android:layout_height="fill_parent"
+             app:use_controller="false" />
+
+         <RelativeLayout
+             android:id="@+id/transactionViewRight"
+             android:visibility="gone"
+             android:background="@drawable/blue_shape"
+             android:layout_width="@dimen/_65dp"
+             android:layout_marginStart="@dimen/_50dp"
+             android:layout_marginTop="@dimen/_100dp"
+             android:layout_height="@dimen/_65dp">
+
+             <ImageView
+                 android:id="@+id/transactionImageRight"
+                 android:padding="@dimen/_15dp"
+                 android:src="@drawable/right_transaction"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 app:tint="@color/white" />
+
+         </RelativeLayout>
+
+         <RelativeLayout
+             android:id="@+id/transactionViewLeft"
+             android:visibility="gone"
+             android:background="@drawable/readshape"
+             android:layout_width="@dimen/_65dp"
+             android:layout_marginEnd="@dimen/_50dp"
+             android:layout_alignParentEnd="true"
+             android:layout_marginTop="@dimen/_100dp"
+             android:layout_height="@dimen/_65dp">
+
+             <ImageView
+                 android:id="@+id/transactionImageLeft"
+                 android:padding="@dimen/_15dp"
+                 android:src="@drawable/left_transaction"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 app:tint="@color/white" />
+
+         </RelativeLayout>
+
+         <ImageView
+             android:id="@+id/thumbnail"
+             android:visibility="gone"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"/>
+
+         <ProgressBar
+             android:id="@+id/progressbar"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerInParent="true"
+             android:visibility="visible" />
+
+
+         <ImageView
+             android:id="@+id/buttonPlayPause"
+             android:visibility="gone"
+             android:background="@drawable/selector_play_pause"
+             android:layout_width="@dimen/_50dp"
+             android:layout_centerInParent="true"
+             android:layout_height="@dimen/_50dp"/>
+         
+         <RelativeLayout
+             android:id="@+id/layDetails"
+
+             android:background="@drawable/detail_shape"
+             android:layout_marginBottom="@dimen/_20dp"
+             android:layout_alignParentBottom="true"
+             android:layout_width="@dimen/_300dp"
+             android:layout_height="85dp">
+
+             <com.jackandphantom.circularimageview.CircleImage
+                 android:id="@+id/productImage"
+                 android:layout_width="@dimen/_70dp"
+                 android:scaleType="centerCrop"
+                 android:src="@drawable/notification_blue_icon"
+                 android:layout_marginStart="@dimen/_10dp"
+                 android:layout_centerVertical="true"
+                 android:layout_height="@dimen/_70dp"/>
+
+             <TextView
+                 android:id="@+id/btnDetails"
+                 android:fontFamily="@font/quicksand_bold"
+                 android:gravity="center"
+                 android:textColor="@color/white"
+                 android:text=""
+                 android:textSize="@dimen/_12sp"
+                 android:layout_marginEnd="@dimen/_10dp"
+                 android:layout_alignParentEnd="true"
+                 android:layout_centerVertical="true"
+                 android:background="@drawable/blue_circle"
+                 android:layout_width="@dimen/_55dp"
+                 android:layout_height="@dimen/_55dp"/>
+
+             <TextView
+                 tools:text="$1500.00"
+                 android:id="@+id/txtDiscount"
+                 android:layout_toEndOf="@+id/productImage"
+                 android:textColor="@color/white"
+                 android:layout_marginStart="@dimen/_10dp"
+                 android:layout_marginTop="@dimen/_12dp"
+                 android:textSize="@dimen/_14sp"
+                 android:singleLine="true"
+                 android:fontFamily="@font/quicksand_bold"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"/>
+
+             <TextView
+                 android:id="@+id/productPrice"
+                 tools:text="$5000.00"
+                 android:singleLine="true"
+                 android:layout_toEndOf="@+id/txtDiscount"
+                 android:textColor="@color/white"
+                 android:layout_toStartOf="@+id/btnDetails"
+                 android:layout_marginStart="@dimen/_10dp"
+                 android:layout_marginTop="@dimen/_12dp"
+                 android:textSize="@dimen/_14sp"
+                 android:visibility="gone"
+                 android:fontFamily="@font/quicksand_regular"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"/>
+
+             <TextView
+                 android:id="@+id/productName"
+                 tools:text="cloth"
+                 android:layout_toStartOf="@+id/btnDetails"
+                 android:singleLine="true"
+                 android:layout_marginEnd="@dimen/_8dp"
+                 android:layout_toEndOf="@+id/productImage"
+                 android:textColor="@color/white"
+                 android:textSize="@dimen/_16sp"
+                 android:layout_marginTop="@dimen/_3dp"
+                 android:includeFontPadding="false"
+                 android:layout_below="@+id/txtDiscount"
+                 android:layout_marginStart="@dimen/_10dp"
+                 android:fontFamily="@font/quicksand_regular"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"/>
+
+
+             <TextView
+                 android:id="@+id/txtInventoryLocation"
+                 tools:text="india"
+                 android:layout_marginTop="@dimen/_2dp"
+                 android:layout_toStartOf="@+id/btnDetails"
+                 android:layout_toEndOf="@+id/productImage"
+                 android:textColor="@color/white"
+                 android:singleLine="true"
+                 android:textSize="@dimen/_12sp"
+                 android:includeFontPadding="false"
+                 android:layout_marginEnd="@dimen/_8dp"
+                 android:layout_marginStart="@dimen/_10dp"
+                 android:layout_below="@+id/productName"
+                 android:fontFamily="@font/quicksand_regular"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"/>
+
+
+         </RelativeLayout>
+
+         <com.jackandphantom.circularimageview.CircleImage
+             android:id="@+id/profilePicture"
+             android:layout_width="@dimen/_50dp"
+             android:layout_marginStart="@dimen/_10dp"
+             android:layout_marginEnd="@dimen/_10dp"
+             android:layout_alignParentBottom="true"
+             android:layout_marginBottom="@dimen/_40dp"
+             android:layout_alignParentEnd="true"
+             android:layout_height="@dimen/_50dp"/>
+         
+     </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

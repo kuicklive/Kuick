@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <RelativeLayout
+            android:background="#EFEFF1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/layoutComman"
+                layout="@layout/comman_bg" />
+
+            <include
+                android:layout_marginTop="@dimen/_50dp"
+                android:layout_marginStart="@dimen/_15dp"
+                layout="@layout/common_toolbar"
+                android:layout_height="@dimen/_50dp"
+                android:layout_width="match_parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/kuik_icon"
+                    android:paddingStart="@dimen/_3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_40dp"
+                    android:src="@drawable/splash_icon_blue"
+                    tools:ignore="RtlSymmetry" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/dataNotFound"
+                android:visibility="gone"
+                android:layout_below="@+id/layoutComman"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include
+                    layout="@layout/data_not_found"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent" />
+
+            </LinearLayout>
+
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/swiperefresh"
+                    android:layout_below="@+id/layoutComman"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.core.widget.NestedScrollView
+                        android:id="@+id/dataView"
+                        android:visibility="visible"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvLiveStreamer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20dp"
+                        android:orientation="horizontal" />
+
+
+                    <RelativeLayout
+
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+
+                        <FrameLayout
+                            android:id="@+id/layViewPager"
+                            android:layout_marginTop="@dimen/_10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.viewpager.widget.ViewPager
+                                android:id="@+id/vPagerLiveStreamers"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_270dp" />
+
+                            <ImageView
+                                android:id="@+id/vpButtonLeft"
+                                android:layout_width="48dp"
+                                android:visibility="gone"
+                                android:layout_height="48dp"
+                                android:layout_marginBottom="@dimen/_30dp"
+                                android:padding="@dimen/_10dp"
+                                android:layout_gravity="center_vertical|left"
+                                android:src="@drawable/ic_left" />
+
+                            <ImageView
+                                android:id="@+id/vpButtonRight"
+                                android:layout_width="48dp"
+                                android:padding="@dimen/_10dp"
+                                android:layout_height="48dp"
+                                android:layout_marginBottom="@dimen/_30dp"
+                                android:layout_gravity="center_vertical|right"
+                                android:src="@drawable/ic_right" />
+
+                        </FrameLayout>
+
+
+                        <TextView
+                            android:id="@+id/txtFeaturedStreamer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/layViewPager"
+                            android:layout_marginLeft="@dimen/_10dp"
+                            android:layout_marginTop="@dimen/_10dp"
+                            android:layout_marginRight="@dimen/_10dp"
+                            android:fontFamily="@font/quicksand_bold"
+                            android:text="@string/featuredStream"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/btnViewAllFeaturedStreamers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/layViewPager"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginLeft="@dimen/_10dp"
+                            android:layout_marginTop="@dimen/_12dp"
+                            android:layout_marginRight="@dimen/_10dp"
+                            android:text="@string/view_all"
+                            android:layout_centerVertical="true"
+                            android:textColor="@color/bgSplash"
+                            android:textSize="@dimen/_14sp" />
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvFeaturedStreamers"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="@dimen/_10dp"
+                            android:layout_below="@+id/btnViewAllFeaturedStreamers"
+                            android:layout_height="wrap_content"/>
+
+
+                        <TextView
+                            android:id="@+id/txtTopCategories"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/rvFeaturedStreamers"
+                            android:layout_marginLeft="@dimen/_10dp"
+                            android:layout_marginTop="@dimen/_10dp"
+                            android:layout_marginRight="@dimen/_10dp"
+                            android:fontFamily="@font/quicksand_bold"
+                            android:text="@string/top_categories"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/btnViewAllTopCategories"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/rvFeaturedStreamers"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginLeft="@dimen/_10dp"
+                            android:layout_marginTop="@dimen/_12dp"
+                            android:layout_marginRight="@dimen/_10dp"
+                            android:text="@string/view_all"
+                            android:layout_centerVertical="true"
+                            android:textColor="@color/bgSplash"
+                            android:textSize="@dimen/_14sp" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_marginTop="@dimen/_15dp"
+                            android:id="@+id/rvTopCategories"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/btnViewAllTopCategories"
+                            android:layout_marginRight="@dimen/_10dp" />
+
+                        <TextView
+                            android:id="@+id/txtTrendingStreamer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/rvTopCategories"
+                            android:layout_marginLeft="@dimen/_10dp"
+                            android:layout_marginTop="@dimen/_10dp"
+                            android:layout_marginRight="@dimen/_10dp"
+                            android:fontFamily="@font/quicksand_bold"
+                            android:text="@string/treanding_streamers"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/btnViewAllTreandingStreamers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/rvTopCategories"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginLeft="@dimen/_10dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="@dimen/_12dp"
+                            android:layout_marginRight="@dimen/_10dp"
+                            android:text="@string/view_all"
+                            android:textColor="@color/bgSplash"
+                            android:textSize="@dimen/_14sp"/>
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvTreandingStreamers"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/btnViewAllTreandingStreamers"
+                            android:layout_marginTop="@dimen/_10dp" />
+
+                        <TextView
+                            android:id="@+id/txtNewStreamer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/rvTreandingStreamers"
+                            android:layout_marginLeft="@dimen/_10dp"
+                            android:layout_marginTop="@dimen/_10dp"
+                            android:layout_marginRight="@dimen/_10dp"
+                            android:fontFamily="@font/quicksand_bold"
+                            android:text="@string/new_streamers"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/btnViewAllNewStreamers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/rvTreandingStreamers"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginLeft="@dimen/_10dp"
+                            android:layout_marginTop="@dimen/_12dp"
+                            android:layout_marginRight="@dimen/_10dp"
+                            android:text="@string/view_all"
+                            android:textColor="@color/bgSplash"
+                            android:textSize="@dimen/_14sp" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvNewStreamers"
+                            android:layout_marginBottom="@dimen/_10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/btnViewAllNewStreamers"
+                            android:layout_marginTop="@dimen/_10dp"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                    </androidx.core.widget.NestedScrollView>
+
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        </RelativeLayout>
+
+</layout>

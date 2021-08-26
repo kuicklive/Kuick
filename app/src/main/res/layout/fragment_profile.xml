@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:background="@color/common_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/layoutComman"
+            layout="@layout/comman_bg" />
+
+
+        <include
+            android:layout_marginTop="@dimen/_50dp"
+            layout="@layout/common_toolbar"
+            android:layout_height="@dimen/_50dp"
+            android:layout_width="match_parent" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/layoutComman"
+            android:id="@+id/rvProfileTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15dp"
+            tools:listitem="@layout/profile_item"
+            android:orientation="vertical" />
+
+        <TextView
+            android:textSize="@dimen/_18sp"
+            android:layout_marginTop="@dimen/_15dp"
+            android:layout_below="@+id/rvProfileTab"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:text="App Version 1.0.0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</layout>

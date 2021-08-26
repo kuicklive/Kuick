@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_bg">
+
+        <include
+            android:id="@+id/layoutComman"
+            layout="@layout/comman_bg" />
+
+        <include
+            layout="@layout/common_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_60dp" />
+
+        <LinearLayout
+            android:id="@+id/layName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutComman"
+            android:layout_margin="@dimen/_15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_5dp"
+                android:fontFamily="@font/nexa_book"
+                android:text="@string/name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtCardHoderName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40dp"
+                android:background="@drawable/white_shape"
+                android:fontFamily="@font/nexa_book"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName|textCapWords"
+                android:maxLength="100"
+                android:paddingLeft="@dimen/_10dp"
+                android:singleLine="true"
+                android:textColor="#222B45"
+                android:textColorHint="@color/unselected_color"
+                android:textSize="@dimen/_15sp" />
+
+            <TextView
+                android:id="@+id/mErrorName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12dp"
+                android:text="@string/error_holder_name_cannot_be_empty"
+                android:textColor="@color/colorErrorRed"
+                android:textSize="@dimen/_10sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layDocNum"
+            android:layout_below="@+id/layName"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layDocNumRUT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layName"
+                android:layout_margin="@dimen/_15dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/txtDocNumRUT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5dp"
+                    android:fontFamily="@font/nexa_book"
+                    tools:text="Document Number (RUT)"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sp" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtDocNumRUT"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40dp"
+                    android:background="@drawable/white_shape"
+                    android:fontFamily="@font/nexa_book"
+                    tools:hint="Document Number (RUT)"
+                    android:imeOptions="actionNext"
+                    android:paddingStart="@dimen/_10dp"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="#222B45"
+                    android:textColorHint="@color/unselected_color"
+                    android:textSize="@dimen/_15sp" />
+
+                <TextView
+                    android:id="@+id/mErrorDocNumRUT"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12dp"
+                    android:text="@string/error_invalid_document_number"
+                    android:textColor="@color/colorErrorRed"
+                    android:textSize="@dimen/_10sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/layCardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layDocNum"
+            android:layout_margin="@dimen/_15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtCardNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_5dp"
+                android:fontFamily="@font/nexa_book"
+                android:text="@string/txt_card_number"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sp" />
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtCardNumber"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40dp"
+                android:background="@drawable/white_shape"
+                android:fontFamily="@font/nexa_book"
+                android:hint="**** - **** -  **** - **85"
+                android:imeOptions="actionNext"
+                android:inputType="number|textNoSuggestions"
+                android:paddingStart="@dimen/_10dp"
+                android:singleLine="true"
+                android:textColor="#222B45"
+                android:textColorHint="@color/unselected_color"
+                android:textSize="@dimen/_15sp" />
+
+
+            <TextView
+                android:id="@+id/mErrorCardNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12dp"
+                android:text="@string/error_card_number_cannot_be_empty"
+                android:textColor="@color/colorErrorRed"
+                android:textSize="@dimen/_10sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layPostalCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layCardNumber"
+            android:layout_margin="@dimen/_15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtZipCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_5dp"
+                android:fontFamily="@font/nexa_book"
+                android:text="ZipCode (Only USA)"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sp" />
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtZipCode"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40dp"
+                android:background="@drawable/white_shape"
+                android:fontFamily="@font/nexa_book"
+                android:hint="12345"
+                android:imeOptions="actionNext"
+                android:inputType="number|textNoSuggestions"
+                android:maxLength="5"
+                android:paddingStart="@dimen/_10dp"
+                android:singleLine="true"
+                android:textColor="#222B45"
+                android:textColorHint="@color/unselected_color"
+                android:textSize="@dimen/_15sp" />
+
+
+            <TextView
+                android:id="@+id/mErrorZipCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12dp"
+                android:text="@string/error_invalid_zip_number"
+                android:textColor="@color/colorErrorRed"
+                android:textSize="@dimen/_10sp"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layPostalCode"
+            android:layout_margin="@dimen/_15dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtExpireDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5dp"
+                    android:fontFamily="@font/nexa_book"
+                    android:text="@string/expires"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sp" />
+
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:layout_width="@dimen/_150dp"
+                    android:layout_height="@dimen/_40dp"
+                    android:background="@drawable/white_shape"
+                    android:fontFamily="@font/nexa_book"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_15dp"
+                    android:textColor="#222B45"
+                    android:textColorHint="@color/unselected_color"
+                    android:textSize="@dimen/_15sp" />
+
+                <TextView
+                    android:id="@+id/mErrorExpires"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12dp"
+                    android:text="@string/error_expiry_cannot_be_empty"
+                    android:textColor="@color/colorErrorRed"
+                    android:textSize="@dimen/_10sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5dp"
+                    android:fontFamily="@font/nexa_book"
+                    android:text="@string/cvv"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+
+                    android:id="@+id/edtcvv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40dp"
+                    android:background="@drawable/white_shape"
+                    android:digits="1234567890"
+                    android:fontFamily="@font/nexa_book"
+                    android:gravity="center_vertical"
+                    android:hint="***"
+                    android:inputType="numberPassword"
+                    android:maxLength="4"
+                    android:paddingStart="@dimen/_15dp"
+                    android:singleLine="true"
+                    android:textColor="#222B45"
+                    android:textColorHint="@color/unselected_color"
+                    android:textSize="@dimen/_15sp" />
+
+                <TextView
+                    android:id="@+id/mErrorCVV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12dp"
+                    android:text="@string/error_cvv_cannot_be_empty"
+                    android:textColor="@color/colorErrorRed"
+                    android:textSize="@dimen/_10sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/powerdBy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottomCardImage"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginRight="@dimen/_10dp"
+            android:gravity="center"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:singleLine="true"
+            android:text="Powered by Stripe"
+            android:textSize="@dimen/_12sp" />
+
+        <LinearLayout
+            android:id="@+id/bottomCardImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_above="@+id/saveCard"
+            android:padding="@dimen/_5dp">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/visa_card" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/master_card" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/discover_card" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/direct_debit" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/ciffus_card" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/saveCard"
+            android:layout_width="@dimen/_150dp"
+            android:layout_height="@dimen/_40dp"
+            android:layout_below="@+id/layPaypal"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_15dp"
+            android:layout_marginBottom="@dimen/_25dp"
+            android:background="@drawable/save_change_button"
+            android:gravity="center"
+            android:text="@string/save_card"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18sp" />
+
+    </RelativeLayout>
+</layout>

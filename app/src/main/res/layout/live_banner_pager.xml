@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="@dimen/_10dp"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginRight="@dimen/_10dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200dp">
+
+            <ImageView
+                android:id="@+id/bannerImage"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <LinearLayout
+            android:visibility="visible"
+            android:id="@+id/layBottomCountingViewNButton"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginRight="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+           <LinearLayout
+               android:id="@+id/layTimer"
+               android:visibility="visible"
+               android:layout_marginEnd="@dimen/_15dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content">
+               <LinearLayout
+
+                   android:layout_width="@dimen/_40dp"
+                   android:layout_height="@dimen/_60dp"
+                   android:gravity="center"
+                   android:orientation="vertical">
+
+                   <TextView
+                       android:id="@+id/txtDays"
+                       android:textColor="@color/white"
+                       android:text="00"
+                       android:textSize="@dimen/_18sp"
+                       android:textStyle="bold"
+                       android:fontFamily="@font/quicksand_bold"
+                       android:gravity="center"
+                       android:background="@drawable/blue_square_shape"
+                       android:layout_width="@dimen/_40dp"
+                       android:layout_height="@dimen/_40dp" />
+
+                   <TextView
+                       android:id="@+id/txtDay"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="@dimen/_3dp"
+                       android:text="@string/days"
+                       android:singleLine="true"
+                       android:fontFamily="@font/quicksand_bold"
+                       android:textColor="@color/black"
+                       android:textSize="@dimen/_10sp"
+                       android:visibility="visible" />
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_marginStart="@dimen/_15dp"
+                   android:layout_width="@dimen/_40dp"
+                   android:layout_height="@dimen/_60dp"
+                   android:gravity="center"
+                   android:orientation="vertical">
+
+                   <TextView
+                       android:id="@+id/txthours"
+                       android:textColor="@color/white"
+                       android:gravity="center"
+                       android:text="00"
+                       android:textSize="@dimen/_18sp"
+                       android:textStyle="bold"
+                       android:fontFamily="@font/quicksand_bold"
+                       android:background="@drawable/blue_square_shape"
+                       android:layout_width="@dimen/_40dp"
+                       android:layout_height="@dimen/_40dp" />
+
+                   <TextView
+                       android:id="@+id/txtHourse"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="@dimen/_3dp"
+                       android:text="@string/hourse"
+                       android:singleLine="true"
+                       android:fontFamily="@font/quicksand_bold"
+                       android:textColor="@color/black"
+                       android:textSize="@dimen/_10sp"
+                       android:visibility="visible" />
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_marginStart="@dimen/_15dp"
+                   android:layout_width="@dimen/_40dp"
+                   android:layout_height="@dimen/_60dp"
+                   android:gravity="center"
+                   android:orientation="vertical">
+
+                   <TextView
+                       android:id="@+id/txtMunutes"
+                       android:textColor="@color/white"
+                       android:gravity="center"
+                       android:text="00"
+                       android:textSize="@dimen/_18sp"
+                       android:textStyle="bold"
+                       android:fontFamily="@font/quicksand_bold"
+                       android:background="@drawable/blue_square_shape"
+                       android:layout_width="@dimen/_40dp"
+                       android:layout_height="@dimen/_40dp" />
+
+                   <TextView
+                       android:id="@+id/txtMinutes"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="@dimen/_3dp"
+                       android:text="@string/minutes"
+                       android:singleLine="true"
+                       android:fontFamily="@font/quicksand_bold"
+                       android:textColor="@color/black"
+                       android:textSize="@dimen/_10sp"
+                       android:visibility="visible" />
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_marginStart="@dimen/_15dp"
+                   android:id="@+id/llFooterHome"
+                   android:layout_width="@dimen/_40dp"
+                   android:layout_height="@dimen/_60dp"
+                   android:gravity="center"
+                   android:orientation="vertical">
+
+                   <TextView
+                       android:id="@+id/txtSeconds"
+                       android:textColor="@color/white"
+                       android:gravity="center"
+                       android:text="00"
+                       android:textSize="@dimen/_18sp"
+                       android:textStyle="bold"
+                       android:fontFamily="@font/quicksand_bold"
+                       android:background="@drawable/blue_square_shape"
+                       android:layout_width="@dimen/_40dp"
+                       android:layout_height="@dimen/_40dp" />
+
+                   <TextView
+                       android:id="@+id/txtSecond"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="@dimen/_3dp"
+                       android:text="@string/second"
+                       android:singleLine="true"
+                       android:fontFamily="@font/quicksand_bold"
+                       android:textColor="@color/black"
+                       android:textSize="@dimen/_10sp"
+                       android:visibility="visible" />
+
+               </LinearLayout>
+
+
+           </LinearLayout>
+
+            <RelativeLayout
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/btnNotifyMe"
+                    android:background="@drawable/rsvp_btn_color"
+                    android:paddingRight="@dimen/_10dp"
+                    android:paddingLeft="@dimen/_10dp"
+                    android:padding="@dimen/_5dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_15sp"
+                    android:text=""
+                    android:gravity="center"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40dp"
+                    android:src="@drawable/selector_home" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginEnd="@dimen/_10dp"
+            android:layout_marginStart="@dimen/_10dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/mCard"
+                app:cardCornerRadius="@dimen/_10dp"
+                android:layout_width="match_parent"
+                android:layout_height="180dp">
+
+                <ImageView
+                    android:id="@+id/streamersBanner"
+                    android:scaleType="fitXY"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <LinearLayout
+                    android:id="@+id/layLive"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/_3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/btnLive"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:text="LIVE"
+                        android:layout_marginStart="@dimen/_5dp"
+                        android:background="@drawable/live_shape"
+                        android:layout_marginBottom="@dimen/_8dp"
+                        android:layout_width="@dimen/_45dp"
+                        android:layout_height="@dimen/_20dp"/>
+
+
+                    <ImageView
+                        android:id="@+id/liveIcon"
+                        android:textSize="@dimen/_12sp"
+                        android:padding="1dp"
+                        android:layout_marginTop="@dimen/_10dp"
+                        android:layout_marginStart="@dimen/_5dp"
+                        android:layout_width="@dimen/_10dp"
+                        android:src="@drawable/pink_circle"
+                        android:layout_height="@dimen/_10dp" />
+
+                    <TextView
+                        android:id="@+id/liveWatcher"
+                        android:fontFamily="@font/quicksand_bold"
+                        android:textSize="@dimen/_15sp"
+                        android:text=""
+                        android:layout_marginStart="@dimen/_5dp"
+                        android:layout_marginTop="@dimen/_2dp"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/btnNotifyMe"
+                    android:background="@drawable/white_shape"
+                    android:paddingRight="@dimen/_10dp"
+                    android:paddingLeft="@dimen/_10dp"
+                    android:padding="@dimen/_5dp"
+                    android:textColor="@color/bgSplash"
+                    android:textSize="@dimen/_12sp"
+                    android:text="@string/notify_me"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/_8dp"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30dp"
+                    android:src="@drawable/selector_home" />
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <com.jackandphantom.circularimageview.CircleImage
+                android:id="@+id/profilePicture"
+                android:layout_marginTop="@dimen/_10dp"
+                android:layout_marginEnd="@dimen/_10dp"
+                android:scaleType="fitXY"
+                android:layout_width="@dimen/_50dp"
+                android:layout_below="@+id/mCard"
+                android:layout_height="@dimen/_50dp"/>
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_marginTop="@dimen/_10dp"
+                android:layout_marginRight="@dimen/_10dp"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:fontFamily="@font/quicksand_regular"
+                android:textSize="@dimen/_12sp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_toEndOf="@+id/profilePicture"
+                android:layout_below="@+id/mCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/countryName"
+                android:fontFamily="@font/quicksand_regular"
+                android:textSize="@dimen/_12sp"
+                android:text="USA"
+                android:layout_marginStart="@dimen/_10dp"
+                android:textColor="@color/black"
+                android:layout_toEndOf="@+id/profilePicture"
+                android:layout_below="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

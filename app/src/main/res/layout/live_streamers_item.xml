@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout         xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_marginStart="@dimen/_15dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/parentImage"
+                android:padding="@dimen/_5dp"
+                android:background="@drawable/bg_ring"
+                android:layout_width="@dimen/_70dp"
+                android:layout_height="@dimen/_70dp">
+
+                <com.jackandphantom.circularimageview.CircleImage
+                    android:id="@+id/userImage"
+                    android:gravity="center"
+                    android:scaleType="fitXY"
+                    android:layout_centerInParent="true"
+                    android:padding="@dimen/_5dp"
+                    android:layout_width="@dimen/_70dp"
+                    android:layout_height="@dimen/_70dp"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/btnLive"
+                android:textSize="@dimen/_10sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="LIVE"
+                android:visibility="gone"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_55dp"
+                android:layout_marginStart="@dimen/_5dp"
+                android:background="@drawable/live_shape"
+                android:layout_marginBottom="@dimen/_8dp"
+                android:layout_width="@dimen/_50dp"
+                android:layout_height="@dimen/_15dp"/>
+
+
+            <TextView
+                android:id="@+id/userName"
+                android:gravity="center_horizontal"
+                android:layout_below="@+id/parentImage"
+                android:fontFamily="@font/quicksand_medium"
+                android:textSize="@dimen/_12sp"
+                android:layout_marginTop="@dimen/_5dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:paddingTop="@dimen/_3dp"
+                android:layout_width="@dimen/_70dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/countryName"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textSize="@dimen/_12sp"
+                android:layout_below="@+id/userName"
+                android:layout_width="@dimen/_70dp"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</layout>

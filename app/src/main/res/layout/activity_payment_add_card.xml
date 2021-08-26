@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/layoutComman"
+                layout="@layout/comman_bg" />
+
+            <include
+                layout="@layout/common_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:layout_marginTop="@dimen/_60dp" />
+
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/llpayment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPaymentAddCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:orientation="vertical" />
+
+                <TextView
+                    android:id="@+id/curentMethod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rvPaymentAddCard"
+                    android:layout_margin="@dimen/_15dp"
+                    android:layout_marginTop="@dimen/_15dp"
+                    android:text="@string/current_method"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+
+                <!-- This is fop paypal payment method -->
+                <RelativeLayout
+                    android:id="@+id/layPaypal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/curentMethod"
+                    android:layout_marginLeft="@dimen/_15dp"
+                    android:layout_marginRight="@dimen/_15dp"
+                    android:padding="1dp"
+                    android:visibility="gone"
+                    tools:visibility="gone">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_80dp"
+                        android:background="@drawable/white_shape">
+
+                        <ImageView
+                            android:id="@+id/cardIcon"
+                            android:layout_width="@dimen/_60dp"
+                            android:layout_height="@dimen/_60dp"
+                            android:layout_centerVertical="true"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/white_shape"
+                            android:padding="@dimen/_10dp"
+                            android:paddingLeft="@dimen/_5dp"
+                            android:src="@drawable/paypal" />
+
+                        <TextView
+                            android:id="@+id/cardNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15dp"
+                            android:layout_marginTop="@dimen/_8dp"
+                            android:layout_toEndOf="@+id/cardIcon"
+                            android:fontFamily="@font/quicksand_bold"
+                            android:text="@string/paypal"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_20sp" />
+
+                        <TextView
+                            android:id="@+id/paypalDefaultMethod"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/cardNumber"
+                            android:layout_marginStart="@dimen/_15dp"
+                            android:layout_toEndOf="@+id/cardIcon"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:text="@string/default_method"
+                            android:textSize="@dimen/_12sp" />
+
+
+                        <CheckBox
+                            android:id="@+id/cbPaypal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:visibility="gone" />
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+                <!-- This is for Marcado pago payment method -->
+
+
+                <RelativeLayout
+                    android:id="@+id/layoutdLocalChile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_80dp"
+                    android:layout_below="@+id/layPaypal"
+                    android:layout_marginLeft="@dimen/_15dp"
+                    android:layout_marginRight="@dimen/_15dp"
+                    android:layout_marginBottom="@dimen/_10dp"
+                    android:background="@drawable/white_shape"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/dlocalChileIcon"
+                        android:layout_width="@dimen/_60dp"
+                        android:layout_height="@dimen/_60dp"
+                        android:layout_centerVertical="true"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/white_shape"
+                        android:padding="@dimen/_10dp"
+                        android:paddingStart="@dimen/_5dp"
+                        android:src="@drawable/general_card" />
+                    <!--android:src="@drawable/dlocal_icon"-->
+                    <TextView
+                        android:id="@+id/cardNumberDlocalChile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15dp"
+                        android:layout_marginTop="@dimen/_8dp"
+                        android:layout_toEndOf="@+id/dlocalChileIcon"
+                        android:fontFamily="@font/quicksand_bold"
+                        tools:text="New Credit/Debit Card"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_20sp" />
+                    <!--dLocal-->
+
+                    <TextView
+                        android:id="@+id/dLocalDefaultMethodChile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cardNumberDlocalChile"
+                        android:layout_marginStart="@dimen/_15dp"
+                        android:layout_toEndOf="@+id/dlocalChileIcon"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:text="@string/default_method"
+                        android:textSize="@dimen/_12sp" />
+
+
+                    <CheckBox
+                        android:id="@+id/cbDlocalChile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:visibility="gone" />
+
+
+                </RelativeLayout>
+
+                <!-- This is for Pagofacil paymentb method -->
+                <RelativeLayout
+                    android:id="@+id/layPogofacil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layoutdLocalChile"
+                    android:layout_marginLeft="@dimen/_15dp"
+                    android:layout_marginRight="@dimen/_15dp"
+                    android:layout_marginBottom="@dimen/_10dp"
+                    android:padding="1dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_80dp"
+                        android:background="@drawable/white_shape">
+
+                        <ImageView
+                            android:id="@+id/pogoFacilIcon"
+                            android:layout_width="@dimen/_60dp"
+                            android:layout_height="@dimen/_60dp"
+                            android:layout_centerVertical="true"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/white_shape"
+                            android:padding="@dimen/_10dp"
+                            android:paddingStart="@dimen/_5dp"
+                            android:src="@drawable/pagofacil_icon" />
+
+                        <TextView
+                            android:id="@+id/cardNumberPogofacil"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15dp"
+                            android:layout_marginTop="@dimen/_8dp"
+                            android:layout_toEndOf="@+id/pogoFacilIcon"
+                            android:fontFamily="@font/quicksand_bold"
+                            android:text="PagoFacil"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_20sp" />
+
+                        <TextView
+                            android:id="@+id/pogofacilDefaultMethod"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/cardNumberPogofacil"
+                            android:layout_marginStart="@dimen/_15dp"
+                            android:layout_toEndOf="@+id/pogoFacilIcon"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:textSize="@dimen/_12sp"
+                            tools:text="@string/default_method" />
+
+
+                        <CheckBox
+                            android:id="@+id/cbPogofacil"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:visibility="gone" />
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layMarcadoPago"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layPogofacil"
+                    android:layout_marginLeft="@dimen/_15dp"
+                    android:layout_marginRight="@dimen/_15dp"
+                    android:layout_marginBottom="@dimen/_10dp"
+                    android:padding="1dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_80dp"
+                        android:background="@drawable/white_shape">
+
+                        <ImageView
+                            android:id="@+id/marcadoIcon"
+                            android:layout_width="@dimen/_60dp"
+                            android:layout_height="@dimen/_60dp"
+                            android:layout_centerVertical="true"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/white_shape"
+                            android:padding="@dimen/_10dp"
+                            android:paddingStart="@dimen/_5dp"
+                            android:src="@drawable/mercadopago_logo" />
+
+                        <TextView
+                            android:id="@+id/cardNumberMercadoPago"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15dp"
+                            android:layout_marginTop="@dimen/_8dp"
+                            android:layout_toEndOf="@+id/marcadoIcon"
+                            android:fontFamily="@font/quicksand_bold"
+                            android:text="Mercado Pago"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_20sp" />
+
+                        <TextView
+                            android:id="@+id/txtMethodName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/cardNumberMercadoPago"
+                            android:layout_marginStart="@dimen/_15dp"
+                            android:layout_toEndOf="@+id/marcadoIcon"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:textSize="@dimen/_12sp"
+                            tools:text="Credit Cards" />
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+
+                <!-- This is for dLocal -->
+                <RelativeLayout
+                    android:id="@+id/laydLocal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layPaypal"
+                    android:layout_marginLeft="@dimen/_15dp"
+                    android:layout_marginRight="@dimen/_15dp"
+                    android:padding="1dp"
+                    android:visibility="gone"
+                    tools:visibility="gone">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_80dp"
+                        android:background="@drawable/white_shape">
+
+                        <ImageView
+                            android:id="@+id/dlocalIcon"
+                            android:layout_width="@dimen/_60dp"
+                            android:layout_height="@dimen/_60dp"
+                            android:layout_centerVertical="true"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/white_shape"
+                            android:padding="@dimen/_10dp"
+                            android:paddingStart="@dimen/_5dp"
+                            android:src="@drawable/general_card" />
+                        <!--android:src="@drawable/dlocal_icon"-->
+                        <TextView
+                            android:id="@+id/cardNumberDlocal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15dp"
+                            android:layout_marginTop="@dimen/_8dp"
+                            android:layout_toEndOf="@+id/dlocalIcon"
+                            android:fontFamily="@font/quicksand_bold"
+                            tools:text="New Credit/Debit Card"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_20sp" />
+                        <!--dLocal-->
+
+                        <TextView
+                            android:id="@+id/dLocalDefaultMethod"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/cardNumberDlocal"
+                            android:layout_marginStart="@dimen/_15dp"
+                            android:layout_toEndOf="@+id/dlocalIcon"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:text="@string/default_method"
+                            android:textSize="@dimen/_12sp" />
+
+
+                        <CheckBox
+                            android:id="@+id/cbDlocal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:visibility="gone" />
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/btnAddCard"
+            android:layout_width="@dimen/_150dp"
+            android:layout_height="@dimen/_40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_20dp"
+            android:layout_marginBottom="@dimen/_15dp"
+            android:background="@drawable/save_change_button"
+            android:gravity="center"
+            android:text="@string/add_card"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18sp" />
+
+    </LinearLayout>
+
+</layout>

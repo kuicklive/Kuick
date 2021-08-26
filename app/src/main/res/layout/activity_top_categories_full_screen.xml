@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:background="@color/common_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/layoutComman"
+            layout="@layout/comman_bg" />
+
+
+        <include
+            android:layout_marginTop="@dimen/_50dp"
+            android:layout_marginStart="@dimen/_10dp"
+            layout="@layout/common_toolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swiperefresh"
+            android:layout_marginTop="@dimen/_15dp"
+            android:layout_below="@+id/layoutComman"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginEnd="@dimen/_8dp"
+            android:layout_marginStart="@dimen/_8dp"
+            android:id="@+id/rvTopCategoriesfullscreen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </RelativeLayout>
+
+</layout>

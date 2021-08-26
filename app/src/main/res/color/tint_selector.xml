@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/bgSplash" android:state_selected="true"  />
+    <item  android:color="@color/bgSplash" android:state_focused="true"  />
+    <item  android:color="#9a9a9a"/>
+</selector>

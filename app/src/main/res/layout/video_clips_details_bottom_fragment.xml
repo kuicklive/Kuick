@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+<ScrollView
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:gravity="top"
+        android:background="@color/white"
+        android:layout_marginBottom="@dimen/_20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/productImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200dp"/>
+
+        <TextView
+            android:id="@+id/productName"
+            android:layout_marginStart="@dimen/_20dp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_below="@+id/productImage"
+            android:fontFamily="@font/quicksand_bold"
+            android:textSize="@dimen/_20sp"
+            android:text="Vino Argentino "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/discountPrice"
+            android:layout_marginStart="@dimen/_20dp"
+            android:layout_marginTop="@dimen/_5dp"
+            android:layout_below="@+id/productName"
+            android:fontFamily="@font/quicksand_bold"
+            android:textSize="@dimen/_20sp"
+            android:text="$10.00"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/productPrice"
+            android:layout_toEndOf="@+id/discountPrice"
+            android:layout_marginStart="@dimen/_20dp"
+            android:layout_marginTop="@dimen/_5dp"
+            android:layout_below="@+id/productName"
+            android:fontFamily="@font/quicksand_bold"
+            android:textSize="@dimen/_20sp"
+            android:text="$10.00"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:id="@+id/plus_minus"
+            android:layout_below="@+id/discountPrice"
+            android:visibility="visible"
+            android:layout_marginStart="@dimen/_15dp"
+            android:layout_marginTop="@dimen/_7dp"
+            android:layout_width="@dimen/_110dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnMinus"
+                android:adjustViewBounds="true"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:src="@drawable/blue_minus"
+                android:layout_toStartOf="@+id/numberOfItem"
+                android:layout_width="@dimen/_28dp"
+                android:layout_height="@dimen/_28dp"/>
+
+            <TextView
+                android:id="@+id/numberOfItem"
+                android:layout_centerVertical="true"
+                android:text="01"
+                android:fontFamily="@font/quicksand_medium"
+                android:textColor="@color/black"
+                android:maxLength="99"
+                android:gravity="center"
+                android:singleLine="true"
+                android:layout_marginRight="@dimen/_10dp"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:textSize="@dimen/_18sp"
+                android:layout_toStartOf="@+id/btnPluse"
+                android:layout_width="@dimen/_30dp"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/btnPluse"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:src="@drawable/blue_plus"
+                android:layout_alignParentEnd="true"
+                android:layout_width="@dimen/_28dp"
+                android:layout_height="@dimen/_28dp"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_toEndOf="@+id/plus_minus"
+            android:id="@+id/sizeSpinnerView"
+            android:layout_below="@+id/productPrice"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/_20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_40dp">
+
+            <TextView
+                android:text="@string/select_size"
+                android:layout_marginStart="@dimen/_10dp"
+                android:fontFamily="@font/quicksand_medium"
+                android:textColor="@color/black"
+                android:paddingEnd="@dimen/_10dp"
+                android:gravity="center"
+                android:textSize="@dimen/_14sp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/sizeListSpinner"
+                android:visibility="visible"
+                android:layout_width="@dimen/_100dp"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+
+
+
+
+        <TextView
+            android:id="@+id/txtDescription"
+            android:layout_marginStart="@dimen/_20dp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_below="@+id/plus_minus"
+            android:layout_marginEnd="@dimen/_20dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:textSize="@dimen/_12sp"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100dp"/>
+
+        <TextView
+            android:id="@+id/btnAddToCart"
+            android:textSize="@dimen/_18sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_below="@+id/txtDescription"
+            android:layout_centerHorizontal="true"
+            android:text="@string/add_to_cart"
+            android:layout_marginBottom="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/save_change_button"
+            android:layout_width="@dimen/_200dp"
+            android:layout_height="@dimen/_40dp"/>
+
+    </RelativeLayout>
+
+</ScrollView>
+
+</layout>

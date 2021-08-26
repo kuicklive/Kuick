@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="bgSplash">#7830EB</color>
+    <color name="unselected_color">#9a9a9a</color>
+
+
+    <color name="colorErrorRed" >#EE1A1A </color>
+    <color name="successGreen">#52941F</color>
+    <color name="common_bg">#EFEFF1</color>
+    <color name="profile_tab_color">#DFDFDF</color>
+
+
+    <!--order history button colors-->
+    <color name="yellow_color">#EEAD17</color>
+    <color name="light_green">#28D094</color>
+    <color name="red_color">#EE1734</color>
+    <color name="green_color">#038521</color>
+    <color name="dark_green_color">#009688</color>
+    <color name="login_text_color">#9597A8</color>
+    <color name="purplish_color">#666EE8</color>
+
+    <color name="test_color">#FC5BEB2F</color>
+    <color name="gray">#989898</color>
+    <color name="blue">#007AFF</color>
+    <color name="test">#0000FF</color>
+
+    <color name="orange">#F44336</color>
+    <color name="red">#CA1103</color>
+    <color name="purple">#956AE1</color>
+    <color name="darkblue">#2196F3</color>
+    <color name="green">#33C139</color>
+    <color name="yellow">#FF9800</color>
+
+</resources>

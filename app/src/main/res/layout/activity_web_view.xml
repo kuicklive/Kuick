@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        tools:context=".activity.WebViewActivity">
+
+        <WebView
+            android:id="@+id/commonWebView"
+            android:layout_marginTop="@dimen/_35dp"
+            android:layout_below="@+id/layoutComman"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/mToolBr"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/topRightImg"
+                    android:layout_marginTop="@dimen/_minus_140dp"
+                    android:layout_marginEnd="@dimen/_minus_115dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/blue_circle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <include
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_60dp"
+                    layout="@layout/common_toolbar"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent" />
+
+            </RelativeLayout>
+
+            <ProgressBar
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/progressBar1"/>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</layout>

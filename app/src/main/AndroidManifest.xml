@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.kuick">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-feature android:name="there.isnt.a.vibrate.feature" android:required="false" />
+    <application
+        android:name=".util.App"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:resizeableActivity="false"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Kuick"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:allowBackup">
+
+        <activity android:name=".activity.NotificationActivity" />
+        <activity
+            android:name=".activity.TopCategoriesLivesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ContactUs"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ProductDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.StreamerDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ForgotPasswordChangePasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SplashScreen.SplashScreen"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- when we open application using link -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Deep linking for Live server -->
+
+
+                <!--
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/home"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/live-stream"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/streamers-home-data"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/about-us"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/contact-us"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/delivery"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/returns"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/privacy-policy"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/terms-of-service"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/terms-and-conditions"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/upcoming-live-streams"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/sign-in"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/forgot-password"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/sign-up"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/subscribe-user"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/thank-you-subscriber"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/no-started-yet"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/profile"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/order-history"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/order-details"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/change-password"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/manage-addresses"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/payment-settings"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/product-catalog"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/product-details"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/cart-details"
+                    android:scheme="https" />
+                <data
+                    android:host="www.kuick.live"
+                    android:pathPrefix="/@"
+                    android:scheme="https" />
+                -->
+
+
+                <!-- Deep linking for Development server -->
+
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/home"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/live-stream"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/streamers-home-data"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/about-us"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/contact-us"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/delivery"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/returns"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/privacy-policy"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/terms-of-service"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/terms-and-conditions"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/upcoming-live-streams"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/sign-in"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/forgot-password"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/sign-up"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/subscribe-user"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/thank-you-subscriber"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/no-started-yet"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/profile"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/order-history"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/order-details"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/change-password"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/manage-addresses"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/payment-settings"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/product-catalog"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/product-details"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/cart-details"
+                    android:scheme="https" />
+                <data
+                    android:host="dev.kuick.live"
+                    android:pathPrefix="/kuick_dev/@"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity> <!-- android:launchMode="singleTask (this is for HomeActivity)" -->
+        <activity
+            android:name=".activity.HomeActivity"
+            android:screenOrientation="portrait"
+            android:supportsPictureInPicture="false" />
+        <activity
+            android:name=".activity.LiveActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:resizeableActivity="true"
+            android:screenOrientation="portrait"
+            android:supportsPictureInPicture="true"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            tools:targetApi="n" />
+        <activity
+            android:name=".activity.CartPageActivity"
+            android:screenOrientation="portrait"
+            android:supportsPictureInPicture="true"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.AddressInformation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".activity.TopCategoriesFullScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyProfile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AddressList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SignupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.FeaturedStreamersFullScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.TrendingStreamersFullScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NewStreamersFullScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PaymentCardList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AddPaymentCard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.OrderDetailsActivity"
+            android:parentActivityName=".activity.HomeActivity"
+            android:screenOrientation="portrait"
+            android:supportsPictureInPicture="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".SplashScreen.SecondSplashScreen"
+            android:screenOrientation="portrait" /> <!-- for facebook login -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".firebase.MyAndroidFirebaseMsgService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!--
+ Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/splash_icon_blue" />
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/bgSplash" /> <!-- provider for access image from camera in profile activity -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+        <!--
+<receiver android:name=".util.broadcastReceiver.MyReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        -->
+        <service
+            android:name=".util.service.MyService"
+            android:stopWithTask="false" />
+    </application>
+    <queries>
+        <package android:name="com.facebook.katana" />
+    </queries>
+</manifest>

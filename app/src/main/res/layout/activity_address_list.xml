@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <RelativeLayout
+        android:id="@+id/addressLayout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@color/common_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/layoutComman"
+            layout="@layout/comman_bg" />
+
+
+        <include
+            android:layout_marginStart="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_60dp"
+            layout="@layout/common_toolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAddressInformation"
+            android:visibility="gone"
+            android:layout_below="@+id/layoutComman"
+            android:layout_width="match_parent"
+            android:layout_above="@+id/btnAddAddress"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15dp"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/dataNotFound"
+            android:layout_below="@+id/layoutComman"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                layout="@layout/data_not_found"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btnAddAddress"
+            android:textSize="@dimen/_18sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_20dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/add_address"
+            android:layout_marginTop="@dimen/_20dp"
+            android:layout_gravity="center"
+            android:paddingTop="@dimen/_8dp"
+            android:paddingBottom="@dimen/_8dp"
+            android:paddingStart="@dimen/_10dp"
+            android:paddingEnd="@dimen/_10dp"
+            android:background="@drawable/save_change_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</layout>

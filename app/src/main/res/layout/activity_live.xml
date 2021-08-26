@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/parentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true">
+
+
+        <com.kuick.livestreaming.ui.VideoGridContainer
+            android:id="@+id/live_video_grid_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"></com.kuick.livestreaming.ui.VideoGridContainer>
+
+        <RelativeLayout
+
+            android:id="@+id/parentRelativeView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_155dp"
+                android:layout_above="@id/layComment"
+                android:layout_toStartOf="@+id/productImg">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="@dimen/_15dp"
+                    android:layout_marginEnd="@dimen/_15dp"
+                    android:layout_marginBottom="@dimen/_10dp"
+                    android:overScrollMode="never"
+                    app:reverseLayout="true"
+                    app:stackFromEnd="true" />
+            </LinearLayout>
+
+            <com.jackandphantom.circularimageview.RoundedImage
+                android:id="@+id/productImg"
+                android:layout_width="@dimen/__90dp"
+                android:layout_height="@dimen/__100dp"
+                android:layout_above="@+id/productView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_5dp"
+                android:visibility="visible" />
+
+            <RelativeLayout
+                android:id="@+id/productView"
+                android:layout_width="@dimen/_100dp"
+                android:layout_height="@dimen/_50dp"
+                android:layout_above="@+id/layComment"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_10dp"
+                android:layout_marginEnd="@dimen/_5dp"
+                android:layout_marginBottom="@dimen/_20dp"
+                android:background="@drawable/blueshape"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/productName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:fontFamily="@font/quicksand_regular"
+                    android:maxLength="15"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sp" />
+
+                <TextView
+                    android:id="@+id/productPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/productName"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sp" />
+
+            </RelativeLayout>
+
+
+            <com.kuick.heart_animation.HeartLayout
+                android:id="@+id/heart_layout"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="@dimen/_15dp" />
+
+            <RelativeLayout
+                android:id="@+id/layHeart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true">
+
+
+                <ImageView
+                    android:id="@+id/btnHeart"
+                    android:layout_width="@dimen/_45dp"
+                    android:layout_height="@dimen/_45dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginEnd="@dimen/_15dp"
+                    android:layout_marginBottom="@dimen/_15dp"
+                    android:src="@drawable/live_like_icon"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/txtHeartButtonPressCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/counting_bg"
+                    android:gravity="center"
+                    android:minWidth="@dimen/_40dp"
+                    android:paddingStart="@dimen/_5dp"
+                    android:paddingEnd="@dimen/_5dp"
+                    android:text="0"
+                    android:textColor="@color/bgSplash"
+                    android:textSize="@dimen/_10dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@+id/layHeart"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40dp"
+                    android:layout_marginStart="@dimen/_15dp"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    android:layout_marginBottom="@dimen/_15dp"
+                    android:layout_toStartOf="@+id/btnCart"
+                    android:layout_weight="1"
+                    android:background="@drawable/comment_shape"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/txtCommentBox"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:hint="Type comment here..."
+                        android:paddingLeft="@dimen/_15dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:textSize="@dimen/_15sp" />
+
+                    <ImageView
+                        android:id="@+id/btnSendComment"
+                        android:layout_width="@dimen/_50dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_5dp"
+                        android:padding="@dimen/_10dp"
+                        android:src="@drawable/btn_send" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/btnCart"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:background="@drawable/blue_circle"
+                    android:padding="@dimen/_10dp"
+                    android:src="@drawable/bucket_icon"
+                    android:visibility="visible" />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+        <!--  </com.kuick.livestreaming.ui.VideoGridContainer>-->
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <com.jackandphantom.circularimageview.CircleImage
+                android:id="@+id/circleProductImage"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="@dimen/_30dp"
+                android:scaleType="centerCrop"
+                android:visibility="visible"
+                app:border_color="@color/white"
+                app:border_width="2dp"
+                tools:src="@drawable/hh" />
+
+            <com.jackandphantom.circularimageview.CircleImage
+                android:id="@+id/circleStreamerProfile"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_30dp"
+                android:padding="20dp"
+                android:scaleType="centerCrop"
+                android:visibility="visible"
+                app:border_color="@color/white"
+                app:border_width="2dp"
+                tools:src="@drawable/c" />
+
+            <TextView
+                android:id="@+id/buyerText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/circleProductImage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_20dp"
+                android:fontFamily="@font/quicksand_bold"
+                android:gravity="center"
+                android:paddingStart="@dimen/_15sp"
+                android:paddingEnd="@dimen/_15sp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_22sp"
+                tools:text="John Doe just made a purchase from Brand XXX! " />
+
+        </RelativeLayout>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/celebration" />
+
+
+        <LinearLayout
+            android:id="@+id/actionView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50dp"
+                android:layout_marginLeft="@dimen/_15dp"
+                android:layout_marginTop="@dimen/_30dp"
+                android:layout_marginRight="@dimen/_15dp"
+                android:gravity="center_vertical"
+                tools:context=".activity.LiveActivity">
+
+                <ImageView
+                    android:id="@+id/btnClose"
+                    android:layout_width="@dimen/_40dp"
+                    android:layout_height="@dimen/_40dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/white_circle"
+                    android:padding="@dimen/_14dp"
+                    android:src="@drawable/close" />
+
+                <RelativeLayout
+                    android:id="@+id/tabLive"
+                    android:layout_width="@dimen/_160dp"
+                    android:layout_height="@dimen/_50dp"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    android:layout_toEndOf="@+id/btnClose"
+                    android:background="@drawable/dark_shape">
+
+
+                    <RelativeLayout
+                        android:id="@+id/streamerImg"
+                        android:layout_width="@dimen/_50dp"
+                        android:layout_height="@dimen/_50dp"
+                        android:layout_marginStart="1dp"
+                        android:background="@drawable/bg_ring"
+                        android:padding="6dp">
+
+                        <com.jackandphantom.circularimageview.CircleImage
+                            android:id="@+id/userImage"
+                            android:layout_width="@dimen/_50dp"
+                            android:layout_height="@dimen/_50dp"
+                            android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:padding="@dimen/_5dp"
+                            android:scaleType="fitXY" />
+
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:id="@+id/streamerName"
+                        android:layout_width="@dimen/_150dp"
+                        android:layout_height="@dimen/_25dp"
+                        android:layout_marginStart="@dimen/_10dp"
+                        android:layout_toEndOf="@+id/streamerImg"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15sp" />
+
+                    <ImageView
+                        android:id="@+id/eye"
+                        android:layout_width="@dimen/_20dp"
+                        android:layout_height="@dimen/_20dp"
+                        android:layout_below="@+id/streamerName"
+                        android:layout_marginStart="@dimen/_10dp"
+                        android:layout_toEndOf="@+id/streamerImg"
+                        android:src="@drawable/eye" />
+
+                    <TextView
+                        android:id="@+id/watcher"
+                        android:layout_width="@dimen/_150dp"
+                        android:layout_height="@dimen/_25dp"
+                        android:layout_below="@+id/streamerName"
+                        android:layout_marginStart="@dimen/_5dp"
+                        android:layout_toEndOf="@+id/eye"
+                        android:text="1"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15sp" />
+
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/btnPiP"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_7dp"
+                    android:layout_toLeftOf="@+id/btnShare"
+                    android:src="@drawable/pip_button_icon"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/btnShare"
+                    android:layout_width="@dimen/_40dp"
+                    android:layout_height="@dimen/_40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_7dp"
+                    android:layout_toStartOf="@+id/layValume"
+                    android:background="@drawable/white_circle"
+                    android:padding="@dimen/_12dp"
+                    android:src="@drawable/icon_share" />
+
+                <LinearLayout
+                    android:id="@+id/layValume"
+                    android:layout_width="@dimen/_40dp"
+                    android:layout_height="@dimen/_40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/white_circle"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/btnVolume"
+                        android:layout_width="@dimen/_20dp"
+                        android:layout_height="@dimen/_20dp"
+                        android:background="@drawable/selector_volume" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</layout>

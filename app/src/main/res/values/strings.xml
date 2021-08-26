@@ -1,0 +1,248 @@
+<resources>
+    <string name="app_name">Kuick</string>
+
+    <!--login/sign up-->
+    <string name="dont_have_account">"Don't have an account?"</string>
+    <string name="have_an_account">Have an account?</string>
+    <string name="or_sign_in_with">Or Sign In With</string>
+    <string name="hint_email">Email / Phone Number</string>
+    <string name="hint_password">Password</string>
+    <string name="forgot_password"><u>Forgot Password</u></string>
+    <string name="hint_name">Full Name</string>
+    <string name="hint_your_email">Your E-Mail</string>
+    <string name="hint_country">Your Country</string>
+    <string name="by_registering_with_kuick_live_you_accept_our">By registering with Kuick Live, you accept our</string>
+    <string name="terms_and_conditions_of_service">Terms and Conditions of Service</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="or_sign_up_with">Or Sign Up With</string>
+    <string name="clickable_sign_in"><u>SIGN IN</u></string>
+    <string name="clickable_sign_up"><u>SIGN UP</u></string>
+    <string name="ok">OK</string>
+
+    <!--home screen-->
+    <string name="top_categories">Top Categories</string>
+    <string name="view_all">View all</string>
+    <string name="treanding_streamers">Trending Streamers</string>
+    <string name="featuredStream">Featured Streamers</string>
+    <string name="days">Days</string>
+    <string name="hourse">Hourse</string>
+    <string name="minutes">Minutes</string>
+    <string name="second">Seconds</string>
+    <string name="rsvp_now">RSVP NOW</string>
+
+
+    <!--tab-->
+    <string name="home">Home</string>
+    <string name="order">Order</string>
+    <string name="discover">Discover</string>
+    <string name="notifications">Notifications</string>
+    <string name="profile">Profile</string>
+
+    <!--language-->
+    <string name="spa">SPA</string>
+    <string name="en">EN</string>
+
+
+    <!--login validation-->
+    <string name="please_enter_password">Please enter password</string>
+    <string name="password_must_contain_atleast">Password must contain minimum 8 characters</string>
+    <string name="error_enter_email">Please enter  email</string>
+    <string name="error_enter_valid_email">Please enter valid email</string>
+
+    <!--network connection -->
+    <string name="oops">Oops!</string>
+    <string name="server_connection_error">Not able to connect, please retry again</string>
+    <!--<string name="network_connection_error">Internet connection lost, please retry again</string>-->
+    <string name="not_a_http_exception_message">Something wrong happened, please retry again</string>
+    <string name="error_enter_name">Please enter name</string>
+    <string name="new_streamers">New Streamers</string>
+
+    <!--My Profile-->
+    <string name="my_profile">My Profle</string>
+    <string name="address_info">Address Information</string>
+    <string name="payment_info">Payment Information</string>
+    <string name="about_us">About Us</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="delivery">Delivery</string>
+    <string name="return_">Return</string>
+    <string name="emoji">\u0001\u0001</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
+
+    <!--order history-->
+    <string name="order_history">Orders History</string>
+    <string name="completed">Completed</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="in_progress">In Progress</string>
+    <string name="light_your_order_placed">Light your Order Placed</string>
+
+    <!--profile-->
+
+    <string name="full_name">Full Name</string>
+    <string name="thomas_joi">Thomas joi</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="dummy_email">thomas@gmail.com</string>
+    <string name="mobile">Mobile Number</string>
+    <string name="dummy_number">+1 3215 3225 331</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="dummy_date">22-07-1992</string>
+    <string name="your_contry">Your Country</string>
+    <string name="usa">USA</string>
+    <string name="gander">Gender</string>
+    <string name="Male">Male</string>
+    <string name="female">Female</string>
+    <string name="save_changes">Save Changes</string>
+
+    <!--Address information-->
+
+    <string name="undo">UNDO</string>
+    <string name="remove_message">Item was removed from the list.</string>
+    <string name="address_type">Address Type</string>
+    <string name="address">Address</string>
+    <string name="apartment">Apartment, suite, etc (Optional)</string>
+    <string name="city">City</string>
+    <string name="state">State/Territory (Optional)</string>
+    <string name="postal">Postal Code</string>
+
+
+    <!--payment information-->
+    <string name="save_address">Save Address</string>
+    <string name="card_number">**** **** **** 5967</string>
+    <string name="card_remove_message">Card was removed from the list.</string>
+    <string name="current_method">CURRENT METHOD</string>
+    <string name="paypal">Paypal</string>
+    <string name="default_method">Default Method</string>
+    <string name="add_card">Add card</string>
+    <string name="name">Name</string>
+    <string name="txt_card_number">Card Number</string>
+    <string name="expires">Expires</string>
+    <string name="cvv">CVV</string>
+    <string name="mm_yy">MM/YY</string>
+    <string name="save_card">Save Card</string>
+    <string name="debit_cards_are_accepted_at_some_locations_and_for_some">Debit cards are accepted at some locations and for some</string>
+    <string name="most_populer_lives">Most Popular LIVEs</string>
+    <string name="payment_success">Payment Successful</string>
+
+    <!--forgot password and change password-->
+    <string name="submit">Submit</string>
+    <string name="hint_current_password">Current Password</string>
+    <string name="hint_new_password">New Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="change_password">Change Password</string>
+
+    <!--steamer detaisl-->
+    <string name="country">Country : USA</string>
+    <string name="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore mallum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</string>
+    <string name="streamer_details">Streamer Detail</string>
+
+    <!--order datsils and basket-->
+    <string name="your_shopping_basket">Your Shopping Basket</string>
+    <string name="promo_code">Promo Code</string>
+    <string name="apply">Apply</string>
+    <string name="add_your_promo_code_to_get_more_savings">Add your PROMO CODE to get more savings!</string>
+    <string name="order_overview">Order Overview</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="discount">Discount</string>
+    <string name="tex">Tax</string>
+    <string name="shipping_charge">Shipping Charge</string>
+    <string name="total">Total</string>
+    <string name="payment_type">Payment Type</string>
+    <string name="place_order">Place Order</string>
+    <string name="customer_info">Customer Info</string>
+    <string name="contact">Contact</string>
+    <string name="order_detail">Order Detail</string>
+    <string name="add_address">Add Address</string>
+    <string name="clothing">Clothing</string>
+    <string name="logout">Logout</string>
+    <string name="quantity">Quantity</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="product_details">Product Detail</string>
+    <string name="enter_your_promo_code">Enter Your Promo Code</string>
+    <string name="error_holder_name_cannot_be_empty">Holder Name Cannot be Empty</string>
+    <string name="error_card_number_cannot_be_empty">Card Number Cannot be Empty</string>
+    <string name="error_invalid_zip_number">Please enter valid zip number</string>
+    <string name="error_invalid_document_number">Document Number Cannot be Empty</string>
+    <string name="error_expiry_cannot_be_empty">Expiry Cannot be Empty</string>
+    <string name="error_cvv_cannot_be_empty">CVV Cannot be Empty</string>
+    <string name="expirie_date">Expires 10/12</string>
+    <string name="hint_choose_password">Choose a Password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="send">SEND</string>
+    <string name="contact_detail">Contact Detail</string>
+    <string name="stream_today">STREAM TODAY!</string>
+    <string name="thank_you">Thank You</string>
+    <string name="current_password_must_be_required">Current Password Must be Required</string>
+    <string name="new_password_must_be_required">New Password Must be Required</string>
+    <string name="conform_password_must_be_required">Conform Password Must be Required</string>
+    <string name="newpassword_and_conform_password_must_be_same">New Password and Conform Password Must be Same</string>
+    <string name="password_changed">Password Changed</string>
+    <string name="notify_me">Notify Me</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="sign_in">Sign in</string>
+    <string name="your_order_has_been_placed">Your order has been placed</string>
+    <string name="live">LIVE</string>
+    <string name="orders">Orders</string>
+    <string name="sign_up_success">Registration successfully</string>
+    <string name="user__already_exist">User already exists</string>
+    <string name="sign_up_failed">Registration Failed</string>
+    <string name="user_not_found">User not found</string>
+    <string name="failed_to_login">Login Failed</string>
+    <string name="something_wrong">Something wrong, Try again</string>
+    <string name="email_must_be_required">Email must be required</string>
+    <string name="save_successfully">Save successfully</string>
+    <string name="failed_to_update">Failed to update</string>
+    <string name="error_new_password_must_be_morethan_8_character">Password must be more than 8 character</string>
+    <string name="try_again">Try Again</string>
+    <string name="watch_live_streaming">Watch Live Stream</string>
+    <string name="data_not_found">Data not found</string>
+    <string name="address_must_required">Address must required</string>
+    <string name="city_must_required">City must required</string>
+    <string name="postal_must_required">Postal code must required</string>
+    <string name="country_must_required">Country must required</string>
+    <string name="address_type_must_required">Address type must required</string>
+    <string name="date_of_order">Date Of Order</string>
+    <string name="canclled">cancelled</string>
+    <string name="reset_password_link_sent_successfully_please_check_your_mail">reset password link sent successfully please check your mail</string>
+    <string name="mm_yyyy">MM/YYYY</string>
+
+    <string name="facebook_app_id">2790025284598659</string>
+    <string name="fb_login_protocol_scheme">fb2790025284598659</string>
+    <string name="inventory_location">Inventory Location</string>
+    <string name="success_to_add">Sucess to add</string>
+    <string name="cart_is_empty">Your Shopping Basket is empty, join a LIVE to buy :)</string>
+    <string name="please_select_payment_card">Please select payment card</string>
+    <string name="please_enter_vailid_promocode">Please enter  Promo Code</string>
+    <string name="select_address">select address</string>
+    <string name="please_select_address">Please select address</string>
+    <string name="options">Options</string>
+    <string name="select_size">Size</string>
+    <string name="select_color">Color</string>
+
+    <string name="permission_denied_for_storage">Permission Denied, You cannot read storage.</string>
+    <string name="permission_denied_for_camera">Permission Denied, You cannot open camera</string>
+    <string name="select_from_gallery">select from gallery</string>
+    <string name="select_from_camera"> select from camera  </string>
+    <string name="choose_photo">choose photo</string>
+    <string name="new_picture">New Picture</string>
+    <string name="please_select_photo_again">Please select profile again</string>
+    <string name="password_change_success_fully">Password changed successfully</string>
+    <string name="order_not_found">You don\'t have any orders, join LIVE to buy :)</string>
+    <string name="notification_not_found">You don’t have any notifications, join LIVE to buy :)</string>
+    <string name="decover_the_best_live">Discover the Best LIVEs</string>
+    <string name="failed_to_logout">Failed to logout</string>
+    <string name="clips">Clips</string>
+    <string name="LIVEs">LIVEs</string>
+
+    <!--for agora-->
+    <string-array name="string_array_resolutions">
+        <item>320x240</item>
+        <item>480x360</item>
+        <item>640x360</item>
+        <item>640x480</item>
+        <item>960x540</item>
+        <item>1280x720</item>
+    </string-array>
+
+
+</resources>

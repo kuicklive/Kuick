@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_bg">
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tabView" />
+
+        <LinearLayout
+            android:id="@+id/tabView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/_2dp"
+            android:layout_marginRight="@dimen/_2dp"
+            android:layout_marginBottom="@dimen/_2dp"
+            android:background="@drawable/round_corner"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/_8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/____50dp"
+                android:layout_marginBottom="@dimen/_10dp"
+                android:orientation="horizontal">
+
+
+                <!-- for video clips -->
+                <LinearLayout
+                    android:id="@+id/llFooterVideoClip"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/ivFooterVideoClip"
+                        android:layout_width="@dimen/_30dp"
+                        android:layout_height="@dimen/_30dp"
+                        android:adjustViewBounds="true"
+                        android:padding="3dp"
+                        android:src="@drawable/selector_video_clip" />
+
+
+                    <TextView
+                        android:id="@+id/txtFooterVideoClip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:textColor="@color/bgSplash"
+                        android:textSize="@dimen/_12sp"
+                        android:visibility="visible"
+                        tools:text="@string/clips" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llFooterOrder"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/ivFooterOrder"
+                        android:layout_width="@dimen/_30dp"
+                        android:layout_height="@dimen/_30dp"
+                        android:adjustViewBounds="true"
+                        android:padding="3dp"
+                        android:src="@drawable/selector_order" />
+
+                    <TextView
+                        android:id="@+id/txt_footerOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:textSize="@dimen/_12sp"
+                        android:visibility="visible"
+                        tools:text="@string/orders" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llFooterHome"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/ivFooterHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/selector_home" />
+
+                    <TextView
+                        android:id="@+id/txt_footerHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3dp"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:text="@string/home"
+                        android:textSize="@dimen/_12sp"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llFooterDiscover"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/ivFooterDiscover"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/selector_discover"
+                        app:tint="@color/tint_selector" />
+
+                    <TextView
+                        android:id="@+id/txt_footerDiscover"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:textSize="@dimen/_12sp"
+                        android:visibility="visible"
+                        tools:text="@string/LIVEs" />
+
+                </LinearLayout>
+
+                <!--for notification-->
+                <LinearLayout
+                    android:id="@+id/llFooterNotification"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/ivFooterNotification"
+                            android:layout_width="@dimen/_30dp"
+                            android:layout_height="@dimen/_30dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/selector_notification" />
+
+                        <TextView
+                            android:layout_width="@dimen/_20dp"
+                            android:layout_height="@dimen/_20dp"
+                            android:layout_marginStart="@dimen/_18dp"
+                            android:layout_marginTop="@dimen/_3dp"
+                            android:background="@drawable/blue_circle"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:gravity="center"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sp"
+                            android:visibility="gone" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/txt_footerNotification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:textSize="@dimen/_12sp"
+                        android:visibility="visible"
+                        tools:text="Alert" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llFooterProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.jackandphantom.circularimageview.CircleImage
+                        android:id="@+id/ivFooterProfile"
+                        android:layout_width="@dimen/_30dp"
+                        android:layout_height="@dimen/_30dp"
+                        android:adjustViewBounds="true" />
+
+                    <TextView
+                        android:id="@+id/txt_footerProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:textSize="@dimen/_12sp"
+                        android:visibility="visible"
+                        tools:text="@string/profile" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>
