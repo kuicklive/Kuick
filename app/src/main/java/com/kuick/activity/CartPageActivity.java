@@ -128,6 +128,8 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
     private String streamerId;
     private String discountArray = "";
     private CartOverviewData cartOverviewDataTemp;
+    private String discountStr = "";
+    private String finalTotalAfterShipping = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -253,7 +255,9 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("selectedAddress", "onresume selectedAddress => " + selectedAddress);
+        binding.txtAddress.setEnabled(true);
+        binding.paymentType.setEnabled(true);
+        binding.layCard.setEnabled(true);
         getSingleCard();
     }
 
@@ -615,7 +619,7 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
                 break;
             case R.id.address:
             case R.id.txtAddress:
-
+                binding.txtAddress.setEnabled(false);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -636,6 +640,8 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
                 break;
             case R.id.paymentType:
             case R.id.layCard:
+                binding.paymentType.setEnabled(false);
+                binding.layCard.setEnabled(false);
                 Intent intent1 = new Intent(this, PaymentCardList.class);
                 intent1.putExtra(INTENT_KEY_IS_PAYMENT_SELECTED, TRUE);
                 if (isShopify) {
@@ -680,6 +686,9 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
 
                         if (checkResponseStatusWithMessage(response.body(), true)) {
                             removePromocode();
+                            discountStr = response.body().getCartOverviewData().getDiscount();
+                            finalTotalAfterShipping = response.body().getCartOverviewData().getTotal();
+
                             setCalculation(response.body());
                         }
                     }
@@ -1224,6 +1233,8 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
 
                                 discountId = response.body().getPromoCodeDiscount().getId();
                                 viewchangeApplybutton(true);
+                                discountStr = response.body().getCartOverviewData().getDiscount();
+                                finalTotalAfterShipping = response.body().getCartOverviewData().getTotal();
                                 setCalculation(response.body());
 
                                 priceCalculationListener.removePaymentMethod();
@@ -1486,7 +1497,6 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
 
 
     private void setCalculation(CommonResponse response) {
-
         CartOverviewData cartOverviewData = response.getCartOverviewData();
         cartOverviewDataTemp = cartOverviewData;
         binding.txtSubtotal.setText(cartOverviewData.getSub_total());
@@ -1496,6 +1506,7 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
         binding.total.setText(cartOverviewData.getTotal());
 
         finalTotal = cartOverviewData.getO_total();
+
 
     }
 
@@ -1512,9 +1523,16 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
         //binding.txtDiscount.setText("-" + userPreferences.getCurrencySymbol() + "0.00");
         binding.txtShippingCharge.setText(userPreferences.getCurrencySymbol() + "0.00");
         binding.txtTax.setText(userPreferences.getCurrencySymbol() + "0.00");
-       // binding.txtDiscount.setText(userPreferences.getCurrencySymbol() + "0.00");
 
-        //binding.txtTotal.setText(binding.txtSubtotal.getText());
+        if (!discountStr.equals("")) {
+            binding.txtDiscount.setText(discountStr);
+        }
+        //finalTotalAfterShipping
+        // binding.txtDiscount.setText(userPreferences.getCurrencySymbol() + "0.00");
+
+        if (!finalTotalAfterShipping.equals("")) {
+            binding.txtTotal.setText(finalTotalAfterShipping);
+        }
 
 
     }
@@ -1654,6 +1672,7 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
     public void removePromocode() {
         discountArray = "";
         discountId = "";
+        discountStr = "";
         viewchangeApplybutton(false);
         priceCalculationListener.removeShipping();
         priceCalculationListener.removePaymentMethod();
