@@ -1,5 +1,6 @@
 package com.kuick.SplashScreen;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.kuick.R;
 import com.kuick.Remote.EndPoints;
 import com.kuick.Response.InitResponse;
@@ -53,6 +55,7 @@ public class SplashScreen extends BaseActivity {
     private boolean isFromNotification = false;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +63,6 @@ public class SplashScreen extends BaseActivity {
         setContentView(binding.getRoot());
         //Utility.PrintLog("onCreate", "SplashScreen onCreate()");
         Log.e(TAG, "SplashScreen onCreate()");
-
         //getIntent().getClass().getName()
         IntentFilter intentFilter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
         registerReceiver(new MyReceiver(), intentFilter);
@@ -427,7 +429,9 @@ public class SplashScreen extends BaseActivity {
             }
             else {
 
-                message = body.getMessage();
+                if (language != null) {
+                    message = language.getLanguage(body.getMessage());
+                }
             }
         }
 

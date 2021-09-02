@@ -94,7 +94,9 @@ public class BaseBottomSheetDialogFragment  extends BottomSheetDialogFragment im
 
 
         try {
-            loader.show(getChildFragmentManager(), LoaderDialogFragment.TAG);
+            if (!loader.isAdded()) {
+                loader.show(getChildFragmentManager(), LoaderDialogFragment.TAG);
+            }
         }catch (Exception e){
             Utility.PrintLog(TAG,"BaseBottomDialog showLoader() Exception() ");
         }

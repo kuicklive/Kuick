@@ -1,0 +1,87 @@
+{
+  "project_info": {
+    "project_number": "791985637086",
+    "project_id": "kuick-live",
+    "storage_bucket": "kuick-live.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791985637086:android:4a3507ac0c7b7928c2244f",
+        "android_client_info": {
+          "package_name": "com.kuick"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791985637086-2akudtvfmbeupni5r77i3pi4o2hrqqne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kuick",
+            "certificate_hash": "e03a694add0895aa9f775eac2f4c060fa2c9a481"
+          }
+        },
+        {
+          "client_id": "791985637086-48b1l0oh6jn9lfdfebfhknrsk1qk8170.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kuick",
+            "certificate_hash": "1615d82b431c6a5d074edc5219a89dd396800f15"
+          }
+        },
+        {
+          "client_id": "791985637086-dcfvkpqed98iurpcmtgqglbiasqdbsgr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kuick",
+            "certificate_hash": "e316d9c2547e148d4f74618bfcc7d38a0cdf9dcb"
+          }
+        },
+        {
+          "client_id": "791985637086-ghr4m9qnnqbbe2as1klv5n2ajnedg8s2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kuick",
+            "certificate_hash": "f11a8a413d9618701660d5fb8c9ddb95cbe1e414"
+          }
+        },
+        {
+          "client_id": "791985637086-rdcsdq8odadlhia5f5ifs6fr4bovjvqv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kuick",
+            "certificate_hash": "0914c4f6cf15aa0ff67cdbc3b7fdbf709767b321"
+          }
+        },
+        {
+          "client_id": "791985637086-4kbkq4803qik6j0fu8ajic72p9dff8pq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChAPMniKW-DoToXy940u90C0mp768SinQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791985637086-4kbkq4803qik6j0fu8ajic72p9dff8pq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "791985637086-uhqegt7s7p11d20734hfgm4pso6dplvu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.eww.kuickLive",
+                "app_store_id": "1548475515"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

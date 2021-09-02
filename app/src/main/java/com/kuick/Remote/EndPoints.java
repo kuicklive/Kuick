@@ -265,4 +265,7 @@ public interface EndPoints {
     //FOR EVENT ORDER GENERATE (CONFFITI ANIMATION)
     String ENDPOINT_EVENT_ORDER = "event_order";
     String PARAM_EVENT_ID = "event_id";
+
+    // FOR DlOCAL CARD WEBVIEW
+    String ENDPOINT_DLOCAL_WEBVIEW = "get_add_dlocal_card_url";
 }

@@ -248,7 +248,14 @@ public class OrderDetailsActivity extends BaseActivity {
             binding.cardImage.setImageResource(R.drawable.mercadopago_logo);
             binding.cardNumber.setText(MERCADO_PAGO);
 
-        } else {
+        } else if (orderDetail.getPayment_method().equalsIgnoreCase(DLOCAL_DIRECT))
+        {
+            BaseActivity.showGlideImage(this, orderDetail.getCard_image(), binding.cardImage);
+            if (orderDetail.getLast_4() != null) {
+                binding.cardNumber.setText(orderDetail.getLast_4());
+            }
+        }
+        else {
 
             BaseActivity.showGlideImage(this, orderDetail.getCard_image(), binding.cardImage);
             if (orderDetail.getLast_4() != null) {

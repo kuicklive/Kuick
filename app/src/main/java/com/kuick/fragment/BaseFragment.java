@@ -83,9 +83,10 @@ public class BaseFragment extends Fragment implements BaseView, View.OnClickList
     @Override
     public void showLoader(boolean isClose) {
 
-
         try {
-            loader.show(getChildFragmentManager(), LoaderDialogFragment.TAG);
+            if (!loader.isAdded()) {
+                loader.show(getChildFragmentManager(), LoaderDialogFragment.TAG);
+            }
         }catch (Exception e){
             Utility.PrintLog(TAG,"BaseFragment showLoader() Exception() ");
         }

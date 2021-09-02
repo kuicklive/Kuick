@@ -641,7 +641,10 @@ public class BaseActivity extends AppCompatActivity implements
     public void showLoader(boolean isClose) {
 
         try {
-            loader.show(getSupportFragmentManager(), LoaderDialogFragment.TAG);
+            if(!loader.isAdded()){
+                loader.show(getSupportFragmentManager(), LoaderDialogFragment.TAG);
+            }
+
         } catch (Exception e) {
             Utility.PrintLog(TAG, "BaseActivity showLoader() Exception() ");
         }

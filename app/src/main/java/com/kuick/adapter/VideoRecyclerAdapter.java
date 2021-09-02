@@ -97,7 +97,9 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
         }
 
         if (position == 0) {
-            setExoPlayer(holder, urlList, position);
+            if (mContext.checkInternetConnectionWithMessage()){
+                setExoPlayer(holder,urlList,position);
+            }
         }
 
         holder.mBinding.layDetails.setOnClickListener(v -> {

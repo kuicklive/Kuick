@@ -156,8 +156,8 @@ public class AddressList extends BaseActivity {
                                 userPreferences.getApiKey(),
                                 userPreferences.getUserId(),
                                 addressId,
-                                addressType
-                                );
+                                addressType,
+                                CartPageActivity.discountArray);
 
                         call.enqueue(new Callback<CommonResponse>()
                         {
@@ -201,6 +201,10 @@ public class AddressList extends BaseActivity {
                                         hideShowView(binding.dataNotFound, language.getLanguage(response.body().getMessage()));
                                         Constants.selectedAddress = null;
                                        // showSnackErrorMessage(language.getLanguage(response.body().getMessage()));
+                                    }
+
+                                    if (response.body()!=null && response.body().getCartOverviewData()!=null){
+                                        CartPageActivity.cartOverViewResponse = response.body();
                                     }
                                 }
 

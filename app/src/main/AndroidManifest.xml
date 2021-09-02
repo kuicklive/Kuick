@@ -63,11 +63,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <!-- Deep linking for Live server -->
+                <!-- Deep linking for Live server-->
 
 
-                <!--
-                <data
+              <!--  <data
                     android:host="www.kuick.live"
                     android:pathPrefix="/home"
                     android:scheme="https" />
@@ -174,8 +173,7 @@
                 <data
                     android:host="www.kuick.live"
                     android:pathPrefix="/@"
-                    android:scheme="https" />
-                -->
+                    android:scheme="https" />-->
 
 
                 <!-- Deep linking for Development server -->

@@ -10,8 +10,8 @@ android {
         applicationId "com.kuick"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 22
-        versionName "1.2.1"
+        versionCode 23
+        versionName "1.2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -23,12 +23,12 @@ android {
     buildTypes {
 
             debug {
-                /*buildConfigField "String", "API_URL", "\"https://dev.kuick.live/api/ViewerApi2/\""
+                buildConfigField "String", "API_URL", "\"https://dev.kuick.live/api/ViewerApi2/\""
                 buildConfigField "String", "BASE_WEB", "\"https://dev.kuick.live/\""
-                buildConfigField "String", "SOCKET_ADDRESS", "\"https://dev.kuick.live:8080\""*/
-                buildConfigField "String", "API_URL", "\"https://www.kuick.live/api/ViewerApi2/\""
+                buildConfigField "String", "SOCKET_ADDRESS", "\"https://dev.kuick.live:8080\""
+                /*buildConfigField "String", "API_URL", "\"https://www.kuick.live/api/ViewerApi2/\""
                 buildConfigField "String", "BASE_WEB", "\"https://www.kuick.live/\""
-                buildConfigField "String", "SOCKET_ADDRESS", "\"https://www.kuick.live:8080\""
+                buildConfigField "String", "SOCKET_ADDRESS", "\"https://www.kuick.live:8080\""*/
             }
             release {
                 buildConfigField "String", "API_URL", "\"https://www.kuick.live/api/ViewerApi2/\""

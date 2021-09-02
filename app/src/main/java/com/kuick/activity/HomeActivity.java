@@ -446,8 +446,8 @@ public class HomeActivity extends BaseActivity implements ImageRefreshListener, 
                         }*/
 
 
-                        if (fragment instanceof DiscoverFragment) {
-                            ((DiscoverFragment) fragment).addSingleNewLiveShort(jsonObject);
+                        if (DiscoverFragment.discoverFragment!=null) {
+                            DiscoverFragment.discoverFragment.addSingleNewLiveShort(jsonObject);
                         }
 
                         if (isTopCategoriesActivity != null) {
@@ -641,12 +641,17 @@ public class HomeActivity extends BaseActivity implements ImageRefreshListener, 
 
                     jsonResult = new JSONObject(jsonString);
 
-                    if (fragment instanceof DiscoverFragment) {
-                        ((DiscoverFragment) fragment).addLiveShort(jsonResult);
+                    if (DiscoverFragment.discoverFragment!=null) {
+                        DiscoverFragment.discoverFragment.addLiveShort(jsonResult);
                     }
 
-                    StreamerDetailsActivity.addLiveShort(jsonResult);
-                    TopCategoriesLivesActivity.addLiveShort(jsonResult);
+                    if (streamerDetailsActivity!=null){
+                        StreamerDetailsActivity.addLiveShort(jsonResult);
+                    }
+
+                    if (isTopCategoriesActivity!=null){
+                        TopCategoriesLivesActivity.addLiveShort(jsonResult);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1043,8 +1048,8 @@ public class HomeActivity extends BaseActivity implements ImageRefreshListener, 
 
                         jsonResult = new JSONObject(jsonString);
 
-                        if (fragment instanceof DiscoverFragment) {
-                            ((DiscoverFragment) fragment).removeLiveShort(jsonResult);
+                        if (DiscoverFragment.discoverFragment!=null) {
+                            DiscoverFragment.discoverFragment.removeLiveShort(jsonResult);
                         } else {
 
                             if (isTopCategoriesActivity != null) {
@@ -1981,6 +1986,8 @@ public class HomeActivity extends BaseActivity implements ImageRefreshListener, 
             connectSocket();
             if (VideoClipsFragment.currentFragment!=null){
                 if (VideoClipsFragment.currentFragment.mVideoClipAdapter!=null){
+                    VideoClipsFragment.isSwipeRight = false;
+                    VideoClipsFragment.currentFragment.mVideoClipAdapter.stop();
                     VideoClipsFragment.currentFragment.mVideoClipAdapter.notifyDataSetChanged();
                 }
             }

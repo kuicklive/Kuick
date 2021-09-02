@@ -88,7 +88,6 @@ import static com.kuick.util.comman.Constants.PAYPAL;
 import static com.kuick.util.comman.Constants.REQUEST_FOR_ADDRESS_SELECTION;
 import static com.kuick.util.comman.Constants.REQUEST_FOR_PAYMENT_CARD;
 import static com.kuick.util.comman.Constants.TRUE;
-import static com.kuick.util.comman.Constants.isdLocalSelected;
 import static com.kuick.util.comman.Constants.selectedAddress;
 import static com.kuick.util.comman.Constants.selectedPaymentCard;
 import static com.kuick.util.comman.CurrencyCode.ARS;
@@ -100,9 +99,8 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
 
     public static PriceCalculationListener priceCalculationListener;
     public static CartPageActivity cartPageActivity;
+    public static @NotNull CommonResponse cartOverViewResponse = null;
     private final String TAG = "CardPageActivity";
-    private final double Tax = 0;
-    private final double disc = 0.0;
     public Handler handler = new Handler();
     public Runnable runnable = null;
     private ActivityCardPageBinding binding;
@@ -126,10 +124,7 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
     private String zipCode = null;
     private boolean isShopify = false;
     private String streamerId;
-    private String discountArray = "";
-    private CartOverviewData cartOverviewDataTemp;
-    private String discountStr = "";
-    private String finalTotalAfterShipping = "";
+    public static String discountArray = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -252,19 +247,14 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        binding.txtAddress.setEnabled(true);
-        binding.paymentType.setEnabled(true);
-        binding.layCard.setEnabled(true);
-        getSingleCard();
-    }
-
     private void getSingleCard() {
+
+        Log.e("selectedAddress", "onResume selectedAddress => " + selectedAddress);
         if (selectedAddress != null) {
             binding.txtAddress.setText(Constants.selectedAddress.getAddress());
             addressId = selectedAddress.getId();
+            Log.e("selectedAddress", "onResume selectedAddress Id => " + addressId);
+
             CheckShippingChargeAPI(addressId);
 
         } else {
@@ -278,10 +268,11 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
             BaseActivity.showGlideImage(this, selectedPaymentCard.getCard_image(), binding.cardImage);
             paymentType = CARD;
             cardId = selectedPaymentCard.getId();
-
+            //callSingleCardAPI(selectedPaymentCard.getId());
             if (userPreferences != null && userPreferences.getCountry() != null && !userPreferences.getCurrencyCode().equals(CLP) && !userPreferences.getCurrencyCode().equals(ARS)) {
                 callSingleCardAPI(selectedPaymentCard.getId());
             }
+
         } else if (Constants.isPaypalSelected) {
             paymentType = PAYPAL;
             binding.cardImage.setVisibility(View.VISIBLE);
@@ -515,7 +506,6 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
 
                 if (response.getCartOverviewData().getMessage() != null && !response.getCartOverviewData().getMessage().equals("")) {
                     showDialogMessage(language.getLanguage(response.getCartOverviewData().getMessage()));
-
                 }
             }
         }
@@ -620,6 +610,7 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
             case R.id.address:
             case R.id.txtAddress:
                 binding.txtAddress.setEnabled(false);
+                binding.address.setEnabled(false);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -686,9 +677,6 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
 
                         if (checkResponseStatusWithMessage(response.body(), true)) {
                             removePromocode();
-                            discountStr = response.body().getCartOverviewData().getDiscount();
-                            finalTotalAfterShipping = response.body().getCartOverviewData().getTotal();
-
                             setCalculation(response.body());
                         }
                     }
@@ -703,7 +691,10 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
                 }
             });
 
+        } else {
+            hideShowView(binding.dataNotFound, language.getLanguage(KEY.internet_connection_lost_please_retry_again));
         }
+
     }
 
 
@@ -748,7 +739,6 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
                     placeOrder.put(PARAM_DISCOUNT_ID, discountId);
                 }
 
-
                 if (userPreferences != null && userPreferences.getCountry() != null && (userPreferences.getCurrencyCode().equals(CLP) || userPreferences.getCurrencyCode().equals(ARS))) {
                     placeOrder.put(PARAM_PAYMENT_TYPE, "dLocalDirect");
                 } else {
@@ -767,10 +757,8 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
                             if (stripeToken == null) {
                                 return;
                             }
-
                             placeOrder.put(PARAM_TOKEN, stripeToken);
                         }
-
                         placeOrder.put(PARAM_TOTAL_AMOUNT, finalTotal);
 
                     }
@@ -1233,8 +1221,7 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
 
                                 discountId = response.body().getPromoCodeDiscount().getId();
                                 viewchangeApplybutton(true);
-                                discountStr = response.body().getCartOverviewData().getDiscount();
-                                finalTotalAfterShipping = response.body().getCartOverviewData().getTotal();
+
                                 setCalculation(response.body());
 
                                 priceCalculationListener.removePaymentMethod();
@@ -1445,7 +1432,7 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
 
                         }
 
-                        // binding.txtDiscount.setText("-" + userPreferences.getCurrencySymbol() + setValidFormat(totalDiscount));
+                       // binding.txtDiscount.setText("-" + userPreferences.getCurrencySymbol() + setValidFormat(totalDiscount));
 
                     }
                 }
@@ -1491,14 +1478,23 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
     protected void onRestart() {
         super.onRestart();
 
-        //   getSingleCard();
+        //  getSingleCard();
         //getCartDetails();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        binding.txtAddress.setEnabled(true);
+        binding.address.setEnabled(true);
+        binding.paymentType.setEnabled(true);
+        binding.layCard.setEnabled(true);
+        getSingleCard();
+    }
 
     private void setCalculation(CommonResponse response) {
+
         CartOverviewData cartOverviewData = response.getCartOverviewData();
-        cartOverviewDataTemp = cartOverviewData;
         binding.txtSubtotal.setText(cartOverviewData.getSub_total());
         binding.txtDiscount.setText(cartOverviewData.getDiscount());
         binding.txtTax.setText(cartOverviewData.getTax());
@@ -1506,8 +1502,6 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
         binding.total.setText(cartOverviewData.getTotal());
 
         finalTotal = cartOverviewData.getO_total();
-
-
     }
 
     @Override
@@ -1520,21 +1514,10 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
         selectedAddress = null;
         addressId = null;
         binding.txtAddress.setText(language.getLanguage(KEY.please_select_address));
-        //binding.txtDiscount.setText("-" + userPreferences.getCurrencySymbol() + "0.00");
-        binding.txtShippingCharge.setText(userPreferences.getCurrencySymbol() + "0.00");
-        binding.txtTax.setText(userPreferences.getCurrencySymbol() + "0.00");
-
-        if (!discountStr.equals("")) {
-            binding.txtDiscount.setText(discountStr);
+        if (CartPageActivity.cartOverViewResponse!=null){
+            setCalculation(CartPageActivity.cartOverViewResponse);
+            CartPageActivity.cartOverViewResponse = null;
         }
-        //finalTotalAfterShipping
-        // binding.txtDiscount.setText(userPreferences.getCurrencySymbol() + "0.00");
-
-        if (!finalTotalAfterShipping.equals("")) {
-            binding.txtTotal.setText(finalTotalAfterShipping);
-        }
-
-
     }
 
     @Override
@@ -1662,8 +1645,6 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
         if (cardItemAdapter != null) {
             previousPrice = 0;
         }
-        discountStr = "";
-
         removePaymentMethod();
         removePromocode();
         removeShipping();
@@ -1674,7 +1655,6 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
     public void removePromocode() {
         discountArray = "";
         discountId = "";
-        discountStr = "";
         viewchangeApplybutton(false);
         priceCalculationListener.removeShipping();
         priceCalculationListener.removePaymentMethod();

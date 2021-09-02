@@ -121,7 +121,9 @@ public class AddPaymentCardAdapter extends RecyclerView.Adapter<AddPaymentCardAd
         notifyDataSetChanged();
         paymentInformationListener.onClickCardCheckBox(card,position);
         holder.itemBinding.mLinearView.setBackground(mContext.getResources().getDrawable(R.drawable.blueline));
-        mContext.onBackPressed();
+        if(isFromCart){
+            mContext.onBackPressed();
+        }
     }
 
 

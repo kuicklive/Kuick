@@ -188,6 +188,8 @@ public class VideoClipsFragment extends BaseFragment implements View.OnClickList
                     hideLoader();
                 }
             });
+        }else {
+            isSwipeRight = false;
         }
     }
 
@@ -266,7 +268,14 @@ public class VideoClipsFragment extends BaseFragment implements View.OnClickList
                         isCart = "0";
                         isDislike = "1";
                         cartORdislikeAIP(isCart, isDislike, mVideoClipAdapter.getCurrentItem());
-                        resetNewVideo();
+                        if (checkInternetConnectionWithMessage(getContext())){
+                            resetNewVideo();
+                        }else {
+
+                            if (mVideoClipAdapter!=null){
+                                mVideoClipAdapter.stop();
+                            }
+                        }
 
                     }
 
@@ -285,8 +294,15 @@ public class VideoClipsFragment extends BaseFragment implements View.OnClickList
                             isDislike = "0";
                             isSwipeRight = true;
                             cartORdislikeAIP(isCart, isDislike,data);
-                            Utility.vibrate();
-                            resetNewVideo();
+
+                            if (checkInternetConnectionWithMessage(getContext())){
+                                resetNewVideo();
+                                Utility.vibrate();
+                            } else {
+                                if (mVideoClipAdapter!=null){
+                                    mVideoClipAdapter.stop();
+                                }
+                            }
 
                         }
                       /*  isCart = "1";

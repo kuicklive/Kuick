@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
@@ -22,11 +23,13 @@ import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.kuick.R;
+import com.kuick.Remote.EndPoints;
 import com.kuick.Response.CommonResponse;
 import com.kuick.base.BaseActivity;
 import com.kuick.databinding.ActivitySignupBinding;
@@ -39,6 +42,7 @@ import com.thekhaeng.pushdownanim.PushDownAnim;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.security.SecureRandom;
 import java.util.HashMap;
@@ -92,6 +96,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
     private String firebaseToken;
     private CallbackManager callbackManager;
     private GoogleApiClient googleApiClient;
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +108,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         setLanguageLable();
         setLanguageSwitch();
         buttonListener();
-        callCountryList(false);
+        callCountryList(true);
         setCountryName();
 
         binding.edtName.addTextChangedListener(new TextWatcher() {
@@ -333,7 +338,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         switch (v.getId()) {
             case R.id.btnTermsAndCondition:
                 Intent intent = new Intent(this, WebViewActivity.class);
-                intent.putExtra(WEBVIEW_SCREEN, 8);
+                intent.putExtra(WEBVIEW_SCREEN, 9);
                 intent.putExtra(NOT_LOGIN, NOT_LOGIN);
                 startActivity(intent);
                 break;
@@ -355,14 +360,100 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
             case R.id.btnSwitch:
 
                 if (binding.btnSwitch.isSelected()){
-                    callLanguageAPI(EN, false, binding.btnSwitch);
+                    callLanguageAPIChange(EN, false, binding.btnSwitch);
                 } else{
-                    callLanguageAPI(ES, false, binding.btnSwitch);
+                    callLanguageAPIChange(ES, false, binding.btnSwitch);
                 }
 
                 break;
         }
     }
+
+    public void callLanguageAPIChange(String languageCode, boolean isCallInit, LinearLayout languageSwitch) {
+        languageSwitch(languageSwitch, false);
+        try {
+
+            Call<String> call = apiService.doGetLanguage(EndPoints.API_KEY, languageCode);
+
+            if (checkInternetConnectionWithMessage()) {
+                if (!isFromSpashScreen) {
+                    showLoader(true);
+                }
+
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(@NotNull Call<String> call, @NotNull Response<String> response) {
+
+                        Utility.PrintLog(TAG, "response code from language API : " + response.code());
+
+                        if (!response.isSuccessful()) {
+                            showSnackErrorMessage(language.getLanguage(KEY.something_wrong_happened_please_retry_again));
+                            return;
+                        }
+
+                        if (response.body() != null) {
+                            Utility.PrintLog(TAG, "response json : " + response);
+
+                            try {
+
+                                JSONObject jsonObject = new JSONObject(response.body());
+                                Utility.PrintLog(TAG, "json response :" + jsonObject.toString());
+                                language.setLanguageCode(jsonObject.getString("language_code"));
+
+                                if (jsonObject.has("labels")) {
+                                    Object languageObject = jsonObject.get("labels");
+                                    Utility.PrintLog(TAG, "language :" + jsonObject.toString());
+                                    language.setLanguage(languageObject.toString());
+                                    if (isCallInit) {
+
+
+                                    } else hideLoader();
+
+                                    languageSwitch(languageSwitch, true);
+
+                                    if (!isFromSpashScreen) {
+                                        //onClickRefreshActivity();
+                                        recreate();
+                                        setLanguageLable();
+
+                                    }
+
+                                    isFromSpashScreen = false;
+
+                                    if (Constants.isFromProfileScreen) {
+                                        Constants.isFromProfileScreen = false;
+                                        callLanguagUpdateApi();
+                                    }
+
+                                }
+
+                            } catch (JSONException e) {
+                                languageSwitch(languageSwitch, true);
+                                e.printStackTrace();
+                                Utility.PrintLog(TAG, "exception : " + e.toString());
+                            }
+                        }
+
+                        hideLoader();
+
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<String> call, @NotNull Throwable t) {
+                        languageSwitch(languageSwitch, true);
+                        Utility.PrintLog(TAG, "onFailure language() : " + t.toString());
+                        hideLoader();
+                    }
+                });
+            } else languageSwitch(languageSwitch, true);
+
+        } catch (Exception e) {
+            languageSwitch(languageSwitch, true);
+            Utility.PrintLog(TAG, "exception language() : " + e.toString());
+            hideLoader();
+        }
+    }
+
     private void setLanguageSwitch() {
         if (language!=null && language.getLanguageCode()!=null && !language.getLanguageCode().equals("")){
             if (language.getLanguageCode().equals(EN)){
@@ -378,7 +469,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         if (validateFieldWithMessage()) {
             if (checkInternetConnectionWithMessage()) {
                 showLoader(true);
-
+                binding.btnSignUp.setEnabled(false);
                 doRegisterResponse();
 
             }
@@ -427,6 +518,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
                     if (checkResponseStatusWithMessage(response.body(), true)) {
                         userPreferences.saveCurrentUser(response.body());
                         // showSnackResponse(getString(R.string.sign_up_success));
+                        binding.btnSignUp.setEnabled(true);
                         goToNextScreen(SignupActivity.this, HomeActivity.class, true);
                         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
                     }else showSnackErrorMessage(language.getLanguage(response.body().getMessage()));
@@ -592,17 +684,22 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
                 .requestEmail()
                 .build();
 
-        if (googleApiClient!=null && googleApiClient.isConnected()){
+     /*   if (googleApiClient!=null && googleApiClient.isConnected()){
             disconnectGoogleAPIClient();
         }
 
         googleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();
+                .build();*/
 
-        Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-        startActivityForResult(intent,RC_SIGN_IN);
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+
+       /* Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+        startActivityForResult(intent,RC_SIGN_IN);*/
     }
 
     private void setCountryName() {
@@ -676,10 +773,14 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
 
     }
     public void disconnectGoogleAPIClient(){
-        if (googleApiClient!=null && googleApiClient.isConnected()){
+        if (mGoogleSignInClient!=null){
+            mGoogleSignInClient.signOut();
+        }
+
+        /*if (googleApiClient!=null && googleApiClient.isConnected()){
             googleApiClient.stopAutoManage(this);
             googleApiClient.disconnect();
-        }
+        }*/
     }
 
     @Override

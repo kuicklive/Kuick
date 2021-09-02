@@ -38,6 +38,7 @@ import static com.kuick.Remote.EndPoints.ENDPOINT_COUNTRY_REGIONS;
 import static com.kuick.Remote.EndPoints.ENDPOINT_DASHBOARD;
 import static com.kuick.Remote.EndPoints.ENDPOINT_DELETE_CARD;
 import static com.kuick.Remote.EndPoints.ENDPOINT_DELETE_CART;
+import static com.kuick.Remote.EndPoints.ENDPOINT_DLOCAL_WEBVIEW;
 import static com.kuick.Remote.EndPoints.ENDPOINT_EVENT_ORDER;
 import static com.kuick.Remote.EndPoints.ENDPOINT_GET_ALL_CLIPS;
 import static com.kuick.Remote.EndPoints.ENDPOINT_GET_ALL_COUNTRY_CODE;
@@ -197,7 +198,8 @@ public interface ApiInterface {
             @Header(HEADER_X_API_KEY) String apiKey,
             @Field(ENDPOINT_USER_ID) String user_id,
             @Field(PARAM_ADDRESS_ID) String address_id,
-            @Field(PARAM_ADDRESS_TYPE) String address_type);
+            @Field(PARAM_ADDRESS_TYPE) String address_type,
+            @Field(PARAM_DISCOUNT) String discountArray);
 
 
     // ORDER HISTORY
@@ -531,5 +533,13 @@ public interface ApiInterface {
             @Header(HEADER_X_API_KEY) String apiKey,
             @Field(PARAM_EVENT_ID) String eventId,
             @Field(PARAM_ORDER_ID) String order_id);
+
+
+    // for dLocal card url
+    @FormUrlEncoded
+    @POST(ENDPOINT_DLOCAL_WEBVIEW)
+    Call<String> doDLocalWebView(
+            @Header(HEADER_X_API_KEY) String apikey,
+            @Field(PARAM_USER_ID) String user_ID);
 
 }

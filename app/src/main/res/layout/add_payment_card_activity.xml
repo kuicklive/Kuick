@@ -386,4 +386,5 @@
             android:textSize="@dimen/_18sp" />
 
     </RelativeLayout>
+
 </layout>

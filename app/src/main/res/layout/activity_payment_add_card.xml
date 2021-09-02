@@ -123,7 +123,7 @@
                 <!-- This is for Marcado pago payment method -->
 
 
-                <RelativeLayout
+               <!-- <RelativeLayout
                     android:id="@+id/layoutdLocalChile"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_80dp"
@@ -145,7 +145,7 @@
                         android:padding="@dimen/_10dp"
                         android:paddingStart="@dimen/_5dp"
                         android:src="@drawable/general_card" />
-                    <!--android:src="@drawable/dlocal_icon"-->
+                    &lt;!&ndash;android:src="@drawable/dlocal_icon"&ndash;&gt;
                     <TextView
                         android:id="@+id/cardNumberDlocalChile"
                         android:layout_width="match_parent"
@@ -157,7 +157,7 @@
                         tools:text="New Credit/Debit Card"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_20sp" />
-                    <!--dLocal-->
+                    &lt;!&ndash;dLocal&ndash;&gt;
 
                     <TextView
                         android:id="@+id/dLocalDefaultMethodChile"
@@ -179,17 +179,18 @@
                         android:visibility="gone" />
 
 
-                </RelativeLayout>
+                </RelativeLayout>-->
 
                 <!-- This is for Pagofacil paymentb method -->
                 <RelativeLayout
                     android:id="@+id/layPogofacil"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/layoutdLocalChile"
+                    android:layout_below="@+id/laydLocal"
                     android:layout_marginLeft="@dimen/_15dp"
                     android:layout_marginRight="@dimen/_15dp"
                     android:layout_marginBottom="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_15dp"
                     android:padding="1dp"
                     android:visibility="gone"
                     tools:visibility="visible">
@@ -315,7 +316,7 @@
                     android:layout_marginRight="@dimen/_15dp"
                     android:padding="1dp"
                     android:visibility="gone"
-                    tools:visibility="gone">
+                    tools:visibility="visible">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
