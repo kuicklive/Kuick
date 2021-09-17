@@ -319,6 +319,7 @@
                     tools:visibility="visible">
 
                     <RelativeLayout
+                        android:id="@+id/subDLocal"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_80dp"
                         android:background="@drawable/white_shape">
@@ -342,9 +343,9 @@
                             android:layout_marginTop="@dimen/_8dp"
                             android:layout_toEndOf="@+id/dlocalIcon"
                             android:fontFamily="@font/quicksand_bold"
-                            tools:text="New Credit/Debit Card"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_20sp" />
+                            android:textSize="@dimen/_20sp"
+                            tools:text="New Credit/Debit Card" />
                         <!--dLocal-->
 
                         <TextView

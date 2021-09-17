@@ -12,6 +12,7 @@ import com.kuick.Response.CommonResponse;
 import com.kuick.activity.LiveActivity;
 import com.kuick.base.BaseActivity;
 import com.kuick.databinding.ProductListItemBinding;
+import com.kuick.util.comman.Analytic;
 import com.kuick.util.comman.Constants;
 import com.kuick.util.comman.Utility;
 
@@ -25,6 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.kuick.Remote.EndPoints.PARAM_EVENT_ID;
 import static com.kuick.Remote.EndPoints.PARAM_PRODUCT_ID;
 import static com.kuick.Remote.EndPoints.PARAM_PRODUCT_TYPE;
 import static com.kuick.Remote.EndPoints.PARAM_USER_ID;
@@ -93,14 +95,17 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         public void CheckAPI(int position) {
             try {
 
+                Utility.PrintLog("liveActivityliveActivity","event id : " + LiveActivity.eventId);
+
                 Map<String, String> addCard = new HashMap<>();
                 CommonResponse.ProductData data = productData.get(position);
 
                 addCard.put(PARAM_USER_ID, liveActivity.userPreferences.getUserId());
                 addCard.put(PARAM_PRODUCT_ID, data.getId());
                 addCard.put(PARAM_PRODUCT_TYPE, data.getProduct_type());
+                addCard.put(PARAM_EVENT_ID, LiveActivity.eventId);
 
-                Call<BaseResponse> call = null;
+                Call<BaseResponse> call;
 
                 if (liveActivity.checkInternetConnectionWithMessage()) {
 
@@ -147,6 +152,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
                 if (response.getRedirect_page().equals(Constants.CART_PAGE))
                 {
+                    liveActivity.addFirebaseLogEvent(Analytic.eventAdd_to_cart,Analytic.ScreenLive,Analytic.btnAddToCart);
                     liveEventListener.startPictureInPicture(selectedProductId, true, false);
                     //liveActivity.startActivity(new Intent(mContext, CartPageActivity.class));
 

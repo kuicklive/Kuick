@@ -419,6 +419,7 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.dataView.scrollTo(0, binding.edtPromocode.getBottom());
             }
 
             @Override
@@ -429,6 +430,13 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
                 }
             }
         });
+
+        binding.edtPromocode.setOnFocusChangeListener((v, hasFocus) -> {
+            binding.dataView.scrollTo(0, binding.edtPromocode.getBottom());
+        });
+
+        binding.edtPromocode.setOnClickListener(v -> binding.dataView.scrollTo(0, binding.edtPromocode.getBottom()));
+
     }
 
     private void getCartDetails() {
@@ -544,7 +552,7 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
         binding.txtAddress.setOnClickListener(this);
         binding.paymentType.setOnClickListener(this);
         binding.address.setOnClickListener(this);
-        binding.layCard.setOnClickListener(this);
+        binding.cardNumber.setOnClickListener(this);
         binding.promoCancel.setOnClickListener(this);
         btnBack.setOnClickListener(this);
 
@@ -611,12 +619,9 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
             case R.id.txtAddress:
                 binding.txtAddress.setEnabled(false);
                 binding.address.setEnabled(false);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        removePaymentMethod();
-                        removeDlocal();
-                    }
+                new Handler().postDelayed(() -> {
+                    removePaymentMethod();
+                    removeDlocal();
                 }, 500);
 
                 Intent intent = new Intent(this, AddressList.class);
@@ -630,9 +635,9 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
                 startActivityForResult(intent, REQUEST_FOR_ADDRESS_SELECTION);
                 break;
             case R.id.paymentType:
-            case R.id.layCard:
+            case R.id.cardNumber:
                 binding.paymentType.setEnabled(false);
-                binding.layCard.setEnabled(false);
+                binding.cardNumber.setEnabled(false);
                 Intent intent1 = new Intent(this, PaymentCardList.class);
                 intent1.putExtra(INTENT_KEY_IS_PAYMENT_SELECTED, TRUE);
                 if (isShopify) {
@@ -1488,7 +1493,7 @@ public class CartPageActivity extends BaseActivity implements PriceCalculationLi
         binding.txtAddress.setEnabled(true);
         binding.address.setEnabled(true);
         binding.paymentType.setEnabled(true);
-        binding.layCard.setEnabled(true);
+        binding.cardNumber.setEnabled(true);
         getSingleCard();
     }
 

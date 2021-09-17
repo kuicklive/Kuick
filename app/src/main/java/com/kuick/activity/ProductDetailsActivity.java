@@ -26,6 +26,7 @@ import com.kuick.adapter.VariantColorSelectionAdapter;
 import com.kuick.base.BaseActivity;
 import com.kuick.databinding.ActivityProductDetailsBinding;
 import com.kuick.interfaces.ColorSelectionListener;
+import com.kuick.util.comman.Analytic;
 import com.kuick.util.comman.KEY;
 import com.kuick.util.comman.Utility;
 
@@ -40,6 +41,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.kuick.Remote.EndPoints.PARAM_EVENT_ID;
 import static com.kuick.Remote.EndPoints.PARAM_PRODUCT_CENTRY_ID;
 import static com.kuick.Remote.EndPoints.PARAM_PRODUCT_COLOR_ID;
 import static com.kuick.Remote.EndPoints.PARAM_PRODUCT_ID;
@@ -48,7 +50,6 @@ import static com.kuick.Remote.EndPoints.PARAM_PRODUCT_SHOPIFY_ID;
 import static com.kuick.Remote.EndPoints.PARAM_PRODUCT_SIZE_ID;
 import static com.kuick.Remote.EndPoints.PARAM_PRODUCT_TYPE;
 import static com.kuick.Remote.EndPoints.PARAM_USER_ID;
-import static com.kuick.activity.LiveActivity.liveActivity;
 import static com.kuick.util.comman.Constants.CENTRY_VARIANT;
 import static com.kuick.util.comman.Constants.COLOR_VARIANT;
 import static com.kuick.util.comman.Constants.No_VARIANT;
@@ -175,10 +176,10 @@ public class ProductDetailsActivity extends BaseActivity implements ColorSelecti
         });
     }
 
-    private void setColorSelectionAdapter(ArrayList<String> RGBColorList) {
+    private void setColorSelectionAdapter(ArrayList<String> RGBColorList, ArrayList<String> productID) {
 
         binding.rcvColorSelection.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        binding.rcvColorSelection.setAdapter(new VariantColorSelectionAdapter(RGBColorList));
+        binding.rcvColorSelection.setAdapter(new VariantColorSelectionAdapter(RGBColorList, productID));
 
     }
 
@@ -539,6 +540,7 @@ public class ProductDetailsActivity extends BaseActivity implements ColorSelecti
         if (sizeColorVariant != null && sizeColorVariant.size() > 0) {
             isSizeColorVariant = true;
             ArrayList<String> RGBColorList = new ArrayList<>();
+            ArrayList<String> productId = new ArrayList<>();
             colorIdHash = new HashMap<>();
             priceHash = new HashMap<>();
             totalQuantity = new HashMap<>();
@@ -559,14 +561,15 @@ public class ProductDetailsActivity extends BaseActivity implements ColorSelecti
                         price = sizeColorVariant.get(0).getPrice(); // set default price
                         Utility.PrintLog("selectedProductColorId","sizeColorVariant id - " + id);
 
-                        colorIdHash.put(color, id);
-                        priceHash.put(color, sizeColorVariant.get(i).getPrice());
+                        colorIdHash.put(id, id);
+                        priceHash.put(id, sizeColorVariant.get(i).getPrice());
                         RGBColorList.add(color);
-                        colorSizeArrayList.put(color, sizeColorVariant.get(i).getSizes());
+                        productId.add(id);
+                        colorSizeArrayList.put(id, sizeColorVariant.get(i).getSizes());
 
                     }
 
-                    setColorSelectionAdapter(RGBColorList);
+                    setColorSelectionAdapter(RGBColorList,productId);
                     setSize(sizeColorVariant.get(0).getSizes());
                     binding.productPrice.setText(price);
 
@@ -581,6 +584,7 @@ public class ProductDetailsActivity extends BaseActivity implements ColorSelecti
     private void setColorVariant(List<Variant.ColorVariant> colorVariant) {
 
         ArrayList<String> rgbColorList = new ArrayList<>();
+        ArrayList<String> productId = new ArrayList<>();
         colorIdHash = new HashMap<>();
         priceHash = new HashMap<>();
         totalQuantity = new HashMap<>();
@@ -607,14 +611,15 @@ public class ProductDetailsActivity extends BaseActivity implements ColorSelecti
 
                         Utility.PrintLog("selectedProductColorId", "colorVariant.get(i).getId() " + id);
 
-                        totalQuantity.put(color, quantity);
-                        colorIdHash.put(color, id);
+                        totalQuantity.put(id, quantity);
+                        colorIdHash.put(id, id);
                         rgbColorList.add(color);
-                        priceHash.put(color, colorVariant.get(i).getPrice());
+                        productId.add(id);
+                        priceHash.put(id, colorVariant.get(i).getPrice());
                     }
 
                     binding.productPrice.setText(price);
-                    setColorSelectionAdapter(rgbColorList);
+                    setColorSelectionAdapter(rgbColorList,productId);
 
                 } catch (Exception e) {
                     Utility.PrintLog(TAG, "size color exception : " + e.toString());
@@ -854,6 +859,7 @@ public class ProductDetailsActivity extends BaseActivity implements ColorSelecti
             addCard.put(PARAM_PRODUCT_ID, productDetails.getProductDetails().getId());
             addCard.put(PARAM_PRODUCT_TYPE, productDetails.getProductDetails().getProduct_type());
             addCard.put(PARAM_PRODUCT_QTY, binding.numberOfItem.getText().toString());
+            addCard.put(PARAM_EVENT_ID, LiveActivity.eventId);
 
             if (productVariantType.equals(SIZE_VARIANT)) {
                 addCard.put(PARAM_PRODUCT_SIZE_ID, selectedProductSizeId);
@@ -895,6 +901,7 @@ public class ProductDetailsActivity extends BaseActivity implements ColorSelecti
 
                         if (response.body() != null) {
                             if (checkResponseStatusWithMessage(response.body(), true)) {
+                                addFirebaseLogEvent(Analytic.eventAdd_to_cart,Analytic.ScreenProductDetail,Analytic.btnAddToCart);
                                 goToNextScreen(ProductDetailsActivity.this, CartPageActivity.class, true);
 
                             } else

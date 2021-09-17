@@ -273,6 +273,7 @@ public class PaymentCardList extends BaseActivity implements PaymentInformationL
                         if (response.body() != null) {
 
                             if (checkResponseStatusWithMessage(response.body(), true)) {
+
                                 List<UserCard> userCard = response.body().getUserCard();
                                 if (userCard != null && userCard.size() > 0) {
                                     if (mAdapter != null) {
@@ -342,11 +343,16 @@ public class PaymentCardList extends BaseActivity implements PaymentInformationL
         binding.layPaypal.setOnClickListener(this);
         binding.layPogofacil.setOnClickListener(this);
         binding.laydLocal.setOnClickListener(this);
+        binding.subDLocal.setOnClickListener(this);
+        binding.cardNumberDlocal.setOnClickListener(this);
+        binding.dLocalDefaultMethod.setOnClickListener(this);
+        binding.dlocalIcon.setOnClickListener(this);
         //binding.layoutdLocalChile.setOnClickListener(this);
         binding.layMarcadoPago.setOnClickListener(this);
 
         TextView btnCartCount = binding.getRoot().findViewById(R.id.cartCount);
         showCartCount(btnCartCount);
+
 
     }
 
@@ -398,30 +404,19 @@ public class PaymentCardList extends BaseActivity implements PaymentInformationL
                     onBackPressed();
                 }
                 break;
+            case R.id.subDLocal:
+            case R.id.dlocalIcon:
+            case R.id.dLocalDefaultMethod:
+            case R.id.cardNumberDlocal:
             case R.id.laydLocal:
                 binding.layPogofacil.setBackgroundColor(getResources().getColor(R.color.white));
                 onSelectPaymentMethod(binding.laydLocal);
 
                 if (isFromCart) {
                     removeAllOthers();
-                    //Constants.isdLocalSelected = true;
-                    //onBackPressed();
                 }
                 openWebViewForAddCard();
                 break;
-        /*    case R.id.layoutdLocalChile:
-               // goToNextScreenWithParam(this, AddPaymentCard.class, false, "isDLocal", "1");
-                //  Constants.isdLocalSelected = true;
-                binding.layMarcadoPago.setBackgroundColor(getResources().getColor(R.color.white));
-                onSelectPaymentMethod(binding.laydLocal);
-
-                if (isFromCart) {
-                    removeAllOthers();
-                    Constants.isdLocalSelected = true;
-                    onBackPressed();
-                }
-
-                break;*/
 
             case R.id.img_cart:
                 goToNextScreen(this, CartPageActivity.class, false);

@@ -4,7 +4,7 @@
     xmlns:card_view="http://schemas.android.com/tools">
 
 <LinearLayout
-    android:background="@color/common_bg"
+    android:background="@android:color/transparent"
     android:gravity="center"
     android:layout_marginLeft="@dimen/_5dp"
     android:layout_width="@dimen/_35dp"

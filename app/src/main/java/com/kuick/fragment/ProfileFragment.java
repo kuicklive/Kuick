@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kuick.R;
 import com.kuick.activity.CartPageActivity;
+import com.kuick.activity.HomeActivity;
 import com.kuick.adapter.ProfileAdapter;
 import com.kuick.base.BaseActivity;
 import com.kuick.databinding.FragmentProfileBinding;
@@ -29,6 +30,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     private TextView txtTitle;
     public int[] profileIconList;
     private FragmentProfileBinding binding;
+    public static  boolean isLanguageChanged = false;
 
     public static ProfileFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -164,11 +166,14 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     public void onResume() {
         super.onResume();
 
-        Utility.PrintLog("onResume()" ,"onResume()");
-      /*  if (Constants.idFromProfile){
-            Constants.idFromProfile = false;
+        Utility.PrintLog("onResume()" ,"onResume() ProfileFragment");
+        if (isLanguageChanged){
+            isLanguageChanged = false;
+            HomeActivity.languageChangeListener.isLanguageChanged();
+            setLanguageLable();
             setAdapter();
-        }*/
+        }
+
 
         TextView btnCartCount = binding.getRoot().findViewById(R.id.cartCount);
         showCartCount(btnCartCount);

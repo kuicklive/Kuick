@@ -425,7 +425,6 @@ public class MostPopulerLiveAdapter extends RecyclerView.Adapter<MostPopulerLive
                 BaseActivity.showGlideImageWithError(mContext, imageBaseUrl.concat(data.getLive_streaming_image()), holder.itemBinding.streamersBanner, ContextCompat.getDrawable(mContext, R.drawable.ic_company_banner_default));
             } else {
                 BaseActivity.showGlideImageWithError(mContext, "", holder.itemBinding.streamersBanner, ContextCompat.getDrawable(mContext, R.drawable.ic_company_banner_default));
-
             }
 
             if (data.getProfile_pic() != null) {

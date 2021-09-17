@@ -60,6 +60,7 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
                 }
             }
         } else {
+
             List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
             ComponentName componentInfo = taskInfo.get(0).topActivity;
             if (componentInfo.getPackageName().equals(context.getPackageName())) {

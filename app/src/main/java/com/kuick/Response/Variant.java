@@ -21,6 +21,8 @@ public class Variant extends BaseResponse {
 
     @SerializedName("centry_variant")
     private CentryVariant centryVariant;
+    @SerializedName("shopify_variant")
+    private List<ShopifyVariant> shopify_variant;
 
     public List<ShopifyVariant> getShopify_variant() {
         return shopify_variant;
@@ -29,11 +31,6 @@ public class Variant extends BaseResponse {
     public void setShopify_variant(List<ShopifyVariant> shopify_variant) {
         this.shopify_variant = shopify_variant;
     }
-
-    @SerializedName("shopify_variant")
-    private List<ShopifyVariant> shopify_variant;
-
-
 
     public CentryVariant getCentryVariant() {
         return centryVariant;
@@ -76,7 +73,7 @@ public class Variant extends BaseResponse {
         this.colorVariant = colorVariant;
     }
 
-   public static class ShopifyVariant {
+    public static class ShopifyVariant {
         @SerializedName("id")
         String id;
         @SerializedName("title")
@@ -85,6 +82,16 @@ public class Variant extends BaseResponse {
         String price;
         @SerializedName("quantity")
         String quantity;
+        @SerializedName("discount_price")
+        String discount_price;
+
+        public String getDiscount_price() {
+            return discount_price;
+        }
+
+        public void setDiscount_price(String discount_price) {
+            this.discount_price = discount_price;
+        }
 
         public String getId() {
             return id;
@@ -280,9 +287,18 @@ public class Variant extends BaseResponse {
 
         @SerializedName("price")
         String price;
-
+        @SerializedName("discount_price")
+        String discount_price;
         @SerializedName("quantity")
         String quantity;
+
+        public String getDiscount_price() {
+            return discount_price;
+        }
+
+        public void setDiscount_price(String discount_price) {
+            this.discount_price = discount_price;
+        }
 
         public String getPrice() {
             return price;
@@ -306,8 +322,18 @@ public class Variant extends BaseResponse {
 
         @SerializedName("price")
         String price;
+        @SerializedName("discount_price")
+        String discount_price;
         @SerializedName("sizes")
         private List<Sizes> sizes;
+
+        public String getDiscount_price() {
+            return discount_price;
+        }
+
+        public void setDiscount_price(String discount_price) {
+            this.discount_price = discount_price;
+        }
 
         public String getPrice() {
             return price;
@@ -340,8 +366,18 @@ public class Variant extends BaseResponse {
         String color_hex;
         @SerializedName("price")
         String price;
+        @SerializedName("discount_price")
+        String discount_price;
         @SerializedName("quantity")
         String quantity;
+
+        public String getDiscount_price() {
+            return discount_price;
+        }
+
+        public void setDiscount_price(String discount_price) {
+            this.discount_price = discount_price;
+        }
 
         public String getColor_rgba() {
             return color_rgba;
@@ -406,10 +442,20 @@ public class Variant extends BaseResponse {
         String color_hex;
         @SerializedName("price")
         String price;
+        @SerializedName("discount_price")
+        String discount_price;
         @SerializedName("quantity")
         String quantity;
         @SerializedName("sizes")
         private List<Sizes> sizes;
+
+        public String getDiscount_price() {
+            return discount_price;
+        }
+
+        public void setDiscount_price(String discount_price) {
+            this.discount_price = discount_price;
+        }
 
         public String getColor_rgba() {
             return color_rgba;
@@ -473,8 +519,18 @@ public class Variant extends BaseResponse {
 
         @SerializedName("price")
         String price;
+        @SerializedName("discount_price")
+        String discount_price;
         @SerializedName("centry_variants")
         List<CentryVariants> centryVariants;
+
+        public String getDiscount_price() {
+            return discount_price;
+        }
+
+        public void setDiscount_price(String discount_price) {
+            this.discount_price = discount_price;
+        }
 
         public String getPrice() {
             return price;

@@ -25,6 +25,7 @@ import com.kuick.activity.LiveActivity;
 import com.kuick.base.BaseActivity;
 import com.kuick.common.Common;
 import com.kuick.databinding.ActivitySplashScreenBinding;
+import com.kuick.fragment.VideoClipsFragment;
 import com.kuick.util.broadcastReceiver.MyReceiver;
 import com.kuick.util.comman.Constants;
 import com.kuick.util.comman.KEY;
@@ -66,6 +67,17 @@ public class SplashScreen extends BaseActivity {
         //getIntent().getClass().getName()
         IntentFilter intentFilter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
         registerReceiver(new MyReceiver(), intentFilter);
+
+        if (VideoClipsFragment.currentFragment != null && VideoClipsFragment.currentFragment.mVideoClipAdapter != null) {
+            if (VideoClipsFragment.currentFragment.mVideoClipAdapter.getListSize() > 0) {
+
+                VideoClipsFragment.currentFragment.mVideoClipAdapter.pause();
+                VideoClipsFragment.currentFragment.mVideoClipAdapter.stop();
+                Utility.PrintLog(TAG,"stop video from notification");
+            }
+        }
+
+        VideoClipsFragment.currentFragment = null;
 
         connectivityListener = this;
         binding.bagIcon.setAnimation(isLeftToRightRoundAnimation());

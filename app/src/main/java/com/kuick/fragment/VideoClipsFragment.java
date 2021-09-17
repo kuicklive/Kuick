@@ -22,6 +22,7 @@ import com.kuick.adapter.VideoRecyclerAdapter;
 import com.kuick.common.Common;
 import com.kuick.databinding.FragmentVideoClipsBinding;
 import com.kuick.interfaces.MediaPlayer;
+import com.kuick.util.comman.Analytic;
 import com.kuick.util.comman.CommanDialogs;
 import com.kuick.util.comman.Constants;
 import com.kuick.util.comman.KEY;
@@ -51,6 +52,7 @@ import static com.kuick.Remote.EndPoints.PARAM_PRODUCT_ID;
 import static com.kuick.Remote.EndPoints.PARAM_PRODUCT_SIZE_ID;
 import static com.kuick.Remote.EndPoints.PARAM_USER_ID;
 import static com.kuick.activity.HomeActivity.homeActivity;
+import static com.kuick.util.comman.Constants.No_VARIANT;
 import static com.kuick.util.comman.Constants.live_slug_from_notification;
 import static com.kuick.video_clip_animation.layoutmanager.touchelper.ItemTouchHelper.LEFT;
 import static com.kuick.video_clip_animation.layoutmanager.touchelper.ItemTouchHelper.RIGHT;
@@ -145,10 +147,10 @@ public class VideoClipsFragment extends BaseFragment implements View.OnClickList
         cartOrDislike.put(ENDPOINT_IS_DISLIKE, isDislike);
         cartOrDislike.put(ENDPOINT_QUANTITY, "1");
 
-        if (clipsData.getSizes() != null && clipsData.getSizes().size() > 0) {
+       /* if (clipsData.getSizes() != null && clipsData.getSizes().size() > 0) {
             String id = clipsData.getSizes().get(0).getId();
             cartOrDislike.put(PARAM_PRODUCT_SIZE_ID, id);
-        }
+        }*/
 
         if (checkInternetConnectionWithMessage(getContext())) {
 
@@ -167,8 +169,8 @@ public class VideoClipsFragment extends BaseFragment implements View.OnClickList
                             if (response.body().getCart_count() != null) {
                                 userPreferences.setTotalCartSize(response.body().getCart_count());
                                 if (isCart.equals("1")) {
+                                    baseActivity.addFirebaseLogEvent(Analytic.eventAdd_to_cart,Analytic.ScreenVideoClips,Analytic.btnAddToCart);
                                     startActivity(new Intent(getContext(), CartPageActivity.class));
-
                                 }
                             }
                         }
@@ -252,6 +254,7 @@ public class VideoClipsFragment extends BaseFragment implements View.OnClickList
 
     private void setRecyclerView(List<ClipsData> clipData) {
 
+        isSwipeRight = false;
         mVideoClipAdapter = new VideoRecyclerAdapter(clipData, binding.rcVideo, homeActivity);
 
 
@@ -283,7 +286,7 @@ public class VideoClipsFragment extends BaseFragment implements View.OnClickList
                     public void onItemSwipedRight() {
                         Utility.PrintLog(TAG, "swipe right ");
                         ClipsData data = mVideoClipAdapter.getCurrentItem();
-                        if (data.getSizes()!=null && data.getSizes().size() > 0){
+                        if (data.getProduct_variant()!=null && !data.getProduct_variant().equals("no_variant")){
                             reLoadVideo();
                             VideoClipBottomDetailsDialog videoClipDitailsDialog = new VideoClipBottomDetailsDialog(data, homeActivity);
                             videoClipDitailsDialog.show(HomeActivity.homeActivity.getSupportFragmentManager(), "VideoClipBottomDetailsDialog");
@@ -604,6 +607,8 @@ public class VideoClipsFragment extends BaseFragment implements View.OnClickList
 
         return super.getExitTransition();
     }
+
+
 
     @Override
     public void onReleasePlayer() {

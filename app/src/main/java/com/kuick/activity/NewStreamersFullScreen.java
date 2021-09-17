@@ -1,8 +1,8 @@
 package com.kuick.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +22,6 @@ import com.kuick.util.comman.Constants;
 import com.kuick.util.comman.KEY;
 import com.kuick.util.comman.Utility;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,8 +31,6 @@ public class NewStreamersFullScreen extends BaseActivity implements ClickEventLi
     public List<NewStreamers> newStreamersListFullScreen;
     private ActivityNewStreamersFullScreenBinding binding;
     private TextView txtTitle;
-    private ImageView btnBack, btnCart;
-    private final String TAG = "NewStreamersFullScreen";
     private NewStreamersFullScreenAdapter newStreamerAdapter;
 
     @Override
@@ -68,6 +65,7 @@ public class NewStreamersFullScreen extends BaseActivity implements ClickEventLi
             }
 
         } catch (Exception e) {
+            String TAG = "NewStreamersFullScreen";
             Utility.PrintLog(TAG, "Exception : " + e.toString());
         }
     }
@@ -89,8 +87,8 @@ public class NewStreamersFullScreen extends BaseActivity implements ClickEventLi
 
     private void setToolBar() {
         txtTitle = binding.getRoot().findViewById(R.id.txtTitle);
-        btnBack = binding.getRoot().findViewById(R.id.img_back);
-        btnCart = binding.getRoot().findViewById(R.id.img_cart);
+        ImageView btnBack = binding.getRoot().findViewById(R.id.img_back);
+        ImageView btnCart = binding.getRoot().findViewById(R.id.img_cart);
         btnBack.setVisibility(View.VISIBLE);
         btnBack.setOnClickListener(this);
         btnCart.setOnClickListener(this);
@@ -99,6 +97,7 @@ public class NewStreamersFullScreen extends BaseActivity implements ClickEventLi
         showCartCount(btnCartCount);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         super.onClick(v);

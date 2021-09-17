@@ -23,6 +23,7 @@ import com.kuick.R;
 import com.kuick.base.BaseActivity;
 import com.kuick.databinding.AddPaymentCardActivityBinding;
 import com.kuick.model.UserCard;
+import com.kuick.util.comman.Analytic;
 import com.kuick.util.comman.KEY;
 import com.kuick.util.comman.Utility;
 import com.stripe.android.Stripe;
@@ -221,6 +222,7 @@ public class AddPaymentCard extends BaseActivity {
 
                         if (response.body() != null) {
                             if (checkResponseStatusWithMessage(response.body(), true) && response.isSuccessful()) {
+                                addFirebaseLogEvent(Analytic.eventAdd_payment_info,Analytic.ScreenAddPaymentInfo,Analytic.btnAddPaymentInfo);
                                 onBackPressed();
                             } else
                                 showSnackErrorMessage(language.getLanguage(response.body().getMessage()));

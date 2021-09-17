@@ -23,6 +23,7 @@ import com.kuick.databinding.ActivityHomeBinding;
 import com.kuick.fragment.DiscoverFragment;
 import com.kuick.fragment.VideoClipsFragment;
 import com.kuick.interfaces.ImageRefreshListener;
+import com.kuick.interfaces.LanguageChangeListener;
 import com.kuick.interfaces.OpenHome;
 import com.kuick.model.BannerDetails;
 import com.kuick.model.FeatureStreamers;
@@ -85,8 +86,9 @@ import static com.kuick.util.comman.Constants.WEBVIEW_SCREEN;
 import static com.kuick.util.comman.Constants.isHomeActivityForNotification;
 import static com.kuick.util.comman.Utility.PrintLog;
 
-public class HomeActivity extends BaseActivity implements ImageRefreshListener, OpenHome {
+public class HomeActivity extends BaseActivity implements ImageRefreshListener, OpenHome, LanguageChangeListener {
 
+    public static LanguageChangeListener languageChangeListener;
     private static final String TAG = "HomeActivity";
     public static OpenHome openHome;
     public static ImageRefreshListener imageRefreshListener;
@@ -1288,6 +1290,7 @@ public class HomeActivity extends BaseActivity implements ImageRefreshListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         initt();
         Utility.PrintLog("onCreate", "HomeActivity onCreate()");
     }
@@ -1298,6 +1301,7 @@ public class HomeActivity extends BaseActivity implements ImageRefreshListener, 
         homeActivity = this;
         imageRefreshListener = this;
         connectivityListener = this;
+        languageChangeListener = this;
 
         isFromNotification();
         isLiveActivity = false;
@@ -1446,6 +1450,7 @@ public class HomeActivity extends BaseActivity implements ImageRefreshListener, 
                     cartPageActivity.finish();
                 }
                 Utility.PrintLog(TAG, "isFromNotification Handler()");
+                Constants.order_id = null;
                 new Handler().postDelayed(() -> imageRefreshListener.goToProductDetailsScreen(orderId, false, true), 500);
 
             } else if (point.equals("4")) {
@@ -1494,6 +1499,8 @@ public class HomeActivity extends BaseActivity implements ImageRefreshListener, 
         binding.llFooterNotification.setOnClickListener(this);
         binding.llFooterVideoClip.setOnClickListener(this);
         binding.llFooterProfile.setOnClickListener(this);
+        binding.ivFooterDiscover.setOnClickListener(this);
+        binding.txtFooterDiscover.setOnClickListener(this);
 
         if (userPreferences.getProfileImage() != null && !userPreferences.getProfileImage().trim().equalsIgnoreCase("")) {
             BaseActivity.showGlideImage(this, userPreferences.getProfileImage(), binding.ivFooterProfile);
@@ -1705,7 +1712,9 @@ public class HomeActivity extends BaseActivity implements ImageRefreshListener, 
                 showOrderHistoryFragment();
                 break;
 
+            case R.id.ivFooterDiscover:
             case R.id.llFooterDiscover:
+            case R.id.txt_footerDiscover:
                 onSelectedView(binding.ivFooterDiscover, binding.txtFooterDiscover);
                 showDiscoverFragment();
                 break;
@@ -2016,5 +2025,10 @@ public class HomeActivity extends BaseActivity implements ImageRefreshListener, 
 
         recreate();
         //showHomeFragment();
+    }
+
+    @Override
+    public void isLanguageChanged() {
+        setLanguageLable();
     }
 }

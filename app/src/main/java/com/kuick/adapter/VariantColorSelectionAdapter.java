@@ -18,13 +18,15 @@ import static com.kuick.activity.ProductDetailsActivity.colorSelectionListener;
 
 public class VariantColorSelectionAdapter extends RecyclerView.Adapter<VariantColorSelectionAdapter.ViewHolder> {
     private final ArrayList<String> colorList;
+    private final ArrayList<String> productId;
     String TAG = "VariantColorSelectionAdapter";
     private Context mContext;
     private int pos = 0;
     private boolean isisFirstTime = true;
 
-    public VariantColorSelectionAdapter(ArrayList<String> RGBColorList) {
+    public VariantColorSelectionAdapter(ArrayList<String> RGBColorList, ArrayList<String> productId) {
         this.colorList = RGBColorList;
+        this.productId = productId;
     }
 
 
@@ -56,7 +58,7 @@ public class VariantColorSelectionAdapter extends RecyclerView.Adapter<VariantCo
             pos = position;
             holder.binding.layBlackRing.setBackgroundColor(Color.BLACK);
             notifyDataSetChanged();
-            colorSelectionListener.onClickColor(colorList.get(position),position);
+            colorSelectionListener.onClickColor(productId.get(position),position);
         });
     }
 

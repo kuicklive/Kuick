@@ -1,7 +1,9 @@
 package com.kuick.adapter;
 
+import static com.kuick.fragment.VideoClipsFragment.isSwipeRight;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -10,23 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.manager.LifecycleListener;
-import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
-import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
-import com.google.android.exoplayer2.source.TrackGroupArray;
-import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
 import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
+import com.kuick.R;
 import com.kuick.Response.ClipsData;
 import com.kuick.activity.HomeActivity;
 import com.kuick.activity.StreamerDetailsActivity;
@@ -39,19 +38,15 @@ import com.kuick.util.comman.Constants;
 import com.kuick.util.comman.KEY;
 import com.kuick.util.comman.Utility;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
-
-import static com.kuick.fragment.VideoClipsFragment.isSwipeRight;
 
 public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdapter.ViewHolder> implements LifecycleListener {
 
-    LifecycleListener lifecycleListener;
     private final List<ClipsData> urlList;
     private final RecyclerView rcVideo;
-    private HomeActivity mContext;
-    private long length = 0;
+    private final HomeActivity mContext;
+    private final long length = 0;
+    LifecycleListener lifecycleListener;
     private MediaPlayer mediaPlayer;
 
     private DefaultHttpDataSource.Factory httpDataSourceFactory;
@@ -75,30 +70,49 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
 
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         this.position = position;
         holder.setIsRecyclable(false);
         setLanguage(holder, mContext);
 
         holder.mBinding.productPrice.setText(urlList.get(position).getPrice());
         holder.mBinding.txtDiscount.setText(urlList.get(position).getDiscount_price());
+
         holder.mBinding.productName.setText(urlList.get(position).getName());
         holder.mBinding.txtInventoryLocation.setText(urlList.get(position).getInventory_location());
         holder.mBinding.productPrice.setPaintFlags(holder.mBinding.productPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        BaseActivity.showGlideImage(mContext, urlList.get(position).getImage(), holder.mBinding.productImage);
-        BaseActivity.showGlideImage(mContext, urlList.get(position).getProfile_pic(), holder.mBinding.profilePicture);
-        holder.mBinding.transactionViewRight.setVisibility(View.GONE);
-        holder.mBinding.transactionViewLeft.setVisibility(View.GONE);
 
         if (urlList.get(position).getIs_show().equals("1")) {
             holder.mBinding.productPrice.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             holder.mBinding.productPrice.setVisibility(View.GONE);
         }
 
+
+        if (urlList.get(position).getImage() != null) {
+            BaseActivity.showGlideImageWithError(mContext, mContext.userPreferences.getImageUrl().concat(urlList.get(position).getImage()),
+                    holder.mBinding.productImage, ContextCompat.getDrawable(mContext, R.drawable.no_image));
+        } else {
+            holder.mBinding.profilePicture.setImageResource(R.drawable.no_image);
+        }
+
+        if (urlList.get(position).getProfile_pic() != null) {
+            BaseActivity.showGlideImageWithError(mContext, mContext.userPreferences.getImageUrl().concat(urlList.get(position).getProfile_pic()),
+                    holder.mBinding.profilePicture, ContextCompat.getDrawable(mContext, R.drawable.admin));
+        } else {
+            holder.mBinding.profilePicture.setImageResource(R.drawable.admin);
+        }
+
+        holder.mBinding.transactionViewRight.setVisibility(View.GONE);
+        holder.mBinding.transactionViewLeft.setVisibility(View.GONE);
+
+
+
+        Utility.PrintLog("LoadedVideo", "url = " + urlList.get(position).getVideo_path() + " position = " + position);
+
         if (position == 0) {
-            if (mContext.checkInternetConnectionWithMessage()){
-                setExoPlayer(holder,urlList,position);
+            if (mContext.checkInternetConnectionWithMessage()) {
+                setExoPlayer(holder, urlList, position);
             }
         }
 
@@ -125,10 +139,12 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
                 .setUpstreamDataSourceFactory(httpDataSourceFactory)
                 .setFlags(CacheDataSource.FLAG_IGNORE_CACHE_ON_ERROR);
 
+        // this is it!
+
         simpleExoPlayer = new SimpleExoPlayer.Builder(mContext)
                 .setMediaSourceFactory(new DefaultMediaSourceFactory(cacheDataSourceFactory)).build();
 
-        Uri uri = Uri.parse(urlList.get(position).getVideo_path());
+        Uri uri = Uri.parse(mContext.userPreferences.getImageUrl().concat(urlList.get(position).getVideo_path()));
         MediaItem mediaItem = MediaItem.fromUri(uri);
         holder.mBinding.playerView.setPlayer(simpleExoPlayer);
         ProgressiveMediaSource mediaSource = new ProgressiveMediaSource.Factory(cacheDataSourceFactory).createMediaSource(mediaItem);
@@ -138,7 +154,18 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
         simpleExoPlayer.setRepeatMode(Player.REPEAT_MODE_ONE);
         simpleExoPlayer.setMediaSource(mediaSource, true);
         simpleExoPlayer.prepare();
-        simpleExoPlayer.addListener(new ExoPlayer.EventListener() {
+        simpleExoPlayer.addListener(new ExoPlayer.Listener() {
+            @Override
+            public void onPlaybackStateChanged(@Player.State int state) {
+                if (state == ExoPlayer.STATE_BUFFERING) {
+                    holder.mBinding.progressbar.setVisibility(View.VISIBLE);
+                } else {
+                    holder.mBinding.progressbar.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        /*simpleExoPlayer.addListener(new ExoPlayer.EventListener() {
 
             @Override
             public void onTracksChanged(@NotNull TrackGroupArray trackGroups, @NotNull TrackSelectionArray trackSelections) {
@@ -158,13 +185,9 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
             }
 
             @Override
-            public void onPlayerError(@NotNull ExoPlaybackException error) {
-            }
-
-            @Override
             public void onPlaybackParametersChanged(@NotNull PlaybackParameters playbackParameters) {
             }
-        });
+        });*/
     }
 
     private void setLanguage(ViewHolder holder, HomeActivity mContext) {
@@ -251,7 +274,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
     }
 
     public void transactionRight(float alpha) {
-        VideoRecyclerAdapter.ViewHolder holder = (VideoRecyclerAdapter.ViewHolder) rcVideo.findViewHolderForAdapterPosition(0);
+        ViewHolder holder = (ViewHolder) rcVideo.findViewHolderForAdapterPosition(0);
         if (holder != null) {
             holder.mBinding.transactionViewRight.setVisibility(View.VISIBLE);
             holder.mBinding.transactionViewLeft.setVisibility(View.GONE);
@@ -261,7 +284,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
     }
 
     public void transactionLeft(float alpha) {
-        VideoRecyclerAdapter.ViewHolder holder = (VideoRecyclerAdapter.ViewHolder) rcVideo.findViewHolderForAdapterPosition(0);
+        ViewHolder holder = (ViewHolder) rcVideo.findViewHolderForAdapterPosition(0);
         if (holder != null) {
             holder.mBinding.transactionViewLeft.setVisibility(View.VISIBLE);
             holder.mBinding.transactionViewRight.setVisibility(View.GONE);
@@ -270,7 +293,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
     }
 
     public void hideTransactionView() {
-        VideoRecyclerAdapter.ViewHolder holder = (VideoRecyclerAdapter.ViewHolder) rcVideo.findViewHolderForAdapterPosition(0);
+        ViewHolder holder = (ViewHolder) rcVideo.findViewHolderForAdapterPosition(0);
         if (holder != null) {
             holder.mBinding.transactionViewLeft.setVisibility(View.GONE);
             holder.mBinding.transactionViewRight.setVisibility(View.GONE);

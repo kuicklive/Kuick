@@ -60,14 +60,14 @@
 
             <ImageView
                 android:id="@+id/btnCart"
-                android:layout_marginEnd="@dimen/_10dp"
-                android:layout_marginTop="@dimen/_20dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginBottom="@dimen/_10dp"
-                android:layout_below="@+id/productName"
-                android:src="@drawable/cart_bucket_icon"
                 android:layout_width="@dimen/_30dp"
-                android:layout_height="@dimen/_30dp"/>
+                android:layout_height="@dimen/_30dp"
+                android:layout_below="@+id/productName"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_20dp"
+                android:layout_marginEnd="@dimen/_10dp"
+                android:layout_marginBottom="@dimen/_10dp"
+                android:src="@drawable/cart_bucket_icon" />
 
         </RelativeLayout>
 

@@ -20,6 +20,7 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import com.google.android.exoplayer2.database.ExoDatabaseProvider;
 import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.kuick.R;
 import com.kuick.livestreaming.rtc.AgoraEventHandler;
 import com.kuick.livestreaming.rtc.EngineConfig;
@@ -51,6 +52,7 @@ public class App extends Application implements LifecycleObserver {
     private LeastRecentlyUsedCacheEvictor leastRecentlyUsedCacheEvictor;
     private ExoDatabaseProvider exoDatabaseProvider;
     public static SimpleCache simpleCache;
+    public static FirebaseAnalytics mFirebaseAnalytics;
 
 
     @Override
@@ -61,6 +63,7 @@ public class App extends Application implements LifecycleObserver {
         observer = TerminalLifecycleObserver.getInstance();
         registerActivityLifecycleCallbacks(observer);
         language = Language.newInstance(this);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         try {
             mRtcEngine = RtcEngine.create(getApplicationContext(), getString(R.string.private_app_id), mHandler);

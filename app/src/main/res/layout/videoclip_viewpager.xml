@@ -119,17 +119,17 @@
                  android:layout_height="@dimen/_55dp"/>
 
              <TextView
-                 tools:text="$1500.00"
                  android:id="@+id/txtDiscount"
-                 android:layout_toEndOf="@+id/productImage"
-                 android:textColor="@color/white"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
                  android:layout_marginStart="@dimen/_10dp"
                  android:layout_marginTop="@dimen/_12dp"
-                 android:textSize="@dimen/_14sp"
-                 android:singleLine="true"
+                 android:layout_toEndOf="@+id/productImage"
                  android:fontFamily="@font/quicksand_bold"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"/>
+                 android:singleLine="true"
+                 android:textColor="@color/white"
+                 android:textSize="@dimen/_14sp"
+                 tools:text="$1500.00" />
 
              <TextView
                  android:id="@+id/productPrice"

@@ -31,9 +31,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.kuick.R;
+import com.kuick.Remote.EndPoints;
 import com.kuick.Response.CommonResponse;
 import com.kuick.base.BaseActivity;
 import com.kuick.databinding.ActivityMyProfileBinding;
+import com.kuick.fragment.ProfileFragment;
 import com.kuick.model.UserDetail;
 import com.kuick.util.comman.Constants;
 import com.kuick.util.comman.KEY;
@@ -130,6 +132,7 @@ public class MyProfile extends BaseActivity {
         setGender();
         callCountryList(true);
         setCountryName();
+        hideLoader();
 
     }
 
@@ -149,8 +152,10 @@ public class MyProfile extends BaseActivity {
         if ((!TextUtils.isEmpty(userPreferences.getUserId())) && !(TextUtils.isEmpty(userPreferences.getApiKey()))) {
             if (checkInternetConnectionWithMessage()) {
 
-                RequestBody imageBody = RequestBody.create(Profile_ByteImage, MediaType.parse("image/*"));
-                return MultipartBody.Part.createFormData(PARAM_PROFILE_IMAGE, documentImage.getName(), imageBody);
+                if (Profile_ByteImage!=null){
+                    RequestBody imageBody = RequestBody.create(Profile_ByteImage, MediaType.parse("image/*"));
+                    return MultipartBody.Part.createFormData(PARAM_PROFILE_IMAGE, documentImage.getName(), imageBody);
+                }
             }
         }
         return null;
@@ -299,7 +304,6 @@ public class MyProfile extends BaseActivity {
                 break;
             case R.id.btnSaveChanges:
                 if (checkInternetConnectionWithMessage()) {
-                    //onUpdateProfileData();
                     onUpdateProfileRequestBodyData();
                 }
                 break;
@@ -307,16 +311,86 @@ public class MyProfile extends BaseActivity {
                 goToNextScreen(this, CartPageActivity.class, false);
                 break;
             case R.id.btnSwitch:
-                Constants.isFromProfileScreen = true;
-                Constants.idFromProfile = true;
-
+                //Constants.isFromProfileScreen = true;
+                //Constants.idFromProfile = true;
+                ProfileFragment.isLanguageChanged = true;
                 if (binding.btnSwitch.isSelected()) {
-                    callLanguageAPI(EN, false, binding.btnSwitch);
+                    callLanguage(EN, false, binding.btnSwitch);
                 } else {
-                    callLanguageAPI(ES, false, binding.btnSwitch);
+                    callLanguage(ES, false, binding.btnSwitch);
                 }
 
                 break;
+        }
+    }
+
+    public void callLanguage(String languageCode, boolean isCallInit, LinearLayout languageSwitch) {
+        languageSwitch(languageSwitch, false);
+        try {
+
+            Call<String> call = apiService.doGetLanguage(EndPoints.API_KEY, languageCode);
+
+            if (checkInternetConnectionWithMessage()) {
+                if (!isFromSpashScreen) {
+                    showLoader(true);
+                }
+
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(@NotNull Call<String> call, @NotNull Response<String> response) {
+
+                        Utility.PrintLog(TAG, "response code from language API : " + response.code());
+
+                        if (!response.isSuccessful()) {
+                            showSnackErrorMessage(language.getLanguage(KEY.something_wrong_happened_please_retry_again));
+                            return;
+                        }
+
+                        if (response.body() != null) {
+                            Utility.PrintLog(TAG, "response json : " + response);
+
+                            try {
+
+                                JSONObject jsonObject = new JSONObject(response.body());
+                                Utility.PrintLog(TAG, "json response :" + jsonObject.toString());
+                                language.setLanguageCode(jsonObject.getString("language_code"));
+
+                                if (jsonObject.has("labels")) {
+                                    Object languageObject = jsonObject.get("labels");
+                                    Utility.PrintLog(TAG, "language :" + jsonObject.toString());
+                                    language.setLanguage(languageObject.toString());
+                                    finish();
+                                    overridePendingTransition( 0, 0);
+                                    startActivity(getIntent());
+                                    overridePendingTransition( 0, 0);
+                                    languageSwitch(languageSwitch, true);
+
+                                }
+
+                            } catch (JSONException e) {
+                                languageSwitch(languageSwitch, true);
+                                e.printStackTrace();
+                                Utility.PrintLog(TAG, "exception : " + e.toString());
+                            }
+                        }
+
+                        hideLoader();
+
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<String> call, @NotNull Throwable t) {
+                        languageSwitch(languageSwitch, true);
+                        Utility.PrintLog(TAG, "onFailure language() : " + t.toString());
+                        hideLoader();
+                    }
+                });
+            } else languageSwitch(languageSwitch, true);
+
+        } catch (Exception e) {
+            languageSwitch(languageSwitch, true);
+            Utility.PrintLog(TAG, "exception language() : " + e.toString());
+            hideLoader();
         }
     }
 
@@ -336,88 +410,6 @@ public class MyProfile extends BaseActivity {
             binding.btnEN.setBackground(null);
         }
     }
-
-    private void onUpdateProfileData() {
-
-        try {
-            String email = binding.txtUserEmail.getText().toString().trim();
-
-            if (TextUtils.isEmpty(email)) {
-                //showSnackErrorMessage(language.getLanguage(KEY.email_must_be_required));
-                return;
-            }
-            if (!Utility.validEmail(email)) {
-                //showSnackErrorMessage(getString(R.string.error_enter_valid_email));
-                return;
-            }
-
-            showLoader(true);
-
-            Map<String, Object> updateRequest = new HashMap<>();
-
-
-            updateRequest.put(PARAM_USER_ID, userPreferences.getUserId());
-            updateRequest.put(PARAM_FULL_NAME, binding.txtUserName.getText().toString().trim());
-            updateRequest.put(PARAM_EMAIL, email);
-            updateRequest.put(PARAM_DATE_OF_BIRTH, binding.txtBirthDate.getText().toString().trim());
-            updateRequest.put(PARAM_GENDER, isGender);
-            updateRequest.put(PARAM_MOBILE_NUMBER, binding.txtUserMobileNumber.getText().toString().trim());
-            updateRequest.put(PARAM_COUNTRY, selectedCountry);
-
-
-            if (imageUri != null) {
-                File fil = new File(getRealPath(this, imageUri));
-                updateRequest.put(PARAM_PROFILE_IMAGE, fil);
-            }
-
-            PrintLog(TAG, userPreferences.getApiKey());
-
-            Call<CommonResponse> call = apiService.doUpdateProfileCall(userPreferences.getApiKey(), updateRequest);
-
-            call.enqueue(new Callback<CommonResponse>() {
-                @Override
-                public void onResponse(@NotNull Call<CommonResponse> call, @NotNull Response<CommonResponse> response) {
-                    Utility.PrintLog(TAG, response.toString());
-
-                    checkErrorCode(response.code());
-
-                    if (response.body() != null) {
-
-                        Utility.PrintLog(TAG, "response details : " + response.body());
-
-
-                        try {
-                            JSONObject jsonObject = new JSONObject(response.body().toString());
-                            Object object = jsonObject.get("user_details");
-                            Utility.PrintLog(TAG, "user details : " + object);
-                        } catch (JSONException e) {
-
-                        }
-
-                        //userPreferences.saveCurrentUser(response.body());
-                        if (checkResponseStatusWithMessage(response.body(), true)) {
-                            userPreferences.saveCurrentUser(response.body());
-                            showSnackResponse(language.getLanguage(response.body().getMessage()));
-                        } else
-                            showSnackErrorMessage(language.getLanguage(response.body().getMessage()));
-                    }
-
-                    hideLoader();
-                }
-
-                @Override
-                public void onFailure(@NotNull Call<CommonResponse> call, @NotNull Throwable t) {
-                    Utility.PrintLog(TAG, t.toString());
-                    hideLoader();
-                }
-            });
-        } catch (Exception e) {
-            Utility.PrintLog(TAG, e.toString());
-            showSnackErrorMessage(language.getLanguage(KEY.something_wrong_happened_please_retry_again));
-            hideLoader();
-        }
-    }
-
 
     private void onUpdateProfileRequestBodyData() {
 

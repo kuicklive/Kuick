@@ -110,17 +110,17 @@
 
           <TextView
               android:id="@+id/productPrice"
-              android:layout_marginLeft="@dimen/_10dp"
-              android:textColor="@color/black"
-              android:fontFamily="@font/quicksand_bold"
-              android:layout_below="@+id/productName"
-              android:text=""
-              android:singleLine="true"
-              android:drawablePadding="@dimen/_5dp"
-              app:drawableLeftCompat="@drawable/price_tag"
-              android:textSize="@dimen/_18sp"
               android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/productName"
+              android:layout_marginLeft="@dimen/_10dp"
+              android:drawablePadding="@dimen/_5dp"
+              android:fontFamily="@font/quicksand_bold"
+              android:singleLine="true"
+              android:text=""
+              android:textColor="@color/black"
+              android:textSize="@dimen/_18sp"
+              app:drawableLeftCompat="@drawable/price_tag" />
 
           <TextView
               android:id="@+id/txtQuantity"
@@ -136,48 +136,48 @@
 
           <RelativeLayout
               android:id="@+id/plus_minus"
-              android:visibility="visible"
-              android:layout_below="@+id/productPrice"
-              android:layout_marginEnd="@dimen/_10dp"
-              android:layout_marginTop="@dimen/_20dp"
               android:layout_width="wrap_content"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/productPrice"
+              android:layout_marginTop="@dimen/_20dp"
+              android:layout_marginEnd="@dimen/_10dp"
+              android:visibility="visible">
 
               <ImageView
                   android:id="@+id/btnMinus"
-                  android:adjustViewBounds="true"
-                  android:textColor="@color/white"
-                  android:layout_centerVertical="true"
-                  android:src="@drawable/blue_minus"
-                  android:layout_toStartOf="@+id/numberOfItem"
                   android:layout_width="@dimen/_20sp"
-                  android:layout_height="@dimen/_20dp"/>
+                  android:layout_height="@dimen/_20dp"
+                  android:layout_centerVertical="true"
+                  android:layout_toStartOf="@+id/numberOfItem"
+                  android:adjustViewBounds="true"
+                  android:src="@drawable/blue_minus"
+                  android:textColor="@color/white" />
 
               <TextView
                   android:id="@+id/numberOfItem"
-                  android:layout_centerVertical="true"
-                  android:text="01"
-                  android:fontFamily="@font/quicksand_medium"
-                  android:textColor="@color/black"
-                  android:maxLength="99"
-                  android:gravity="center"
-                  android:singleLine="true"
-                  android:layout_marginRight="@dimen/_10dp"
-                  android:layout_marginLeft="@dimen/_10dp"
-                  android:textSize="@dimen/_18sp"
-                  android:layout_toStartOf="@+id/btnPluse"
                   android:layout_width="@dimen/_30dp"
-                  android:layout_height="wrap_content"/>
+                  android:layout_height="wrap_content"
+                  android:layout_centerVertical="true"
+                  android:layout_marginLeft="@dimen/_10dp"
+                  android:layout_marginRight="@dimen/_10dp"
+                  android:layout_toStartOf="@+id/btnPluse"
+                  android:fontFamily="@font/quicksand_medium"
+                  android:gravity="center"
+                  android:maxLength="99"
+                  android:singleLine="true"
+                  android:text="01"
+                  android:textColor="@color/black"
+                  android:textSize="@dimen/_18sp" />
 
               <ImageView
                   android:id="@+id/btnPluse"
-                  android:textColor="@color/white"
-                  android:gravity="center"
-                  android:layout_centerVertical="true"
-                  android:src="@drawable/blue_plus"
-                  android:layout_alignParentEnd="true"
                   android:layout_width="@dimen/_20sp"
-                  android:layout_height="@dimen/_20dp"/>
+                  android:layout_height="@dimen/_20dp"
+                  android:layout_alignParentEnd="true"
+                  android:layout_centerVertical="true"
+                  android:gravity="center"
+                  android:src="@drawable/blue_plus"
+                  android:textColor="@color/white" />
 
           </RelativeLayout>
 
@@ -293,7 +293,6 @@
               android:id="@+id/txtDescription"
               android:fontFamily="@font/quicksand_regular"
               android:textColor="@color/black"
-              android:layout_below="@+id/centryVariantProduct"
               android:layout_margin="@dimen/_10dp"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"/>
@@ -301,7 +300,6 @@
           <TextView
               android:id="@+id/location"
               android:layout_margin="@dimen/_10dp"
-              android:layout_below="@+id/txtDescription"
               android:text="@string/inventory_location"
               android:textColor="@color/black"
               android:fontFamily="@font/quicksand_medium"

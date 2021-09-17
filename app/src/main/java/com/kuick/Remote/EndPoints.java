@@ -248,10 +248,10 @@ public interface EndPoints {
     String  ENDPOINT_MERCADO_PAGO = "get_url_of_mercadopago";
 
     // video clips
-    String ENDPOINT_GET_ALL_CLIPS = "get_all_clips";
+    String ENDPOINT_GET_ALL_CLIPS = "get_all_clips_new";
 
     //Video clip Add to cart or dislike
-    String ENDPOINT_CLIP_CART_OR_DISLIKE = "clip_cart_or_dislike";
+    String ENDPOINT_CLIP_CART_OR_DISLIKE = "clip_cart_or_dislike_new";
     String ENDPOINT_CLIP_ID = "clip_id";
     String ENDPOINT_PRODUCT_VARIANT = "product_variant";
     String ENDPOINT_IS_CART = "is_cart";

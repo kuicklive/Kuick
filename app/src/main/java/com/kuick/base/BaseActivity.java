@@ -1,5 +1,16 @@
 package com.kuick.base;
 
+import static com.kuick.activity.CartPageActivity.cartPageActivity;
+import static com.kuick.activity.HomeActivity.homeActivity;
+import static com.kuick.activity.HomeActivity.imageRefreshListener;
+import static com.kuick.fragment.HomeFragment.homeFragment;
+import static com.kuick.util.comman.Constants.ALLOW;
+import static com.kuick.util.comman.Constants.AppConstance.FORWARD_SCREEN_CHANGE_TIME;
+import static com.kuick.util.comman.Constants.CANCEL;
+import static com.kuick.util.comman.Constants.OK;
+import static com.kuick.util.comman.Constants.SESSION_EXPIRE;
+import static com.kuick.util.comman.Utility.PrintLog;
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -82,6 +93,7 @@ import com.kuick.model.TrendingStreamers;
 import com.kuick.pref.Language;
 import com.kuick.pref.UserPreferences;
 import com.kuick.util.App;
+import com.kuick.util.comman.Analytic;
 import com.kuick.util.comman.CommanDialogs;
 import com.kuick.util.comman.Constants;
 import com.kuick.util.comman.DefaultLanguage;
@@ -93,7 +105,6 @@ import com.kuick.util.loader.LoaderDialogFragment;
 import com.kuick.util.network.NetworkHelper;
 import com.kuick.util.network.NetworkHelperImpl;
 import com.kuick.util.service.MyService;
-import com.kuick.util.utils.AndroidBug5497Workaround;
 import com.ms_square.etsyblur.BlurConfig;
 
 import org.jetbrains.annotations.NotNull;
@@ -114,18 +125,6 @@ import nl.dionsegijn.konfetti.models.Size;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.kuick.activity.CartPageActivity.cartPageActivity;
-import static com.kuick.activity.HomeActivity.homeActivity;
-import static com.kuick.activity.HomeActivity.imageRefreshListener;
-import static com.kuick.fragment.HomeFragment.homeFragment;
-import static com.kuick.util.comman.Constants.ALLOW;
-import static com.kuick.util.comman.Constants.AppConstance.FORWARD_SCREEN_CHANGE_TIME;
-import static com.kuick.util.comman.Constants.CANCEL;
-import static com.kuick.util.comman.Constants.OK;
-import static com.kuick.util.comman.Constants.SESSION_EXPIRE;
-import static com.kuick.util.comman.Constants.order_id;
-import static com.kuick.util.comman.Utility.PrintLog;
 
 public class BaseActivity extends AppCompatActivity implements
         BaseView,
@@ -151,6 +150,7 @@ public class BaseActivity extends AppCompatActivity implements
     public static BaseActivity baseActivity;
     public static boolean isForDiscover = false;
     static boolean runningActivity = false;
+    private static int[] colorsList;
     private final String TAG = "BaseActivity";
     public String[] PERMISSIONS = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -169,8 +169,6 @@ public class BaseActivity extends AppCompatActivity implements
     private NetworkHelper networkHelper;
     private LoaderDialogFragment loaderDialogFragment;
     private LoaderDialogFragment loader;
-
-    private static int[] colorsList;
 
     public static ArrayList<String> getAllRegions() {
         return allRegionsList;
@@ -196,6 +194,7 @@ public class BaseActivity extends AppCompatActivity implements
 
         }
     }
+
     public static void showGlideImageWithError(Context mContext, String imgUrl, ImageView imageView, Drawable drawable) {
 
         try {
@@ -626,6 +625,7 @@ public class BaseActivity extends AppCompatActivity implements
                 true
         );
     }
+
     protected void showErrorDialogInternet(int title, String message) {
         CommanDialogs.showOneButtonDialog(
                 getViewActivity(),
@@ -641,7 +641,7 @@ public class BaseActivity extends AppCompatActivity implements
     public void showLoader(boolean isClose) {
 
         try {
-            if(!loader.isAdded()){
+            if (!loader.isAdded()) {
                 loader.show(getSupportFragmentManager(), LoaderDialogFragment.TAG);
             }
 
@@ -745,6 +745,7 @@ public class BaseActivity extends AppCompatActivity implements
     }
 
     public void showPaymentSuccessDilaog(String orderId, CartPageActivity mcontext) {
+        addFirebaseLogEvent(Analytic.eventPurchase, Analytic.AddToCartScreen, Analytic.btnPurchase);
         callForConffiti(orderId);
         CreateDialogDialogFragment blurDialog = new CreateDialogDialogFragment(orderId, mcontext);
         blurDialog.show(getSupportFragmentManager(), "blurDialog");
@@ -1296,6 +1297,19 @@ public class BaseActivity extends AppCompatActivity implements
         super.onResume();
     }
 
+    public void addFirebaseLogEvent(String eventName, String screenName, String buttonName) {
+        userPreferences = UserPreferences.newInstance(this);
+        Bundle parameters = new Bundle();
+        parameters.putString(Analytic.ANALYTICS_PARAM_SCREEN_NAME, screenName + "_android");
+        parameters.putString(Analytic.ANALYTICS_PARAM_BUTTON_NAME, buttonName + "_android");
+        // parameters.putString(Constants.ANALYTICS_PARAM_METHOD, methodName);
+        parameters.putString(Analytic.ANALYTICS_PARAM_USER_ID, this.userPreferences.getUserId());
+        parameters.putString(Analytic.ANALYTICS_PARAM_USER_NAME, this.userPreferences.getFullName());
+        App.mFirebaseAnalytics.logEvent(eventName+"_android", parameters);
+        Utility.PrintLog("addFirebaseLogEvent","events added");
+
+    }
+
     public static class CreateDialogDialogFragment extends BlurDialogFragment {
 
         public static Dialog builder;
@@ -1331,7 +1345,7 @@ public class BaseActivity extends AppCompatActivity implements
                             .setSpeed(1f, 1f)
                             .setFadeOutEnabled(true)
                             .setTimeToLive(1000L)
-                            .addShapes(Shape.Square.INSTANCE, Shape.Square.RECT, Shape.CIRCLE.INSTANCE)
+                            .addShapes(Shape.Square.INSTANCE, Shape.Square.RECT, Shape.Circle.INSTANCE)
                             .addSizes(new Size(6, 1f))
                             //.setPosition(centreX,centreY)
                             .setPosition(-50f, conffitiView.getWidth() + 50f, -50f, -50f)
@@ -1365,7 +1379,8 @@ public class BaseActivity extends AppCompatActivity implements
 
                 builder.dismiss();
                 cartPageActivity.onBackPressed();
-                /*new Handler().postDelayed(() -> */imageRefreshListener.goToProductDetailsScreen(orderId, false, true);/*, 100);*/
+                /*new Handler().postDelayed(() -> */
+                imageRefreshListener.goToProductDetailsScreen(orderId, false, true);/*, 100);*/
 
             });
 
@@ -1401,7 +1416,5 @@ public class BaseActivity extends AppCompatActivity implements
                     .debug(true)
                     .build();
         }
-
-
     }
 }

@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.kuick">
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the "MyLocation" functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -13,7 +19,15 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-feature android:name="there.isnt.a.vibrate.feature" android:required="false" />
+
+    <uses-feature
+        android:name="there.isnt.a.vibrate.feature"
+        android:required="false" />
+
+    <queries>
+        <package android:name="com.facebook.katana" />
+    </queries>
+
     <application
         android:name=".util.App"
         android:allowBackup="false"
@@ -26,6 +40,18 @@
         android:theme="@style/Theme.Kuick"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
         <activity android:name=".activity.NotificationActivity" />
         <activity
@@ -50,9 +76,9 @@
             android:name=".SplashScreen.SplashScreen"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -63,10 +89,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <!-- Deep linking for Live server-->
+                <!-- Deep linking for Live server -->
 
 
-              <!--  <data
+                <!--
+                <data
                     android:host="www.kuick.live"
                     android:pathPrefix="/home"
                     android:scheme="https" />
@@ -173,7 +200,8 @@
                 <data
                     android:host="www.kuick.live"
                     android:pathPrefix="/@"
-                    android:scheme="https" />-->
+                    android:scheme="https" />
+                -->
 
 
                 <!-- Deep linking for Development server -->
@@ -311,7 +339,7 @@
         <activity
             android:name=".activity.AddressInformation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.TopCategoriesFullScreen"
             android:screenOrientation="portrait" />
@@ -418,7 +446,5 @@
             android:name=".util.service.MyService"
             android:stopWithTask="false" />
     </application>
-    <queries>
-        <package android:name="com.facebook.katana" />
-    </queries>
+
 </manifest>

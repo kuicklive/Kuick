@@ -360,7 +360,7 @@
                     android:layout_marginEnd="@dimen/_7dp"
                     android:layout_toStartOf="@+id/layValume"
                     android:background="@drawable/white_circle"
-                    android:padding="@dimen/_12dp"
+                    android:padding="@dimen/_10dp"
                     android:src="@drawable/icon_share" />
 
                 <LinearLayout

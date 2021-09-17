@@ -40,6 +40,7 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +50,7 @@ import kotlin.Suppress;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 import static com.kuick.Remote.EndPoints.ENDPOINT_USER_ID;
 import static com.kuick.Remote.EndPoints.PARAM_ADDRESS;
 import static com.kuick.Remote.EndPoints.PARAM_ADDRESS_TYPE;
@@ -80,9 +82,9 @@ public class AddressInformation extends BaseActivity {
     private String phoneNumber = null;
     private boolean isShopify;
     private String streamerId;
-    HashMap<String,String> country_id = new HashMap();
-    HashMap<String,String> count_province = new HashMap();
-    HashMap<String,String> state_id = new HashMap();
+    HashMap<String, String> country_id = new HashMap();
+    HashMap<String, String> count_province = new HashMap();
+    HashMap<String, String> state_id = new HashMap();
     private String countryId;
     private String countProvince;
     private String stateType;
@@ -96,37 +98,8 @@ public class AddressInformation extends BaseActivity {
         binding = ActivityAddressInformationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         init();
-        //customStatusBar();
-      //  AndroidBug5497Workaround.assistActivity(this);
-
-        //final View activityRootView = findViewById(R.id.scrollAddress);
     }
-    public  float dpToPx( float valueInDp) {
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInDp, metrics);
-    }
-    private void customStatusBar() {
 
-        try {
-            final View activityRootView = findViewById(R.id.mainLayout);
-            activityRootView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-                Rect r = new Rect();
-
-                activityRootView.getWindowVisibleDisplayFrame(r);
-                int heightDiff = binding.getRoot().getHeight() - (r.bottom - r.top);
-                if (heightDiff > 100) {
-                    //enter your code here
-                    Utility.PrintLog(TAG,"open");
-                    binding.mainLayout.setFitsSystemWindows(true);
-                    binding.mainLayout.requestFitSystemWindows();
-                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-                }
-            });
-        }catch (Exception e){
-            Utility.PrintLog(TAG,"customStatusBar() Exception = " + e.toString());
-        }
-    }
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
@@ -148,13 +121,13 @@ public class AddressInformation extends BaseActivity {
 
     private void getIntentData() {
 
-        if (getIntent()!=null && getIntent().getBooleanExtra(INTENT_KEY_IS_ADDRESS_TYPE,false)){
+        if (getIntent() != null && getIntent().getBooleanExtra(INTENT_KEY_IS_ADDRESS_TYPE, false)) {
             isShopify = true;
             streamerId = getIntent().getStringExtra(INTENT_KEY_IS_STREAMER_ID);
             callStreamerCountryList(false);
-            Utility.PrintLog(TAG,"isShopify");
+            Utility.PrintLog(TAG, "isShopify");
 
-        }else {
+        } else {
             binding.txtStateOptional.setVisibility(View.VISIBLE);
             callCountryList(true);
         }
@@ -165,12 +138,11 @@ public class AddressInformation extends BaseActivity {
         allCountriesList = new ArrayList<>();
 
         if (checkInternetConnectionWithMessage()) {
-            if (isShowLoader)
-            {
+            if (isShowLoader) {
                 showLoader(true);
             }
 
-            Call<String> call = apiService.doShopifyCountry(EndPoints.API_KEY,streamerId);
+            Call<String> call = apiService.doShopifyCountry(EndPoints.API_KEY, streamerId);
 
             call.enqueue(new Callback<String>() {
                 @Override
@@ -189,15 +161,15 @@ public class AddressInformation extends BaseActivity {
                                 String jsonString = json.getString("streamer_countries");
                                 JSONArray jsonArray = new JSONArray(jsonString);
 
-                                for (int i=0;i<jsonArray.length();i++){
+                                for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 
                                     String countryName = jsonObject.getString("name");
                                     String countryId = jsonObject.getString("country_id");
                                     String countProvince = jsonObject.getString("count_province");
 
-                                    country_id.put(countryName,countryId);
-                                    count_province.put(countryName,countProvince);
+                                    country_id.put(countryName, countryId);
+                                    count_province.put(countryName, countProvince);
                                     allCountriesList.add(countryName);
 
                                 }
@@ -227,13 +199,11 @@ public class AddressInformation extends BaseActivity {
 
     }
 
-    private void setSelectedCountryCode()
-    {
+    private void setSelectedCountryCode() {
         binding.countryCodeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (allCountryCodeList!=null && allCountryCodeList.size() > 0)
-                {
+                if (allCountryCodeList != null && allCountryCodeList.size() > 0) {
                     selectedCountryCode = allCountryCodeList.get(position);
                 }
             }
@@ -245,8 +215,7 @@ public class AddressInformation extends BaseActivity {
         });
     }
 
-    private void getCountryCode()
-    {
+    private void getCountryCode() {
 
         try {
 
@@ -260,22 +229,18 @@ public class AddressInformation extends BaseActivity {
                         Utility.PrintLog(TAG, response.toString());
                         checkErrorCode(response.code());
 
-                        if (response.body() != null)
-                        {
+                        if (response.body() != null) {
 
-                            if (response.isSuccessful())
-                            {
+                            if (response.isSuccessful()) {
 
                                 try {
 
                                     JSONObject jsonObject = new JSONObject(response.body());
 
-                                    if (jsonObject.has("status"))
-                                    {
+                                    if (jsonObject.has("status")) {
                                         String status = jsonObject.getString("status");
 
-                                        if (status.equals(Constants.FALSE))
-                                        {
+                                        if (status.equals(Constants.FALSE)) {
                                             binding.layRegions.setVisibility(View.GONE);
                                             //hideLoader();
                                             return;
@@ -285,8 +250,7 @@ public class AddressInformation extends BaseActivity {
                                     String jsonArray = String.valueOf(jsonObject.get("country_codes"));
                                     JSONArray arrayList = new JSONArray(jsonArray);
 
-                                    for (int i = 0; i < arrayList.length(); i++)
-                                    {
+                                    for (int i = 0; i < arrayList.length(); i++) {
                                         selectedCountryCode = String.valueOf(arrayList.get(0));
                                         String regionList = String.valueOf(arrayList.get(i));
                                         allCountryCodeList.add(regionList);
@@ -298,12 +262,11 @@ public class AddressInformation extends BaseActivity {
                                     binding.countryCodeSpinner.setAdapter(adapter);
                                     binding.countryCodeSpinner.setSelection(25);
                                     seletedCountryCode = allCountryCodeList.get(25);
-                                    Utility.PrintLog(TAG,"selected country - " + allCountryCodeList.get(25));
+                                    Utility.PrintLog(TAG, "selected country - " + allCountryCodeList.get(25));
 
                                     hideLoader();
 
-                                } catch (JSONException e)
-                                {
+                                } catch (JSONException e) {
                                     e.printStackTrace();
                                     Utility.PrintLog(TAG, "json exception : " + e.toString());
                                 }
@@ -321,16 +284,14 @@ public class AddressInformation extends BaseActivity {
                 });
             }
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             Utility.PrintLog(TAG, e.toString());
             //hideLoader();
         }
 
     }
 
-    private void setAddressSpinner()
-    {
+    private void setAddressSpinner() {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -338,7 +299,7 @@ public class AddressInformation extends BaseActivity {
         binding.addressSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (arraySpinner!=null && arraySpinner.length > 0){
+                if (arraySpinner != null && arraySpinner.length > 0) {
                     selectedAddressType = arraySpinner[position];
                 }
             }
@@ -353,22 +314,21 @@ public class AddressInformation extends BaseActivity {
     private void setRegion() {
         if (regionPicker == null) {
 
-                regionPicker = RegionsPicker.newInstance("Select Region", allRegionsList);
-                regionPicker.setListener((name) -> {
+            regionPicker = RegionsPicker.newInstance("Select Region", allRegionsList);
+            regionPicker.setListener((name) -> {
 
-                    if (isShopify)
-                    {
-                        binding.stateRegionProvinceName.setText(name);
-                        stateId = state_id.get(name);
+                if (isShopify) {
+                    binding.stateRegionProvinceName.setText(name);
+                    stateId = state_id.get(name);
 
-                    }else {
+                } else {
 
-                        binding.region.setText(name);
-                        selectedRegion = name;
-                    }
+                    binding.region.setText(name);
+                    selectedRegion = name;
+                }
 
-                    regionPicker.dismiss();
-                });
+                regionPicker.dismiss();
+            });
         }
     }
 
@@ -378,7 +338,7 @@ public class AddressInformation extends BaseActivity {
         try {
             if (language != null) {
 
-                Utility.PrintLog("LanguageLable"," key " + language.getLanguage(KEY.home));
+                Utility.PrintLog("LanguageLable", " key " + language.getLanguage(KEY.home));
 
                 arraySpinner = new String[]{language.getLanguage(KEY.home), language.getLanguage(KEY.office)};
                 txtTitle.setText(language.getLanguage(KEY.address_information));
@@ -392,10 +352,10 @@ public class AddressInformation extends BaseActivity {
                 binding.btnSaveAddress.setText(language.getLanguage(KEY.save_address));
                 binding.txtRegion.setText(language.getLanguage(KEY.regions));
 
-                if (isShopify){
-                    binding.txtState.setText(language.getLanguage(KEY.state__region__province) + " ("+language.getLanguage(KEY.optional)+")");
+                if (isShopify) {
+                    binding.txtState.setText(language.getLanguage(KEY.state__region__province) + " (" + language.getLanguage(KEY.optional) + ")");
                     binding.stateRegionProvince.setText(language.getLanguage(KEY.state__region__province));
-                }else {
+                } else {
                     binding.txtState.setText(language.getLanguage(KEY.stateterritory_optional));
                 }
             }
@@ -436,24 +396,21 @@ public class AddressInformation extends BaseActivity {
 
                                     JSONObject jsonObject = new JSONObject(response.body());
 
-                                    if (jsonObject.has("status"))
-                                    {
+                                    if (jsonObject.has("status")) {
                                         String status = jsonObject.getString("status");
 
-                                            if (status.equals(Constants.FALSE))
-                                            {
-                                                    binding.layRegions.setVisibility(View.GONE);
-                                                    hideLoader();
-                                                    return;
-                                            }
+                                        if (status.equals(Constants.FALSE)) {
+                                            binding.layRegions.setVisibility(View.GONE);
+                                            hideLoader();
+                                            return;
+                                        }
                                     }
 
                                     binding.layRegions.setVisibility(View.VISIBLE);
                                     String jsonArray = String.valueOf(jsonObject.get("data"));
                                     JSONArray arrayList = new JSONArray(jsonArray);
 
-                                    for (int i = 0; i < arrayList.length(); i++)
-                                    {
+                                    for (int i = 0; i < arrayList.length(); i++) {
                                         selectedRegion = String.valueOf(arrayList.get(0));
                                         binding.region.setText(String.valueOf(arrayList.get(0)));
                                         String regionList = String.valueOf(arrayList.get(i));
@@ -489,56 +446,54 @@ public class AddressInformation extends BaseActivity {
     private void setCountryName() {
         if (picker == null) {
 
-               try {
-                   picker = CountryPicker.newInstance("Select Country", allCountriesList);
-                   picker.setListener((name) ->
-                   {
-                       binding.countyName.setText(name);
-                       picker.dismiss();
+            try {
+                picker = CountryPicker.newInstance("Select Country", allCountriesList);
+                picker.setListener((name) ->
+                {
+                    binding.countyName.setText(name);
+                    picker.dismiss();
 
-                       if (isShopify){
+                    if (isShopify) {
 
-                           countryId = country_id.get(name);
-                           selectedCountry = country_id.get(name);
-                           countProvince = count_province.get(name);
+                        countryId = country_id.get(name);
+                        selectedCountry = country_id.get(name);
+                        countProvince = count_province.get(name);
 
-                           if (countProvince != null && !countProvince.equals("0")) {
-                               callCountryProvince(true,countryId);
-                               binding.inputStateRegionProvince.setVisibility(View.VISIBLE);
-                               binding.stateRegionProvinceName.setText("");
-                               binding.txtStateOptional.setVisibility(View.GONE);
-                               stateType = "id";
-                           }else {
-                               binding.txtStateOptional.setVisibility(View.VISIBLE);
-                               binding.state.setText("");
-                               binding.inputStateRegionProvince.setVisibility(View.GONE);
-                               stateType = "direct";
-                           }
+                        if (countProvince != null && !countProvince.equals("0")) {
+                            callCountryProvince(true, countryId);
+                            binding.inputStateRegionProvince.setVisibility(View.VISIBLE);
+                            binding.stateRegionProvinceName.setText("");
+                            binding.txtStateOptional.setVisibility(View.GONE);
+                            stateType = "id";
+                        } else {
+                            binding.txtStateOptional.setVisibility(View.VISIBLE);
+                            binding.state.setText("");
+                            binding.inputStateRegionProvince.setVisibility(View.GONE);
+                            stateType = "direct";
+                        }
 
-                       }else {
+                    } else {
 
-                           selectedCountry = name;
+                        selectedCountry = name;
 
-                           if(name!=null && name.equals("Chile"))
-                           {
-                               binding.layRegions.setVisibility(View.VISIBLE);
-                           }else {
-                               binding.layRegions.setVisibility(View.GONE);
-                           }
+                        if (name != null && name.equals("Chile")) {
+                            binding.layRegions.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.layRegions.setVisibility(View.GONE);
+                        }
 
-                           if (allRegionsList!=null && allRegionsList.size() > 0)
-                           {
-                               selectedRegion = String.valueOf(allRegionsList.get(0));
-                               binding.region.setText(String.valueOf(allRegionsList.get(0)));
-                               return;
-                           }
-                           callCheckCountryRegions(selectedCountry);
-                       }
+                        if (allRegionsList != null && allRegionsList.size() > 0) {
+                            selectedRegion = String.valueOf(allRegionsList.get(0));
+                            binding.region.setText(String.valueOf(allRegionsList.get(0)));
+                            return;
+                        }
+                        callCheckCountryRegions(selectedCountry);
+                    }
 
-                   });
-               }catch (Exception e){
+                });
+            } catch (Exception e) {
 
-               }
+            }
         }
     }
 
@@ -546,13 +501,12 @@ public class AddressInformation extends BaseActivity {
 
 
         if (checkInternetConnectionWithMessage()) {
-            if (isShowLoader)
-            {
+            if (isShowLoader) {
                 showLoader(true);
             }
 
             allRegionsList.clear();
-            Call<String> call = apiService.doProvince(EndPoints.API_KEY,streamerId,countryId);
+            Call<String> call = apiService.doProvince(EndPoints.API_KEY, streamerId, countryId);
 
             call.enqueue(new Callback<String>() {
                 @Override
@@ -569,17 +523,17 @@ public class AddressInformation extends BaseActivity {
                                 String jsonString = json.getString("streamer_provinces");
                                 JSONArray jsonArray = new JSONArray(jsonString);
 
-                                for (int i=0;i<jsonArray.length();i++){
+                                for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 
                                     String name = jsonObject.getString("name");
                                     String stateid = jsonObject.getString("province_id");
 
-                                    state_id.put(name,stateid);
+                                    state_id.put(name, stateid);
                                     allRegionsList.add(name);
 
                                     //set default
-                                    if (i == 0){
+                                    if (i == 0) {
                                         binding.stateRegionProvinceName.setText(name);
                                         stateId = stateid;
                                     }
@@ -644,8 +598,7 @@ public class AddressInformation extends BaseActivity {
                 openRagionsPicker();
                 break;
             case R.id.inputCountry:
-                if (allCountriesList!=null && allCountriesList.size() > 0)
-                {
+                if (allCountriesList != null && allCountriesList.size() > 0) {
                     openCountryPicker();
                 }
 
@@ -663,7 +616,7 @@ public class AddressInformation extends BaseActivity {
     }
 
     private void openRagionsPicker() {
-        Utility.PrintLog(TAG,"country list side = " + allRegionsList.size());
+        Utility.PrintLog(TAG, "country list side = " + allRegionsList.size());
         regionPicker.show(getSupportFragmentManager(), "REGIONS_PICKER");
     }
 
@@ -688,8 +641,8 @@ public class AddressInformation extends BaseActivity {
                             showSnackErrorMessage(language.getLanguage(KEY.please_enter_phone_number));
                             return;
 
-                        } if (edtMobileNumber.length() < 6)
-                        {
+                        }
+                        if (edtMobileNumber.length() < 6) {
                             showSnackErrorMessage(language.getLanguage(KEY.please_enter_proper_phone_number));
                             return;
 
@@ -715,13 +668,12 @@ public class AddressInformation extends BaseActivity {
                             return;
                         }
 
-                        if (selectedAddressType == null)
-                        {
+                        if (selectedAddressType == null) {
                             showSnackErrorMessage(language.getLanguage(KEY.address_type_must_required));
                             return;
                         }
 
-                        if (isShopify && stateType == null){
+                        if (isShopify && stateType == null) {
                             showSnackErrorMessage(language.getLanguage(KEY.please_select_state__region__province));
                             return;
                         }
@@ -743,13 +695,13 @@ public class AddressInformation extends BaseActivity {
                 addAddress.put(PARAM_APARTMENT, apartment);
                 addAddress.put(PARAM_CITY, city);
 
-                if (!isShopify){
+                if (!isShopify) {
                     addAddress.put(PARAM_STATE, state);
-                }else {
+                } else {
 
-                    if (stateType.equals("direct")){
+                    if (stateType.equals("direct")) {
                         addAddress.put(PARAM_STATE, state);
-                    }else {
+                    } else {
                         addAddress.put(PARAM_STATE, stateId);
                     }
 
@@ -758,29 +710,26 @@ public class AddressInformation extends BaseActivity {
                 addAddress.put(PARAM_POSTAL_CODE, postalCode);
                 addAddress.put(PARAM_COUNTRY, selectedCountry);
 
-                if (phoneNumber == null)
-                {
+                if (phoneNumber == null) {
                     showSnackErrorMessage(language.getLanguage(KEY.please_enter_phone_number));
                     return;
                 }
 
                 addAddress.put(PARAM_PHONE_NUMBER, phoneNumber);
 
-                if (selectedRegion != null)
-
-                {
+                if (selectedRegion != null) {
                     addAddress.put(PARAM_REGION, selectedRegion);
                 }
 
                 showLoader(true);
 
-                Utility.PrintLog(TAG,"addAddressInfo" + addAddress);
+                Utility.PrintLog(TAG, "addAddressInfo" + addAddress);
 
                 Call<UserAddressResponse> call = null;
 
-                if (isShopify){
+                if (isShopify) {
                     call = apiService.doAddShopifyAddress(userPreferences.getApiKey(), addAddress);
-                }else {
+                } else {
                     call = apiService.doAddAddress(userPreferences.getApiKey(), addAddress);
                 }
 
@@ -799,8 +748,7 @@ public class AddressInformation extends BaseActivity {
 
                         if (response.body() != null) {
 
-                            if (checkResponseStatusWithMessage(response.body(), true) && response.isSuccessful())
-                            {
+                            if (checkResponseStatusWithMessage(response.body(), true) && response.isSuccessful()) {
                                 userPreferences.setAddressId(response.body().getId());
                                 onBackPressed();
 

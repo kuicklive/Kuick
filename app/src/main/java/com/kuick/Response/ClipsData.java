@@ -40,8 +40,20 @@ public class ClipsData extends BaseResponse {
     String quantity;
     @SerializedName("username")
     String username;
-    @SerializedName("sizes")
-    List<Sizes> sizes;
+
+    @SerializedName("variant_pass_data")
+    Variant variant;
+
+    public Variant getVariant() {
+        return variant;
+    }
+
+    public void setVariant(Variant variant) {
+        this.variant = variant;
+    }
+
+
+
 
     public String getUsername() {
         return username;
@@ -171,12 +183,12 @@ public class ClipsData extends BaseResponse {
         this.quantity = quantity;
     }
 
-    public List<Sizes> getSizes() {
-        return sizes;
+    public String getIs_show() {
+        return is_show;
     }
 
-    public void setSizes(List<Sizes> sizes) {
-        this.sizes = sizes;
+    public void setIs_show(String is_show) {
+        this.is_show = is_show;
     }
 
     public static class Sizes {
@@ -211,13 +223,5 @@ public class ClipsData extends BaseResponse {
         public void setQuantity(String quantity) {
             this.quantity = quantity;
         }
-    }
-
-    public String getIs_show() {
-        return is_show;
-    }
-
-    public void setIs_show(String is_show) {
-        this.is_show = is_show;
     }
 }
